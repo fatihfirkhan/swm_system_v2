@@ -1,0 +1,5648 @@
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM users WHERE work_id = ?
+Input: ADM001
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM users WHERE work_id = ?
+Input: ADM001
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => hi
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => datih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => alibinabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 1
+    [name] => Muhammad Ali bin Abu
+    [phone] => 0184002315
+    [address_line1] => 24, Jalan Kencana 5, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$1/CKoSxlPnrYYWMxsHpiGe3mRdKyKhvlTmYkrfbqp3oM2oY9auiya
+    [role] => resident
+    [created_at] => 2025-06-19 09:37:00
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => ali8000
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 1
+    [name] => Muhammad Ali bin Abu
+    [phone] => 0184002315
+    [address_line1] => 24, Jalan Kencana 5, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$1/CKoSxlPnrYYWMxsHpiGe3mRdKyKhvlTmYkrfbqp3oM2oY9auiya
+    [role] => resident
+    [created_at] => 2025-06-19 09:37:00
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => aiman123@gmail.com
+    [password] => aiman123
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: aiman123@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 2
+    [name] => Aiman bin Aman
+    [phone] => 0114002437
+    [address_line1] => 20, Jalan Kencana 5, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => aiman123@gmail.com
+    [work_id] => 
+    [password] => $2y$10$6BIprKFutXOdkvR0nJW6re3eNjSAgzzlp/llwbOCrtEz9BDLEsefa
+    [role] => resident
+    [created_at] => 2025-06-24 14:21:38
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => mfatihfirkhan@gmail.com
+    [password] => firkhanali
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: mfatihfirkhan@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 17
+    [name] => Firkhan bin Ali
+    [phone] => 0137305350
+    [address_line1] => 24, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => mfatihfirkhan@gmail.com
+    [work_id] => 
+    [password] => $2y$10$NE.xKHp/f7qXkwpnf3ouoeAklgInwwXqsUos5XcbGmNjq9zJnn2mm
+    [role] => resident
+    [created_at] => 2025-12-09 06:43:26
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 17
+    [role] => resident
+    [name] => Firkhan bin Ali
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => a
+    [password] => espocrm123$%
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: a
+Query: SELECT * FROM user WHERE work_id = ?
+Input: a
+Query result rows: 0
+User not found
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => ali0000
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM002
+    [password] => zarouq
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM002
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM002
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 19
+    [name] => Zarouq
+    [phone] => 0113003333
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => kelantan
+    [address_line2] => kelantan
+    [postcode] => 23930
+    [email] => 
+    [work_id] => ADM002
+    [password] => $2y$10$QTy925Ih5kjxVOc1Ctv7n.N5.Olg1KoZK/19I1hK5PF93QAkAtj6K
+    [role] => admin
+    [created_at] => 2025-12-09 22:11:37
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM002
+    [password] => zarouq
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM002
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM002
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 19
+    [name] => Zarouq
+    [phone] => 0113003333
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => kelantan
+    [address_line2] => kelantan
+    [postcode] => 23930
+    [email] => 
+    [work_id] => ADM002
+    [password] => $2y$10$QTy925Ih5kjxVOc1Ctv7n.N5.Olg1KoZK/19I1hK5PF93QAkAtj6K
+    [role] => admin
+    [created_at] => 2025-12-09 22:11:37
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabbu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih]
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 20
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$XfervTZPnp5s4gVD9hwOHerkwI5hDKa5ZkknJ2j1WizQRFrNJH67q
+    [role] => resident
+    [created_at] => 2025-12-10 23:54:59
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 20
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$XfervTZPnp5s4gVD9hwOHerkwI5hDKa5ZkknJ2j1WizQRFrNJH67q
+    [role] => resident
+    [created_at] => 2025-12-10 23:54:59
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => Zarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 20
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$XfervTZPnp5s4gVD9hwOHerkwI5hDKa5ZkknJ2j1WizQRFrNJH67q
+    [role] => resident
+    [created_at] => 2025-12-10 23:54:59
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => ahmadzarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 21
+    [role] => resident
+    [name] => Zarouq bin Ahmad
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fsatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => ahamdzarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarouqahmad
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarruq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => zarouqahmad
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Wrong password
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => zarouq9000@gmail.com
+    [password] => ahmadzarouq
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: zarouq9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 21
+    [name] => Zarouq bin Ahmad
+    [phone] => 0113007777
+    [house_unit_number] => 20
+    [lane_id] => 3
+    [area_id] => 1
+    [address_line1] => 20, Jalan Sri Mutiara 3, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => zarouq9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$EuHBpklymPxODpZs0aSkPuhdxHsPifalffc/guO1P12x15Img0X6y
+    [role] => resident
+    [created_at] => 2025-12-10 23:57:39
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 21
+    [role] => resident
+    [name] => Zarouq bin Ahmad
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Wrong password
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => espocrm123$%
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF004
+    [password] => espocrm123$%kamarul
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF004
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF004
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 13
+    [name] => Kamarul bin Adli
+    [phone] => 0113332839
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 10, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF004
+    [password] => $2y$10$GQcVpXdUBJwpQg6.KuCmKuoLYqk0gChf2.0krENeMK4poIfNMzRfu
+    [role] => staff
+    [created_at] => 2025-06-26 13:59:48
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF004
+    [password] => kamarul
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF004
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF004
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 13
+    [name] => Kamarul bin Adli
+    [phone] => 0113332839
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 10, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF004
+    [password] => $2y$10$GQcVpXdUBJwpQg6.KuCmKuoLYqk0gChf2.0krENeMK4poIfNMzRfu
+    [role] => staff
+    [created_at] => 2025-06-26 13:59:48
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 13
+    [role] => staff
+    [name] => Kamarul bin Adli
+    [work_id] => STF004
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF003
+    [password] => razli
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF003
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF003
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 12
+    [name] => Razli bin Sidek
+    [phone] => 0174111311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF003
+    [password] => $2y$10$1WMz6i/F7tA/fNeoJha1GObSaYdwrF1TdZqzY9WKg./UettS.dzvO
+    [role] => staff
+    [created_at] => 2025-06-26 13:58:52
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 12
+    [role] => staff
+    [name] => Razli bin Sidek
+    [work_id] => STF003
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+    [error] => You need to be logged in as an admin to access this page.
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => rayyan
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 16
+    [role] => staff
+    [name] => Rayyan bin Kogler
+    [work_id] => STF007
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF006
+    [password] => chtistopher
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF006
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF006
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 15
+    [name] => Christopher bin Nolang
+    [phone] => 0114902437
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 10 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF006
+    [password] => $2y$10$YZrxi.o1hK6ibWIlB84DRO.x/9lxVyK/dR8uysIGuD1/eAHgce2q.
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:47
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF006
+    [password] => chrisopher
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF006
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF006
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 15
+    [name] => Christopher bin Nolang
+    [phone] => 0114902437
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 10 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF006
+    [password] => $2y$10$YZrxi.o1hK6ibWIlB84DRO.x/9lxVyK/dR8uysIGuD1/eAHgce2q.
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:47
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF006
+    [password] => christopher
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF006
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF006
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 15
+    [name] => Christopher bin Nolang
+    [phone] => 0114902437
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 10 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF006
+    [password] => $2y$10$YZrxi.o1hK6ibWIlB84DRO.x/9lxVyK/dR8uysIGuD1/eAHgce2q.
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:47
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 15
+    [role] => staff
+    [name] => Christopher bin Nolang
+    [work_id] => STF006
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF001
+    [password] => rahman
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 10
+    [name] => Rahman bin Amin
+    [phone] => 0114222315
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9, Jalan Kencana 10, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF001
+    [password] => $2y$10$Fq9cOUXJFZdmguPRjGr5Fupi2axSmJVXmGYM8O89y5FWCS41II0ZC
+    [role] => staff
+    [created_at] => 2025-06-26 13:55:41
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 10
+    [role] => staff
+    [name] => Rahman bin Amin
+    [work_id] => STF001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF007
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF007
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF007
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 16
+    [name] => Rayyan bin Kogler
+    [phone] => 0174100322
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 11, Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF007
+    [password] => $2y$10$9Niip.xBuH8V35O3NHSw6OAungYOt/vWtSEwiKR/ScpQ1kOBcNuiO
+    [role] => staff
+    [created_at] => 2025-12-07 11:47:50
+)
+
+Wrong password
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF006
+    [password] => christopher
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF006
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF006
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 15
+    [name] => Christopher bin Nolang
+    [phone] => 0114902437
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 10 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF006
+    [password] => $2y$10$YZrxi.o1hK6ibWIlB84DRO.x/9lxVyK/dR8uysIGuD1/eAHgce2q.
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:47
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 15
+    [role] => staff
+    [name] => Christopher bin Nolang
+    [work_id] => STF006
+)
+
+Login attempt - Role: 
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => wanarif@gmail.com
+    [password] => waripazhan
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: wanarif@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 22
+    [name] => Wan Ariff bin Azhan
+    [phone] => 0111007777
+    [house_unit_number] => 6
+    [lane_id] => 4
+    [area_id] => 1
+    [address_line1] => 6, Jalan Sri Mutiara 4, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => wanarif@gmail.com
+    [work_id] => 
+    [password] => $2y$10$t73MB3fJLe4.CxaWnz0T5udJKIOqtMEhsNfnQo.Frvftxidk4L/tu
+    [role] => resident
+    [created_at] => 2025-12-20 14:17:52
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 22
+    [role] => resident
+    [name] => Wan Ariff bin Azhan
+    [work_id] => 
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => ADM001
+    [password] => fatih
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: ADM001
+Query: SELECT * FROM user WHERE work_id = ?
+Input: ADM001
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 3
+    [name] => Fatih
+    [phone] => 
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 
+    [address_line2] => 
+    [postcode] => 
+    [email] => 
+    [work_id] => ADM001
+    [password] => $2y$10$COVPEYBrwY/2n18psoZ6Jey.cFGewRlklTqIZip6AXJnUkpgXrOVO
+    [role] => admin
+    [created_at] => 2025-06-25 10:27:02
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 3
+    [role] => admin
+    [name] => Fatih
+    [work_id] => ADM001
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 3
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 3, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+
+Login attempt - Role: resident
+POST data: Array
+(
+    [email] => ali9000@gmail.com
+    [password] => aliabu
+    [login] => 
+)
+
+Query: SELECT * FROM user WHERE email = ? AND role = 'resident'
+Input: ali9000@gmail.com
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 18
+    [name] => Ali bin Abu
+    [phone] => 0113002222
+    [house_unit_number] => 6
+    [lane_id] => 2
+    [area_id] => 1
+    [address_line1] => 6, Jalan Sri Mutiara 2, Taman Sri Mutiara
+    [address_line2] => 
+    [postcode] => 83300
+    [email] => ali9000@gmail.com
+    [work_id] => 
+    [password] => $2y$10$oT7/WvOf1ZErNHGQnWHa0Oz76IQ6EwTLYx.xUmOQGSE8jVPeWFipi
+    [role] => resident
+    [created_at] => 2025-12-09 10:56:15
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 18
+    [role] => resident
+    [name] => Ali bin Abu
+    [work_id] => 
+)
+

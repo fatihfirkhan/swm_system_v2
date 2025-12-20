@@ -1,0 +1,132 @@
+/* Custom SWM Environment theme overrides */
+:root {
+    --swm-primary: #1e8449;  /* More professional forest green */
+    --swm-primary-dark: #196f3d;  /* Darker shade for gradient */
+    --swm-primary-light: #27ae60;  /* Lighter shade for hover states */
+}
+
+/* Override sidebar colors */
+.bg-gradient-primary {
+    background-color: var(--swm-primary) !important;
+    background-image: linear-gradient(180deg, var(--swm-primary) 10%, var(--swm-primary-dark) 100%) !important;
+}
+
+/* Override primary buttons and accents */
+.btn-primary {
+    background-color: var(--swm-primary) !important;
+    border-color: var(--swm-primary) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--swm-primary-dark) !important;
+    border-color: var(--swm-primary-dark) !important;
+}
+
+.text-primary {
+    color: var(--swm-primary) !important;
+}
+
+.border-left-primary {
+    border-left-color: var(--swm-primary) !important;
+}
+
+/* Center logo in topbar */
+.topbar-logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    pointer-events: none; /* Allow clicks to pass through to elements behind */
+}
+
+.topbar-logo-container img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+    pointer-events: auto; /* But logo itself is clickable */
+}
+
+.topbar-logo-container .logo-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3a3b45;
+    pointer-events: auto; /* Text is also clickable */
+}
+
+/* Adjust content wrapper padding to prevent overlap with centered logo */
+@media (min-width: 768px) {
+    .topbar .navbar-nav {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+/* Ensure user dropdown works correctly */
+.topbar .navbar-nav.ml-auto {
+    position: relative;
+    z-index: 1050 !important;
+}
+
+.topbar .dropdown-menu {
+    z-index: 1060 !important;
+}
+
+/* Custom styling for admin icon */
+.admin-icon {
+    font-size: 1.8rem !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Custom chart colors to match theme */
+.chart-area-primary {
+    background-color: rgba(30, 132, 73, 0.05) !important;
+    border-color: var(--swm-primary) !important;
+}
+
+/* Override progress bars and other accent colors */
+.progress-bar-primary {
+    background-color: var(--swm-primary) !important;
+}
+
+/* Enhance card hover effects */
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* Resident Blue Theme - Override admin green for resident pages */
+.resident-page .bg-gradient-primary {
+    background-color: #4e73df !important;
+    background-image: linear-gradient(180deg, #4e73df 10%, #2e59d9 100%) !important;
+}
+
+.resident-page .btn-primary {
+    background-color: #4e73df !important;
+    border-color: #4e73df !important;
+}
+
+.resident-page .btn-primary:hover {
+    background-color: #2e59d9 !important;
+    border-color: #2653d4 !important;
+}
+
+.resident-page .text-primary {
+    color: #4e73df !important;
+}
+
+.resident-page .border-left-primary {
+    border-left-color: #4e73df !important;
+}
+
+/* Ensure dropdown menus appear above other elements */
+.dropdown-menu {
+    z-index: 1000 !important;
+}
+
+.topbar {
+    z-index: 100 !important;
+}

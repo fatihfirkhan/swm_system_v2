@@ -1,0 +1,71 @@
+/* Calendar specific styles */
+#calendar table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+
+#calendar th, 
+#calendar td { 
+    padding: 10px; 
+    border: 1px solid #eef2f7; 
+    min-height: 90px; 
+    vertical-align: top; 
+}
+
+.calendar-day:hover { 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.calendar-day.past-date {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    background-color: #f8f9fa !important;
+}
+
+.calendar-day.past-date:hover {
+    box-shadow: none !important;
+}
+
+.staff-info-display {
+    font-size: 0.85em;
+}
+
+.date-content {
+    position: relative;
+}
+
+/* Completely disable any movement/animation on calendar cells */
+#calendar td,
+#calendar td *,
+.calendar-day,
+.calendar-day *,
+.date-content,
+.date-content * {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Override any Bootstrap hover effects */
+#calendar .table td:hover,
+#calendar td:hover {
+    transform: none !important;
+}
+
+/* Select2 Customization */
+.select2-container--default .select2-selection--single {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #d1d3e2;
+    border-radius: 0.35rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 1.5;
+    color: #6e707e;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: calc(1.5em + 0.75rem + 2px);
+}
