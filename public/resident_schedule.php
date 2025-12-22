@@ -28,6 +28,28 @@ $resident = $stmt->get_result()->fetch_assoc();
 $residentAreaId = $resident['area_id'] ?? null;
 $residentAreaName = $resident['taman_name'] ?? 'Not Assigned';
 
+// Fetch all areas for the area switcher dropdown
+$allAreas = [];
+$areasQuery = "SELECT area_id, taman_name FROM collection_area ORDER BY taman_name ASC";
+$areasResult = $conn->query($areasQuery);
+if ($areasResult) {
+    while ($area = $areasResult->fetch_assoc()) {
+        $allAreas[] = $area;
+    }
+}
+
+// Determine which area to display (from URL param or default to resident's area)
+$selectedAreaId = isset($_GET['area_id']) ? intval($_GET['area_id']) : $residentAreaId;
+
+// Get the selected area name
+$selectedAreaName = $residentAreaName;
+foreach ($allAreas as $area) {
+    if ($area['area_id'] == $selectedAreaId) {
+        $selectedAreaName = $area['taman_name'];
+        break;
+    }
+}
+
 // Start output buffering
 ob_start();
 ?>
@@ -66,11 +88,28 @@ ob_start();
             text-align: center;
         }
         .calendar-day {
-            cursor: default !important;
+            cursor: pointer;
             min-height: 80px;
+            transition: all 0.2s ease;
         }
         .calendar-day:hover {
-            box-shadow: none !important;
+            box-shadow: 0 0 10px rgba(78, 115, 223, 0.3);
+            transform: scale(1.02);
+        }
+        .lane-status-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #f8f9fc;
+            border-left: 4px solid #e3e6f0;
+        }
+        .lane-status-item.collected {
+            border-left-color: #1cc88a;
+            background: #d4edda;
+        }
+        .lane-status-item.pending {
+            border-left-color: #f6c23e;
+            background: #fff3cd;
         }
         .calendar-day.past-date {
             opacity: 0.6;
@@ -219,7 +258,7 @@ ob_start();
                         <h1 class="h3 mb-0 text-gray-800">Collection Schedule</h1>
                     </div>
 
-                    <!-- Area Info Card -->
+                    <!-- Area Switcher Card -->
                     <div class="row mb-4">
                         <div class="col-12">
                             <div class="card border-left-primary shadow">
@@ -227,10 +266,18 @@ ob_start();
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Your Collection Area</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php echo htmlspecialchars($residentAreaName); ?>
-                                            </div>
+                                                View Collection Area</div>
+                                            <select id="area_selector" class="form-control form-control-lg font-weight-bold text-gray-800" style="max-width: 400px;">
+                                                <?php foreach ($allAreas as $area): ?>
+                                                    <option value="<?= $area['area_id'] ?>" <?= ($area['area_id'] == $selectedAreaId) ? 'selected' : '' ?>>
+                                                        <?= htmlspecialchars($area['taman_name']) ?>
+                                                        <?= ($area['area_id'] == $residentAreaId) ? ' (Your Area)' : '' ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                                <?php if (empty($allAreas)): ?>
+                                                    <option value="">No areas available</option>
+                                                <?php endif; ?>
+                                            </select>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-map-marker-alt fa-2x text-gray-300"></i>
@@ -341,6 +388,31 @@ ob_start();
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Lane Status Modal -->
+    <div class="modal fade" id="laneStatusModal" tabindex="-1" role="dialog" aria-labelledby="laneStatusModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="laneStatusModalLabel">
+                        <i class="fas fa-road mr-2"></i>Lane Collection Status
+                    </h5>
+                    <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="laneStatusContent">
+                    <div class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
+                        <p class="mt-2 text-muted">Loading lane status...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -376,17 +448,33 @@ ob_start();
         // Ensure dropdown works
         $('.dropdown-toggle').dropdown();
 
-        // Resident's area ID from PHP
-        const residentAreaId = <?= json_encode($residentAreaId) ?>;
+        // Selected area ID from PHP (from URL or resident's area)
+        const selectedAreaId = <?= json_encode($selectedAreaId) ?>;
 
-        // Only load calendar if resident has an area assigned
-        if (residentAreaId) {
+        // Area selector change - reload page with new area_id
+        $('#area_selector').on('change', function() {
+            const newAreaId = $(this).val();
+            if (newAreaId) {
+                window.location.href = 'resident_schedule.php?area_id=' + newAreaId;
+            }
+        });
+
+        // Only load calendar if an area is selected
+        if (selectedAreaId) {
             // Load calendar on page load
             fetchCalendarData();
 
             // Calendar month change
             $('#calendar_month').on('change', fetchCalendarData);
         }
+
+        // Delegate click event for calendar days
+        $(document).on('click', '.calendar-day', function() {
+            const dateStr = $(this).data('date');
+            if (dateStr) {
+                showLaneStatus(dateStr);
+            }
+        });
 
         function fetchCalendarData() {
             const month = $('#calendar_month').val();
@@ -399,7 +487,10 @@ ob_start();
             $.ajax({
                 url: '../backend/fetch_resident_schedule.php',
                 method: 'GET',
-                data: { month: month },
+                data: { 
+                    month: month,
+                    area_id: selectedAreaId
+                },
                 dataType: 'json',
                 success: function(response) {
                     if (response.error) {
@@ -412,6 +503,82 @@ ob_start();
                     $('#calendar').html('<p class="text-danger text-center py-4">Failed to load schedule. Please try again.</p>');
                 }
             });
+        }
+
+        function showLaneStatus(dateStr) {
+            $('#laneStatusModalLabel').html('<i class="fas fa-road mr-2"></i>Lane Status - ' + dateStr);
+            $('#laneStatusContent').html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading lane status...</p></div>');
+            $('#laneStatusModal').modal('show');
+
+            $.ajax({
+                url: '../backend/ajax_get_lane_status.php',
+                method: 'GET',
+                data: {
+                    date: dateStr,
+                    area_id: selectedAreaId
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error) {
+                        $('#laneStatusContent').html('<div class="alert alert-warning"><i class="fas fa-exclamation-triangle mr-2"></i>' + response.error + '</div>');
+                        return;
+                    }
+                    // Handle no_schedule status
+                    if (response.status === 'no_schedule') {
+                        $('#laneStatusContent').html(
+                            '<div class="text-center py-5">' +
+                            '<i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>' +
+                            '<h5 class="text-muted">No Collection Scheduled</h5>' +
+                            '<p class="text-muted mb-0">There is no waste collection scheduled for this date in <strong>' + (response.area_name || 'this area') + '</strong>.</p>' +
+                            '</div>'
+                        );
+                        return;
+                    }
+                    renderLaneStatus(response);
+                },
+                error: function() {
+                    $('#laneStatusContent').html('<div class="alert alert-danger"><i class="fas fa-times-circle mr-2"></i>Failed to load lane status.</div>');
+                }
+            });
+        }
+
+        function renderLaneStatus(data) {
+            if (!data.lanes || data.lanes.length === 0) {
+                $('#laneStatusContent').html('<div class="text-center py-4"><i class="fas fa-info-circle fa-3x text-muted mb-3"></i><p class="text-muted">No lanes found for this area.</p></div>');
+                return;
+            }
+
+            let html = '<div class="mb-3">';
+            html += '<p class="text-muted small mb-2"><i class="fas fa-map-marker-alt mr-1"></i>' + (data.area_name || 'Selected Area') + '</p>';
+            if (data.collection_type) {
+                html += '<p class="mb-0"><strong>Collection Type:</strong> <span class="badge badge-' + (data.collection_type === 'Recycle' ? 'success' : 'primary') + '">' + data.collection_type + '</span></p>';
+            }
+            html += '</div>';
+
+            html += '<div class="lane-list">';
+            data.lanes.forEach(function(lane) {
+                const statusClass = lane.status === 'Collected' ? 'collected' : 'pending';
+                const statusBadge = lane.status === 'Collected' 
+                    ? '<span class="badge badge-success"><i class="fas fa-check mr-1"></i>Collected</span>'
+                    : '<span class="badge badge-warning"><i class="fas fa-clock mr-1"></i>Pending</span>';
+
+                html += '<div class="lane-status-item ' + statusClass + ' d-flex justify-content-between align-items-center">';
+                html += '<div><i class="fas fa-road mr-2 text-muted"></i><strong>' + lane.lane_name + '</strong></div>';
+                html += statusBadge;
+                html += '</div>';
+            });
+            html += '</div>';
+
+            // Summary
+            const collected = data.lanes.filter(l => l.status === 'Collected').length;
+            const pending = data.lanes.filter(l => l.status !== 'Collected').length;
+            html += '<div class="mt-3 pt-3 border-top">';
+            html += '<div class="row text-center">';
+            html += '<div class="col-6"><span class="h4 text-success">' + collected + '</span><br><small class="text-muted">Collected</small></div>';
+            html += '<div class="col-6"><span class="h4 text-warning">' + pending + '</span><br><small class="text-muted">Pending</small></div>';
+            html += '</div></div>';
+
+            $('#laneStatusContent').html(html);
         }
 
         function renderCalendar(schedules, month) {
@@ -460,7 +627,8 @@ ob_start();
                 if (isPast) classes += ' past-date';
                 if (isToday) classes += ' today';
 
-                html += '<td class="' + classes + '" style="background-color: ' + bgColor + '; ' + borderStyle + '">';
+                // Add data-date attribute for click handling
+                html += '<td class="' + classes + '" data-date="' + dateStr + '" style="background-color: ' + bgColor + '; ' + borderStyle + '">';
                 html += '<div class="date-number">' + day;
                 if (isToday) {
                     html += '<span class="today-badge">Today</span>';

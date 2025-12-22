@@ -11,25 +11,32 @@ require_once '../includes/db.php';
 // Set JSON header
 header('Content-Type: application/json');
 
-// Check if user is logged in as resident
-if (!isset($_SESSION['user_id']) || strtolower($_SESSION['role']) !== 'resident') {
+// Check if user is logged in (allow resident, admin, or staff)
+$allowedRoles = ['resident', 'admin', 'staff'];
+if (!isset($_SESSION['user_id']) || !in_array(strtolower($_SESSION['role']), $allowedRoles)) {
     echo json_encode(['error' => 'Unauthorized access']);
     exit;
 }
 
-// Get resident's area ID
+// Get area_id from request or use resident's area
 $userId = $_SESSION['user_id'];
-$areaQuery = $conn->prepare("SELECT area_id FROM user WHERE user_id = ?");
-$areaQuery->bind_param('i', $userId);
-$areaQuery->execute();
-$areaResult = $areaQuery->get_result()->fetch_assoc();
+$userRole = strtolower($_SESSION['role']);
+$areaId = isset($_GET['area_id']) ? intval($_GET['area_id']) : null;
 
-if (!$areaResult || !$areaResult['area_id']) {
-    echo json_encode(['error' => 'You are not assigned to any collection area']);
-    exit;
+// If no area_id provided and user is a resident, get their area
+if (!$areaId && $userRole === 'resident') {
+    $areaQuery = $conn->prepare("SELECT area_id FROM user WHERE user_id = ?");
+    $areaQuery->bind_param('i', $userId);
+    $areaQuery->execute();
+    $areaResult = $areaQuery->get_result()->fetch_assoc();
+
+    if (!$areaResult || !$areaResult['area_id']) {
+        echo json_encode(['error' => 'You are not assigned to any collection area']);
+        exit;
+    }
+    
+    $areaId = $areaResult['area_id'];
 }
-
-$areaId = $areaResult['area_id'];
 
 // Validate month parameter
 if (!isset($_GET['month']) || !preg_match('/^\d{4}-\d{2}$/', $_GET['month'])) {

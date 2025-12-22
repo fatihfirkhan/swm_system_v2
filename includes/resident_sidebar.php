@@ -42,13 +42,5 @@
         </a>
     </li>
 
-    <!-- Nav Item - Notifications -->
-    <li class="nav-item <?php echo $currentPage === 'notifications' ? 'active' : ''; ?>">
-        <a class="nav-link" href="resident_notifications.php">
-            <i class="fas fa-fw fa-bell"></i>
-            <span>Notifications</span>
-        </a>
-    </li>
-
 </ul>
 <!-- End of Sidebar -->

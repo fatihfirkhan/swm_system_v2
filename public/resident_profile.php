@@ -223,43 +223,55 @@ ob_start();
 
                         <!-- Nav Item - Notifications -->
                         <?php
-                        // Count notifications for Resident
+                        // Count UNREAD notifications for Resident using tracking system
                         $notifCount = 0;
                         
-                        $notifSql = "SELECT COUNT(*) as unread_count 
-                                     FROM notifications 
-                                     WHERE target_role IN ('Resident', 'All')";
-                        
-                        $notifResult = $conn->query($notifSql);
-                        
-                        if ($notifResult && $notifRow = $notifResult->fetch_assoc()) {
-                            $notifCount = $notifRow['unread_count'];
+                        try {
+                            // Get user's last check time from notification_tracking
+                            $uniqueUserId = 'RES_' . $user_id;
+                            $lastCheckTime = '2000-01-01 00:00:00'; // Default for new users
+                            
+                            $trackingCheck = $conn->prepare("SELECT last_check FROM notification_tracking WHERE user_id = ?");
+                            if ($trackingCheck) {
+                                $trackingCheck->bind_param('s', $uniqueUserId);
+                                $trackingCheck->execute();
+                                $trackingResult = $trackingCheck->get_result();
+                                if ($trackingRow = $trackingResult->fetch_assoc()) {
+                                    $lastCheckTime = $trackingRow['last_check'];
+                                }
+                                $trackingCheck->close();
+                            }
+                            
+                            // Count notifications newer than last check
+                            $notifSql = "SELECT COUNT(*) as unread_count 
+                                         FROM notifications 
+                                         WHERE target_role IN ('Resident', 'All')
+                                         AND time_created > ?";
+                            
+                            $notifStmt = $conn->prepare($notifSql);
+                            if ($notifStmt) {
+                                $notifStmt->bind_param('s', $lastCheckTime);
+                                $notifStmt->execute();
+                                $notifResult = $notifStmt->get_result();
+                                
+                                if ($notifRow = $notifResult->fetch_assoc()) {
+                                    $notifCount = $notifRow['unread_count'];
+                                }
+                                $notifStmt->close();
+                            }
+                        } catch (Exception $e) {
+                            // Silently fail - just show 0 notifications
+                            $notifCount = 0;
                         }
                         ?>
 
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item no-arrow">
+                            <a class="nav-link" href="notification_view.php" title="Notifications">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <?php if ($notifCount > 0): ?>
-                                    <span class="badge badge-danger badge-counter"><?php echo $notifCount > 9 ? '9+' : $notifCount; ?></span>
+                                    <span class="badge badge-danger badge-counter"><?php echo $notifCount > 3 ? '3+' : $notifCount; ?></span>
                                 <?php endif; ?>
                             </a>
-                            <!-- Dropdown - Notifications -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Notification Center
-                                </h6>
-                                <?php if ($notifCount > 0): ?>
-                                    <a class="dropdown-item text-center small text-gray-500" href="notification_view.php">
-                                        You have <?php echo $notifCount; ?> unread notification<?php echo $notifCount > 1 ? 's' : ''; ?>
-                                    </a>
-                                <?php else: ?>
-                                    <a class="dropdown-item text-center small text-gray-500">No new notifications</a>
-                                <?php endif; ?>
-                                <a class="dropdown-item text-center small text-gray-500" href="notification_view.php">View All Notifications</a>
-                            </div>
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
