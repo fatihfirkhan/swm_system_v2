@@ -68,7 +68,7 @@
 
     <!-- Nav Item - Resident Complaints -->
     <li class="nav-item <?php echo $currentPage === 'complaints' ? 'active' : ''; ?>">
-        <a class="nav-link" href="resident_complaints.php">
+        <a class="nav-link" href="admin_complaints.php">
             <i class="fas fa-fw fa-exclamation-circle"></i>
             <span>Resident Complaints</span>
         </a>

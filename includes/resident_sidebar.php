@@ -36,7 +36,7 @@
 
     <!-- Nav Item - Report Issue / Complaint -->
     <li class="nav-item <?php echo $currentPage === 'complaint' ? 'active' : ''; ?>">
-        <a class="nav-link" href="resident_complaint.php">
+        <a class="nav-link" href="resident_complaints.php">
             <i class="fas fa-fw fa-exclamation-circle"></i>
             <span>Report Issue / Complaint</span>
         </a>
