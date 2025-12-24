@@ -4,7 +4,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="staff_dashboard.php">
-        <div class="sidebar-brand-text mx-3" style="font-family: 'Nunito', sans-serif;">SWM Staff</div>
+        <div class="sidebar-brand-text mx-3" style="font-family: 'Nunito', sans-serif;">SWME Staff</div>
     </a>
 
     <!-- Divider -->
