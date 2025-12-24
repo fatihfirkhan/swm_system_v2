@@ -36,7 +36,7 @@
 
     <!-- Nav Item - Staff -->
     <li class="nav-item <?php echo $currentPage === 'staff' ? 'active' : ''; ?>">
-        <a class="nav-link" href="staffregister.php">
+        <a class="nav-link" href="staff_management.php">
             <i class="fas fa-fw fa-users"></i>
             <span>Staff Management</span>
         </a>

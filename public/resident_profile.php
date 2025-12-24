@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     $email = trim($_POST['email'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
     $house_unit_number = trim($_POST['house_unit_number'] ?? '');
+    $area_id = intval($_POST['area_id'] ?? 0);
+    $lane_id = intval($_POST['lane_id'] ?? 0);
     $new_password = $_POST['new_password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
     
@@ -61,6 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     // Validate required fields
     if (empty($name) || empty($email) || empty($phone) || empty($house_unit_number)) {
         $errors[] = 'Please fill in all required fields.';
+    }
+    
+    // Validate area and lane
+    if ($area_id <= 0) {
+        $errors[] = 'Please select a valid area.';
+    }
+    if ($lane_id <= 0) {
+        $errors[] = 'Please select a valid lane.';
     }
     
     // Validate email format
@@ -88,35 +98,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     
     // If no errors, proceed with update
     if (empty($errors)) {
-        // Update address_line1 with formatted address
-        $address_line1 = $house_unit_number . ', ' . $user['lane_name'] . ', ' . $user['taman_name'];
+        // Fetch area and lane names for address construction
+        $addr_query = $conn->prepare("SELECT ca.taman_name, cl.lane_name 
+                                       FROM collection_area ca, collection_lane cl 
+                                       WHERE ca.area_id = ? AND cl.lane_id = ?");
+        $addr_query->bind_param('ii', $area_id, $lane_id);
+        $addr_query->execute();
+        $addr_result = $addr_query->get_result()->fetch_assoc();
         
-        if (!empty($new_password)) {
-            // Update with new password
-            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $update_query = "UPDATE user SET name = ?, email = ?, phone = ?, 
-                            house_unit_number = ?, address_line1 = ?, password = ? 
-                            WHERE user_id = ?";
-            $update_stmt = $conn->prepare($update_query);
-            $update_stmt->bind_param("ssssssi", $name, $email, $phone, $house_unit_number, 
-                                     $address_line1, $hashed_password, $user_id);
+        if ($addr_result) {
+            // Update address_line1 with formatted address
+            $address_line1 = $house_unit_number . ', ' . $addr_result['lane_name'] . ', ' . $addr_result['taman_name'];
+            
+            if (!empty($new_password)) {
+                // Update with new password
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                $update_query = "UPDATE user SET name = ?, email = ?, phone = ?, 
+                                house_unit_number = ?, area_id = ?, lane_id = ?, 
+                                address_line1 = ?, password = ? 
+                                WHERE user_id = ?";
+                $update_stmt = $conn->prepare($update_query);
+                $update_stmt->bind_param("ssssiissi", $name, $email, $phone, $house_unit_number, 
+                                         $area_id, $lane_id, $address_line1, $hashed_password, $user_id);
+            } else {
+                // Update without changing password
+                $update_query = "UPDATE user SET name = ?, email = ?, phone = ?, 
+                                house_unit_number = ?, area_id = ?, lane_id = ?, address_line1 = ? 
+                                WHERE user_id = ?";
+                $update_stmt = $conn->prepare($update_query);
+                $update_stmt->bind_param("ssssiisi", $name, $email, $phone, $house_unit_number, 
+                                         $area_id, $lane_id, $address_line1, $user_id);
+            }
+            
+            if ($update_stmt->execute()) {
+                $_SESSION['success_message'] = 'Profile updated successfully!';
+                // Refresh user data
+                header("Location: resident_profile.php");
+                exit();
+            } else {
+                $errors[] = 'Failed to update profile. Please try again.';
+            }
         } else {
-            // Update without changing password
-            $update_query = "UPDATE user SET name = ?, email = ?, phone = ?, 
-                            house_unit_number = ?, address_line1 = ? 
-                            WHERE user_id = ?";
-            $update_stmt = $conn->prepare($update_query);
-            $update_stmt->bind_param("sssssi", $name, $email, $phone, $house_unit_number, 
-                                     $address_line1, $user_id);
-        }
-        
-        if ($update_stmt->execute()) {
-            $_SESSION['success_message'] = 'Profile updated successfully!';
-            // Refresh user data
-            header("Location: resident_profile.php");
-            exit();
-        } else {
-            $errors[] = 'Failed to update profile. Please try again.';
+            $errors[] = 'Invalid area or lane selection.';
         }
     }
     
@@ -127,8 +150,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
 }
 
 
-// Fetch all areas for dropdown (in case user wants to change address in future)
+// Fetch all areas for dropdown
 $areas_query = $conn->query("SELECT area_id, taman_name FROM collection_area ORDER BY taman_name");
+
+// Fetch all lanes for dropdown
+$lanes_query = $conn->query("SELECT lane_id, lane_name, area_id FROM collection_lane ORDER BY lane_name");
 
 // Start output buffering
 ob_start();
@@ -188,6 +214,11 @@ ob_start();
             padding: 0.75rem;
             border-radius: 4px;
             font-size: 0.9rem;
+        }
+        /* Fix topbar z-index to be above modal backdrop */
+        .topbar {
+            z-index: 1060 !important;
+            position: relative;
         }
     </style>
 </head>
@@ -414,22 +445,32 @@ ob_start();
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Area (Taman)</label>
-                                    <input type="text" class="form-control" 
-                                           value="<?= htmlspecialchars($user['taman_name']) ?>" readonly>
-                                    <small class="text-muted">Contact admin to change area</small>
+                                    <label class="form-label">Area (Taman) <span class="text-danger">*</span></label>
+                                    <select name="area_id" id="area_id" class="form-control" required>
+                                        <option value="">-- Select Area --</option>
+                                        <?php 
+                                        $areas_query->data_seek(0); // Reset pointer
+                                        while ($area = $areas_query->fetch_assoc()): 
+                                        ?>
+                                            <option value="<?= $area['area_id'] ?>" <?= $area['area_id'] == $user['area_id'] ? 'selected' : '' ?>><?= htmlspecialchars($area['taman_name']) ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                    <small class="text-muted">Select your residential area</small>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Lane (Jalan)</label>
-                                    <input type="text" class="form-control" 
-                                           value="<?= htmlspecialchars($user['lane_name']) ?>" readonly>
-                                    <small class="text-muted">Contact admin to change lane</small>
+                                    <label class="form-label">Lane (Jalan) <span class="text-danger">*</span></label>
+                                    <select name="lane_id" id="lane_id" class="form-control" required>
+                                        <option value="">-- Select Lane --</option>
+                                        <!-- Options loaded dynamically based on area -->
+                                    </select>
+                                    <small class="text-muted">Select your street/lane</small>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Full Address</label>
-                                <textarea class="form-control" rows="2" readonly><?= htmlspecialchars($user['address_line1']) ?></textarea>
+                                <label class="form-label">Full Address (Auto-generated)</label>
+                                <textarea id="full_address" class="form-control" rows="2" readonly><?= htmlspecialchars(trim($user['address_line1'])) ?></textarea>
+                                <small class="text-muted">This will update automatically when you change house number, area, or lane</small>
                             </div>
 
                             <div class="mb-3">
@@ -504,7 +545,7 @@ ob_start();
                     <hr>
                     <small class="text-muted">
                         <i class="fas fa-info-circle mr-1"></i>
-                        To change your area or lane assignment, please contact the administrator.
+                        You can change your area and lane assignment if you move to a different location within the service area.
                     </small>
                 </div>
             </div>
@@ -550,6 +591,38 @@ ob_start();
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Confirm Save Modal-->
+    <div class="modal fade" id="confirmSaveModal" tabindex="-1" role="dialog" aria-labelledby="confirmSaveLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="confirmSaveLabel">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Confirm Profile Update
+                    </h5>
+                    <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmMessage">Are you sure you want to save these changes to your profile?</p>
+                    <div id="passwordWarning" class="alert alert-info" style="display:none;">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>Note:</strong> Your password will also be updated.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </button>
+                    <button class="btn btn-primary" type="button" id="confirmSaveBtn">
+                        <i class="fas fa-check mr-2"></i>Yes, Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -582,7 +655,82 @@ ob_start();
 
     <!-- JavaScript for password validation -->
     <script>
+    // Prepare lanes data for JavaScript
+    const lanesData = <?php 
+        $lanes_array = [];
+        $lanes_query->data_seek(0);
+        while ($lane = $lanes_query->fetch_assoc()) {
+            $lanes_array[] = [
+                'lane_id' => $lane['lane_id'],
+                'lane_name' => $lane['lane_name'],
+                'area_id' => $lane['area_id']
+            ];
+        }
+        echo json_encode($lanes_array);
+    ?>;
+    
+    const currentLaneId = <?= json_encode($user['lane_id']) ?>;
+    
     $(document).ready(function() {
+        // Force initialize Bootstrap dropdowns
+        $('.dropdown-toggle').dropdown();
+        
+        // Function to load lanes based on selected area
+        function loadLanes(areaId, selectLaneId = null) {
+            const laneSelect = $('#lane_id');
+            laneSelect.empty();
+            laneSelect.append('<option value="">-- Select Lane --</option>');
+            
+            // Filter lanes by area
+            const filteredLanes = lanesData.filter(lane => lane.area_id == areaId);
+            
+            filteredLanes.forEach(lane => {
+                const selected = selectLaneId && lane.lane_id == selectLaneId ? 'selected' : '';
+                laneSelect.append(`<option value="${lane.lane_id}" ${selected}>${lane.lane_name}</option>`);
+            });
+            
+            updateFullAddress();
+        }
+        
+        // Function to update full address preview
+        function updateFullAddress() {
+            const houseNumber = $('input[name="house_unit_number"]').val().trim();
+            const areaId = $('#area_id').val();
+            const laneId = $('#lane_id').val();
+            
+            if (!houseNumber || !areaId || !laneId) {
+                return;
+            }
+            
+            const areaName = $('#area_id option:selected').text().trim();
+            const laneName = $('#lane_id option:selected').text().trim();
+            
+            const fullAddress = `${houseNumber}, ${laneName}, ${areaName}`;
+            $('#full_address').val(fullAddress);
+        }
+        
+        // Load lanes for current area on page load
+        const currentAreaId = $('#area_id').val();
+        if (currentAreaId) {
+            loadLanes(currentAreaId, currentLaneId);
+        }
+        
+        // Area change event
+        $('#area_id').on('change', function() {
+            const selectedAreaId = $(this).val();
+            if (selectedAreaId) {
+                loadLanes(selectedAreaId);
+            } else {
+                $('#lane_id').empty().append('<option value="">-- Select Lane --</option>');
+                $('#full_address').val('');
+            }
+        });
+        
+        // Update address when house number, area, or lane changes
+        $('input[name="house_unit_number"], #area_id, #lane_id').on('change keyup', function() {
+            updateFullAddress();
+        });
+        
         // Real-time password matching validation
         $('#confirm_password').on('keyup', function() {
             var newPassword = $('#new_password').val();
@@ -603,15 +751,23 @@ ob_start();
             }
         });
 
-        // Form submission validation
+        // Form submission validation with confirmation
+        var formSubmitting = false;
+        
         $('#profileForm').submit(function(e) {
+            // If already confirmed, allow submission
+            if (formSubmitting) {
+                return true;
+            }
+            
+            e.preventDefault();
+            
             var newPassword = $('#new_password').val();
             var confirmPassword = $('#confirm_password').val();
             
             // Only validate if user entered a new password
             if (newPassword.length > 0) {
                 if (newPassword !== confirmPassword) {
-                    e.preventDefault();
                     $('#password-error').show();
                     $('#new_password').addClass('border-danger');
                     $('#confirm_password').addClass('border-danger');
@@ -620,11 +776,27 @@ ob_start();
                 }
                 
                 if (newPassword.length < 6) {
-                    e.preventDefault();
                     alert('Password must be at least 6 characters long.');
                     return false;
                 }
             }
+            
+            // Show confirmation modal
+            if (newPassword.length > 0) {
+                $('#passwordWarning').show();
+            } else {
+                $('#passwordWarning').hide();
+            }
+            
+            $('#confirmSaveModal').modal('show');
+            return false;
+        });
+        
+        // Handle modal confirmation
+        $('#confirmSaveBtn').click(function() {
+            formSubmitting = true;
+            $('#confirmSaveModal').modal('hide');
+            $('#profileForm').submit();
         });
 
         // Clear error styling when user starts typing in new password
