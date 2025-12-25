@@ -179,7 +179,7 @@ ob_start();
 <div class="tab-content" id="staffTabsContent">
     <!-- Tab 1: Register New Staff -->
     <div class="tab-pane fade <?= ($activeTab === 'register') ? 'show active' : '' ?>" id="register" role="tabpanel">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-xl-8 col-lg-10">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
