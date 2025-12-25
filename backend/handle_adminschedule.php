@@ -146,50 +146,89 @@ if (isset($_POST['action'])) {
  */
 if (isset($_POST['submit'])) {
     $area_id = intval($_POST['area_id'] ?? 0);
-    $collection_date = $_POST['collection_date'] ?? '';
+    $collection_dates_raw = $_POST['collection_dates'] ?? '';
     $collection_type = $_POST['collection_type'] ?? '';
     $truck_id = (isset($_POST['truck_id']) && $_POST['truck_id'] !== '') ? intval($_POST['truck_id']) : null;
 
-    // Validate
-    if ($area_id <= 0 || empty($collection_date) || empty($collection_type)) {
+    // Validate basic fields
+    if ($area_id <= 0 || empty($collection_dates_raw) || empty($collection_type)) {
         header("Location: ../public/adminschedule.php?error=missing_fields");
         exit;
     }
 
-    // Block past dates
-    if (strtotime($collection_date) < strtotime(date('Y-m-d'))) {
-        header("Location: ../public/adminschedule.php?error=past_date");
+    // Parse multiple dates (comma-separated from Flatpickr)
+    $dates = array_map('trim', explode(',', $collection_dates_raw));
+    $dates = array_filter($dates); // Remove empty values
+    
+    if (empty($dates)) {
+        header("Location: ../public/adminschedule.php?error=missing_fields");
         exit;
     }
 
-    // Check duplicate
-    $chk = $conn->prepare("SELECT schedule_id FROM schedule WHERE area_id = ? AND collection_date = ?");
-    $chk->bind_param("is", $area_id, $collection_date);
-    $chk->execute();
-    if ($chk->get_result()->num_rows > 0) {
+    $today = date('Y-m-d');
+    $successCount = 0;
+    $duplicateCount = 0;
+    $pastDateCount = 0;
+    $errorCount = 0;
+
+    foreach ($dates as $collection_date) {
+        // Validate date format
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $collection_date)) {
+            $errorCount++;
+            continue;
+        }
+
+        // Block past dates
+        if (strtotime($collection_date) < strtotime($today)) {
+            $pastDateCount++;
+            continue;
+        }
+
+        // Check duplicate
+        $chk = $conn->prepare("SELECT schedule_id FROM schedule WHERE area_id = ? AND collection_date = ?");
+        $chk->bind_param("is", $area_id, $collection_date);
+        $chk->execute();
+        if ($chk->get_result()->num_rows > 0) {
+            $chk->close();
+            $duplicateCount++;
+            continue;
+        }
         $chk->close();
-        header("Location: ../public/adminschedule.php?error=duplicate");
-        exit;
-    }
-    $chk->close();
 
-    // Insert
-    if ($truck_id !== null) {
-        $ins = $conn->prepare("INSERT INTO schedule (area_id, collection_date, collection_type, truck_id, status, update_time) VALUES (?, ?, ?, ?, 'Pending', NOW())");
-        $ins->bind_param("issi", $area_id, $collection_date, $collection_type, $truck_id);
-    } else {
-        $ins = $conn->prepare("INSERT INTO schedule (area_id, collection_date, collection_type, truck_id, status, update_time) VALUES (?, ?, ?, NULL, 'Pending', NOW())");
-        $ins->bind_param("iss", $area_id, $collection_date, $collection_type);
-    }
-    
-    if ($ins->execute()) {
+        // Insert
+        if ($truck_id !== null) {
+            $ins = $conn->prepare("INSERT INTO schedule (area_id, collection_date, collection_type, truck_id, status, update_time) VALUES (?, ?, ?, ?, 'Pending', NOW())");
+            $ins->bind_param("issi", $area_id, $collection_date, $collection_type, $truck_id);
+        } else {
+            $ins = $conn->prepare("INSERT INTO schedule (area_id, collection_date, collection_type, truck_id, status, update_time) VALUES (?, ?, ?, NULL, 'Pending', NOW())");
+            $ins->bind_param("iss", $area_id, $collection_date, $collection_type);
+        }
+        
+        if ($ins->execute()) {
+            $successCount++;
+        } else {
+            $errorCount++;
+        }
         $ins->close();
-        header("Location: ../public/adminschedule.php?status=success");
-        exit;
     }
-    
-    $ins->close();
-    header("Location: ../public/adminschedule.php?error=insert_failed");
+
+    // Build result message
+    $totalDates = count($dates);
+    if ($successCount == $totalDates) {
+        header("Location: ../public/adminschedule.php?status=success&count=" . $successCount);
+    } elseif ($successCount > 0) {
+        // Partial success
+        $msg = "added={$successCount}";
+        if ($duplicateCount > 0) $msg .= "&skipped_dup={$duplicateCount}";
+        if ($pastDateCount > 0) $msg .= "&skipped_past={$pastDateCount}";
+        header("Location: ../public/adminschedule.php?status=partial&{$msg}");
+    } elseif ($duplicateCount > 0) {
+        header("Location: ../public/adminschedule.php?error=duplicate");
+    } elseif ($pastDateCount > 0) {
+        header("Location: ../public/adminschedule.php?error=past_date");
+    } else {
+        header("Location: ../public/adminschedule.php?error=insert_failed");
+    }
     exit;
 }
 

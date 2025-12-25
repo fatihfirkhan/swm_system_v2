@@ -32,6 +32,7 @@ if ($areasResult) {
 // Additional styles
 $additionalStyles = '
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
 <link href="css/adminschedule.css?v=' . time() . '" rel="stylesheet">
 <style>
     /* Force disable all movement on calendar */
@@ -143,35 +144,131 @@ $additionalStyles = '
     .tab-content {
         padding-top: 20px;
     }
+    
+    /* Custom Radio Button Styling for Collection Type */
+    .btn-check {
+        position: absolute;
+        clip: rect(0,0,0,0);
+        pointer-events: none;
+    }
+    .btn-check:checked + .btn-outline-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+    .btn-check:checked + .btn-outline-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: #fff;
+    }
+    .btn-check + .btn {
+        cursor: pointer;
+    }
 </style>
 ';
 
 // Additional scripts that will be added at the bottom of the page
 $additionalScripts = '
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="js/adminschedule.js?v=20251209092813"></script>
+<script>
+$(document).ready(function() {
+    // Initialize Flatpickr for bulk date selection
+    const fp = flatpickr("#collection_dates", {
+        mode: "multiple",
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        conjunction: ", ",
+        allowInput: false,
+        clickOpens: true,
+        animate: true,
+        monthSelectorType: "static",
+        onChange: function(selectedDates, dateStr, instance) {
+            // Show/hide clear button based on selection
+            const clearBtn = document.getElementById("clearDatesBtn");
+            if (selectedDates.length > 0) {
+                clearBtn.style.display = "inline";
+            } else {
+                clearBtn.style.display = "none";
+            }
+        }
+    });
+    
+    // Clear dates button handler
+    document.getElementById("clearDatesBtn").addEventListener("click", function() {
+        fp.clear();
+        this.style.display = "none";
+    });
+});
+</script>
 ';
 
 // Start output buffering to capture the page content
 ob_start();
+
+// Get additional params for bulk scheduling results
+$count = isset($_GET['count']) ? intval($_GET['count']) : 0;
+$added = isset($_GET['added']) ? intval($_GET['added']) : 0;
+$skippedDup = isset($_GET['skipped_dup']) ? intval($_GET['skipped_dup']) : 0;
+$skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
 ?>
 
 <!-- Status Messages -->
 <div class="mb-4">
     <?php if ($status === 'success'): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Schedule saved successfully
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <i class="fas fa-check-circle mr-2"></i>
+            <?php if ($count > 1): ?>
+                <strong><?= $count ?> schedules</strong> saved successfully!
+            <?php else: ?>
+                Schedule saved successfully!
+            <?php endif; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php elseif ($status === 'partial'): ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <strong><?= $added ?> schedule(s)</strong> added successfully.
+            <?php if ($skippedDup > 0): ?>
+                <br><small><?= $skippedDup ?> date(s) skipped (already scheduled)</small>
+            <?php endif; ?>
+            <?php if ($skippedPast > 0): ?>
+                <br><small><?= $skippedPast ?> date(s) skipped (past dates)</small>
+            <?php endif; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     <?php elseif ($error === 'duplicate'): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Duplicate schedule detected
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <i class="fas fa-times-circle mr-2"></i>All selected dates already have schedules for this area.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php elseif ($error === 'past_date'): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-times-circle mr-2"></i>Cannot schedule for past dates.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php elseif ($error === 'missing_fields'): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-times-circle mr-2"></i>Please fill in all required fields.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     <?php elseif ($error === 'insert_failed'): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Failed to save schedule
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <i class="fas fa-times-circle mr-2"></i>Failed to save schedule. Please try again.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     <?php endif; ?>
 </div>
@@ -204,8 +301,8 @@ ob_start();
     <div class="tab-pane fade show active" id="manageSchedules" role="tabpanel" aria-labelledby="manage-tab">
         
         <div class="d-flex justify-content-end mb-3">
-            <a href="adminschedule.php?new=1" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-plus fa-sm text-white-50"></i> New Schedule
+            <a href="adminschedule.php?new=1" class="btn btn-sm btn-secondary shadow-sm">
+                <i class="fas fa-undo fa-sm"></i> Reset
             </a>
         </div>
 
@@ -228,17 +325,26 @@ ob_start();
                                 </select>
                             </div>
 
-                            <div class="row">
-                                <div class="col-7 mb-3">
-                                    <label for="collection_date" class="form-label">Collection Date</label>
-                                    <input type="date" name="collection_date" id="collection_date" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                            <div class="mb-3">
+                                <label for="collection_dates" class="form-label">Collection Date(s)</label>
+                                <input type="text" name="collection_dates" id="collection_dates" class="form-control" placeholder="Click to select dates..." required>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted"><i class="fas fa-info-circle mr-1"></i>You can select multiple dates for bulk scheduling</small>
+                                    <small id="clearDatesBtn" class="text-danger" style="cursor: pointer; display: none;"><i class="fas fa-times-circle mr-1"></i>Clear Dates</small>
                                 </div>
-                                <div class="col-5 mb-3">
-                                    <label class="form-label">Type</label>
-                                    <select name="collection_type" class="form-select" required>
-                                        <option value="Domestic">Domestic</option>
-                                        <option value="Recycle">Recycle</option>
-                                    </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Collection Type</label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="collection_type" id="type_domestic" value="Domestic" checked required>
+                                    <label class="btn btn-outline-primary" for="type_domestic" style="width: 50%;">
+                                        <i class="fas fa-trash-alt mr-2"></i>Domestic
+                                    </label>
+                                    
+                                    <input type="radio" class="btn-check" name="collection_type" id="type_recycle" value="Recycle" required>
+                                    <label class="btn btn-outline-success" for="type_recycle" style="width: 50%;">
+                                        <i class="fas fa-recycle mr-2"></i>Recycle
+                                    </label>
                                 </div>
                             </div>
 
@@ -285,16 +391,18 @@ ob_start();
                         </div>
 
                         <!-- Legend -->
-                        <div class="d-flex gap-3 mb-3 align-items-center small">
-                            <div class="d-flex align-items-center gap-1">
-                                <span style="display:inline-block; width:16px; height:16px; background:#d4edda; border:2px solid #28a745; border-radius:50%;"></span>
-                                <span>Recycle</span>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center mr-4">
+                                    <span style="display:inline-block; width:14px; height:14px; background:#d4edda; border:2px solid #28a745; border-radius:50%; margin-right:6px;"></span>
+                                    <span style="color:#155724; font-weight:500;">Recycle</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <span style="display:inline-block; width:14px; height:14px; background:#cfe2ff; border:2px solid #0d6efd; border-radius:50%; margin-right:6px;"></span>
+                                    <span style="color:#084298; font-weight:500;">Domestic</span>
+                                </div>
                             </div>
-                            <div class="d-flex align-items-center gap-1">
-                                <span style="display:inline-block; width:16px; height:16px; background:#cfe2ff; border:2px solid #0d6efd; border-radius:50%;"></span>
-                                <span>Domestic</span>
-                            </div>
-                            <small class="text-muted ms-2">Click on scheduled dates to edit</small>
+                            <small style="color:#6c757d; font-style:italic;"><i class="fas fa-info-circle mr-1"></i>Click on scheduled dates to edit</small>
                         </div>
 
                         <div id="calendar" class="table-responsive mt-2">
