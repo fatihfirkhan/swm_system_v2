@@ -31,6 +31,7 @@ if ($truck_result->num_rows > 0) {
 
 // Additional styles
 $additionalStyles = '
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
 <style>
     /* Weekly Date Strip */
     .weekly-nav {
@@ -293,19 +294,48 @@ $additionalStyles = '
         }
     }
     
-    /* Hidden Date Picker */
-    #hidden_date_picker {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
+    /* Flatpickr Custom Styling */
+    .flatpickr-calendar {
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        border: none;
+    }
+    .flatpickr-day.selected {
+        background: #4e73df;
+        border-color: #4e73df;
+    }
+    .flatpickr-day.today {
+        border-color: #1cc88a;
+    }
+    .flatpickr-day:hover {
+        background: #e3e6f0;
     }
 </style>
 ';
 
 // Additional scripts
 $additionalScripts = '
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 $(document).ready(function() {
+    // Initialize Flatpickr with beautiful calendar
+    const datePicker = flatpickr("#hidden_date_picker", {
+        dateFormat: "Y-m-d",
+        defaultDate: "<?= htmlspecialchars($selected_date) ?>",
+        onChange: function(selectedDates, dateStr, instance) {
+            if (dateStr) {
+                window.location.href = "staff_collection_assignment.php?date=" + dateStr;
+            }
+        },
+        monthSelectorType: "static",
+        animate: true
+    });
+    
+    // Handle calendar jump button - open Flatpickr
+    $("#calendar_jump_btn").on("click", function() {
+        datePicker.open();
+    });
+    
     // Check if user has truck assigned
     const hasTruck = ' . ($has_truck ? 'true' : 'false') . ';
     
@@ -331,17 +361,6 @@ $(document).ready(function() {
     
     // Load lanes on page load
     loadLanes();
-    
-    // Handle date change from hidden picker
-    $("#hidden_date_picker").on("change", function() {
-        const newDate = $(this).val();
-        window.location.href = "staff_collection_assignment.php?date=" + newDate;
-    });
-    
-    // Handle calendar jump button
-    $("#calendar_jump_btn").on("click", function() {
-        $("#hidden_date_picker").trigger("click");
-    });
     
     // Handle toggle switch changes
     $(document).on("change", ".lane-toggle", function() {
@@ -578,9 +597,32 @@ $(document).ready(function() {
 // Start output buffering to capture the page content
 ob_start();
 
-// Get selected date from URL or default to today
-$selected_date = $_GET['date'] ?? date('Y-m-d');
+// Get parameters from URL
+$selected_date = null;
+$selected_month = null;
+$selected_year = null;
+
+// Check if specific date is provided
+if (isset($_GET['date'])) {
+    $selected_date = $_GET['date'];
+} 
+// Check if month and year are provided (from month/year selector)
+elseif (isset($_GET['month']) && isset($_GET['year'])) {
+    $selected_month = intval($_GET['month']);
+    $selected_year = intval($_GET['year']);
+    // Default to 1st of the selected month
+    $selected_date = sprintf('%04d-%02d-01', $selected_year, $selected_month);
+} 
+// Default to today
+else {
+    $selected_date = date('Y-m-d');
+}
+
 $selected_timestamp = strtotime($selected_date);
+
+// Extract month and year from selected date for the dropdowns
+$current_month = intval(date('n', $selected_timestamp)); // 1-12
+$current_year = intval(date('Y', $selected_timestamp));
 
 // Format month and year for display
 $selected_month_year = date('F Y', $selected_timestamp);
@@ -617,15 +659,24 @@ for ($i = -3; $i <= 3; $i++) {
                 </a>
             <?php endforeach; ?>
         </div>
+        
+        <!-- Current Month/Year Display -->
         <h5 class="m-0 font-weight-bold text-primary mx-3"><?= $selected_month_year ?></h5>
-        <button type="button" class="btn btn-outline-primary calendar-jump-btn" id="calendar_jump_btn" title="Jump to specific date">
+        
+        <!-- Today Button -->
+        <a href="staff_collection_assignment.php" class="btn btn-primary btn-sm mr-2" title="Jump to today">
+            <i class="fas fa-calendar-day"></i> Today
+        </a>
+        
+        <!-- Calendar Jump Button -->
+        <button type="button" class="btn btn-outline-primary btn-sm" id="calendar_jump_btn" title="Pick specific date">
             <i class="fas fa-calendar-alt"></i>
         </button>
     </div>
 </div>
 
-<!-- Hidden Date Picker for Calendar Jump -->
-<input type="date" id="hidden_date_picker" value="<?= htmlspecialchars($selected_date) ?>">
+<!-- Hidden Date Picker for Flatpickr -->
+<input type="text" id="hidden_date_picker" style="position: absolute; opacity: 0; pointer-events: none;" value="<?= htmlspecialchars($selected_date) ?>">
 
 <!-- Hidden field to store selected date for AJAX -->
 <input type="hidden" id="collection_date" value="<?= htmlspecialchars($selected_date) ?>">

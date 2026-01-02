@@ -215,11 +215,6 @@ ob_start();
             border-radius: 4px;
             font-size: 0.9rem;
         }
-        /* Fix topbar z-index to be above modal backdrop */
-        .topbar {
-            z-index: 1060 !important;
-            position: relative;
-        }
     </style>
 </head>
 
@@ -404,6 +399,8 @@ ob_start();
                 </div>
                 <div class="card-body">
                     <form method="POST" action="" id="profileForm">
+                        <!-- Hidden field to ensure form submission is detected -->
+                        <input type="hidden" name="update_profile" value="1">
                         
                         <!-- Personal Information Section -->
                         <div class="form-section">
@@ -669,12 +666,9 @@ ob_start();
         echo json_encode($lanes_array);
     ?>;
     
-    const currentLaneId = <?= json_encode($user['lane_id']) ?>;
+    const currentLaneId = <?= $user['lane_id'] ?>;
     
     $(document).ready(function() {
-        // Force initialize Bootstrap dropdowns
-        $('.dropdown-toggle').dropdown();
-        
         // Function to load lanes based on selected area
         function loadLanes(areaId, selectLaneId = null) {
             const laneSelect = $('#lane_id');
@@ -792,11 +786,12 @@ ob_start();
             return false;
         });
         
-        // Handle modal confirmation
+        // Handle modal confirmation - use native DOM submit to bypass jQuery event handler
         $('#confirmSaveBtn').click(function() {
             formSubmitting = true;
             $('#confirmSaveModal').modal('hide');
-            $('#profileForm').submit();
+            // Use native DOM submit method to bypass the jQuery submit handler
+            document.getElementById('profileForm').submit();
         });
 
         // Clear error styling when user starts typing in new password
