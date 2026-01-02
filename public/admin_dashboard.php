@@ -48,25 +48,44 @@ ob_start();
 
 <body id="page-top"><?php
 
-// Fetch dashboard statistics
+// ========== DATA FETCHING FOR ADMIN DASHBOARD ==========
 $currentMonth = date('Y-m');
 
-// Total schedules this month
+// 1. Total schedules this month
 $schedulesQuery = "SELECT COUNT(*) as total FROM schedule WHERE DATE_FORMAT(collection_date, '%Y-%m') = ?";
 $stmt = $conn->prepare($schedulesQuery);
 $stmt->bind_param('s', $currentMonth);
 $stmt->execute();
 $scheduleCount = $stmt->get_result()->fetch_assoc()['total'];
+$stmt->close();
 
-// Active staff count
+// 2. Active staff count
 $staffQuery = "SELECT COUNT(*) as total FROM user WHERE role = 'staff'";
 $activeStaff = $conn->query($staffQuery)->fetch_assoc()['total'];
 
-// Collection areas count
+// 3. Collection areas count
 $areasQuery = "SELECT COUNT(DISTINCT area_id) as total FROM collection_area";
 $areaCount = $conn->query($areasQuery)->fetch_assoc()['total'];
 
-// Recent schedules
+// 4. **FIX: Get REAL Pending Complaints count**
+$pendingComplaintsQuery = "SELECT COUNT(*) as total FROM complaints WHERE status = 'Pending'";
+$pendingComplaints = $conn->query($pendingComplaintsQuery)->fetch_assoc()['total'];
+
+// 5. Chart Data: Last 4 weeks collection counts
+$chartData = [];
+for ($i = 3; $i >= 0; $i--) {
+    $weekStart = date('Y-m-d', strtotime("-$i weeks monday"));
+    $weekEnd = date('Y-m-d', strtotime("-$i weeks sunday"));
+    
+    $weekQuery = "SELECT COUNT(*) as count FROM schedule WHERE collection_date BETWEEN ? AND ?";
+    $weekStmt = $conn->prepare($weekQuery);
+    $weekStmt->bind_param('ss', $weekStart, $weekEnd);
+    $weekStmt->execute();
+    $chartData[] = $weekStmt->get_result()->fetch_assoc()['count'];
+    $weekStmt->close();
+}
+
+// 6. Recent schedules
 $recentQuery = "SELECT s.*, GROUP_CONCAT(DISTINCT u.name SEPARATOR ', ') as staff_names, 
                 ca.taman_name as area_name, t.truck_number
                 FROM schedule s
@@ -77,6 +96,28 @@ $recentQuery = "SELECT s.*, GROUP_CONCAT(DISTINCT u.name SEPARATOR ', ') as staf
                 GROUP BY s.schedule_id
                 ORDER BY s.collection_date DESC LIMIT 5";
 $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
+
+// 7. Area Collection Data for Pie Chart (This Month)
+$areaChartQuery = "SELECT ca.taman_name, COUNT(s.schedule_id) as collection_count
+                   FROM collection_area ca
+                   LEFT JOIN schedule s ON ca.area_id = s.area_id 
+                   AND DATE_FORMAT(s.collection_date, '%Y-%m') = ?
+                   GROUP BY ca.area_id, ca.taman_name
+                   ORDER BY collection_count DESC
+                   LIMIT 6";
+$areaStmt = $conn->prepare($areaChartQuery);
+$areaStmt->bind_param('s', $currentMonth);
+$areaStmt->execute();
+$areaChartData = $areaStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$areaStmt->close();
+
+// Prepare data for JavaScript
+$areaLabels = [];
+$areaValues = [];
+foreach ($areaChartData as $area) {
+    $areaLabels[] = $area['taman_name'];
+    $areaValues[] = (int)$area['collection_count'];
+}
 ?>
 
 <!-- Page Wrapper -->
@@ -89,53 +130,7 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
         <!-- Main Content -->
         <div id="content">
 
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Centered Logo -->
-                <div class="topbar-logo-container">
-                    <img src="../assets/swme logo.png" alt="SWM Logo">
-                    <span class="logo-text">SWM ENVIRONMENT</span>
-                </div>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                <?php echo htmlspecialchars($_SESSION['name'] ?? 'Administrator'); ?>
-                            </span>
-                            <i class="fas fa-user-circle fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="profile.php">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
+            <?php include '../includes/admin_topbar.php'; ?>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -153,11 +148,11 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
 
                     <!-- Total Schedules Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card border-left-success shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Total Schedules</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $scheduleCount; ?> This Month</div>
                                     </div>
@@ -189,11 +184,11 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
 
                     <!-- Areas Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card border-left-success shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Areas Covered</div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $areaCount; ?></div>
                                     </div>
@@ -213,7 +208,7 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                             Complaints</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">5 Pending</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $pendingComplaints; ?> Pending</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
@@ -232,7 +227,7 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
                         <div class="card shadow mb-4">
                             <!-- Card Header -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Collection Schedule Overview</h6>
+                                <h6 class="m-0 font-weight-bold text-success">Collection Schedule Overview</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
@@ -248,7 +243,7 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
                         <div class="card shadow mb-4">
                             <!-- Card Header -->
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Collection by Area</h6>
+                                <h6 class="m-0 font-weight-bold text-success">Collection by Area</h6>
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
@@ -263,7 +258,7 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
                 <!-- Recent Schedules Table -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Recent Collection Schedules</h6>
+                        <h6 class="m-0 font-weight-bold text-success">Recent Collection Schedules</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -281,8 +276,8 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
                                     <?php foreach ($recentSchedules as $schedule): ?>
                                     <tr>
                                         <td><?php echo date('M d, Y', strtotime($schedule['collection_date'])); ?></td>
-                                        <td><?php echo htmlspecialchars($schedule['area_name']); ?></td>
-                                        <td><?php echo htmlspecialchars($schedule['staff_name'] ?? 'Not Assigned'); ?></td>
+                                        <td><?php echo htmlspecialchars($schedule['area_name'] ?? 'N/A'); ?></td>
+                                        <td><?php echo htmlspecialchars($schedule['staff_names'] ?? 'Not Assigned'); ?></td>
                                         <td>
                                             <?php
                                             $status = $schedule['status'];
@@ -363,6 +358,9 @@ $recentSchedules = $conn->query($recentQuery)->fetch_all(MYSQLI_ASSOC);
 
 <!-- Page level custom scripts -->
 <script>
+// PHP data passed to JavaScript
+var chartCollectionData = <?php echo json_encode($chartData); ?>;
+
 // Area Chart
 var ctx = document.getElementById("scheduleChart");
 var myLineChart = new Chart(ctx, {
@@ -372,17 +370,17 @@ var myLineChart = new Chart(ctx, {
         datasets: [{
             label: "Collections",
             lineTension: 0.3,
-            backgroundColor: "rgba(78, 115, 223, 0.05)",
-            borderColor: "rgba(78, 115, 223, 1)",
+            backgroundColor: "rgba(28, 200, 138, 0.05)",
+            borderColor: "rgba(28, 200, 138, 1)",
             pointRadius: 3,
-            pointBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointBackgroundColor: "rgba(28, 200, 138, 1)",
+            pointBorderColor: "rgba(28, 200, 138, 1)",
             pointHoverRadius: 3,
-            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverBackgroundColor: "rgba(28, 200, 138, 1)",
+            pointHoverBorderColor: "rgba(28, 200, 138, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [8, 7, 9, 8],
+            data: chartCollectionData,
         }],
     },
     options: {
@@ -443,14 +441,23 @@ var myLineChart = new Chart(ctx, {
 
 // Pie Chart
 var ctx2 = document.getElementById("areaChart");
+
+// PHP data passed to JavaScript
+var areaLabels = <?php echo json_encode($areaLabels); ?>;
+var areaData = <?php echo json_encode($areaValues); ?>;
+
+// Generate colors dynamically
+var colors = ['#1cc88a', '#4e73df', '#36b9cc', '#f6c23e', '#e74a3b', '#858796'];
+var hoverColors = ['#17a673', '#2e59d9', '#2c9faf', '#dda20a', '#be2617', '#60616f'];
+
 var myPieChart = new Chart(ctx2, {
     type: 'doughnut',
     data: {
-        labels: ["Area A", "Area B", "Area C", "Area D"],
+        labels: areaLabels,
         datasets: [{
-            data: [30, 25, 20, 25],
-            backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
-            hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#dda20a'],
+            data: areaData,
+            backgroundColor: colors.slice(0, areaLabels.length),
+            hoverBackgroundColor: hoverColors.slice(0, areaLabels.length),
             hoverBorderColor: "rgba(234, 236, 244, 1)",
         }],
     },
