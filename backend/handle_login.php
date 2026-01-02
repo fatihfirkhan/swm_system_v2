@@ -49,34 +49,30 @@ if ($result->num_rows === 1) {
         fwrite($debug_file, "Login successful. Session data: " . print_r($_SESSION, true) . "\n");
         fclose($debug_file);
 
-        // Redirect based on role - FIXED LOGIC
+        // Redirect based on role
         $userRole = strtolower($user['role']);
         
         if ($userRole === 'resident') {
-            // Redirect residents to their dashboard
-            header("Location: ../public/resident_dashboard.php");
+            header("Location: /resident_dashboard.php");
             exit();
         } elseif ($userRole === 'admin') {
-            // Redirect admins to admin dashboard
-            header("Location: ../public/admin_dashboard.php");
+            header("Location: /admin_dashboard.php");
             exit();
         } elseif ($userRole === 'staff') {
-            // Redirect staff to staff dashboard
-            header("Location: ../public/staff_dashboard.php");
+            header("Location: /staff_dashboard.php");
             exit();
         } else {
-            // Unknown role - show error
             $_SESSION['error'] = 'Unknown user role: ' . $user['role'];
-            header("Location: ../public/login.php?role=$role&error=invalid_role");
+            header("Location: /login.php?role=$role&error=invalid_role");
             exit();
         }
     } else {
         fwrite($debug_file, "Wrong password\n");
-        header("Location: ../public/login.php?role=$role&error=wrong_password");
+        header("Location: /login.php?role=$role&error=wrong_password");
     }
 } else {
     fwrite($debug_file, "User not found\n");
-    header("Location: ../public/login.php?role=$role&error=user_not_found");
+    header("Location: /login.php?role=$role&error=user_not_found");
 }
 fclose($debug_file);
 ?>
