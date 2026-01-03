@@ -42,5 +42,39 @@
         </a>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Account
+    </div>
+
+    <!-- Nav Item - Profile -->
+    <li class="nav-item <?php echo $currentPage === 'profile' ? 'active' : ''; ?>">
+        <a class="nav-link" href="resident_profile.php">
+            <i class="fas fa-fw fa-user"></i>
+            <span>My Profile</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Logout -->
+    <li class="nav-item">
+        <a class="nav-link" href="logout.php" style="background-color: #e74a3b; color: white;" 
+           onmouseover="this.style.backgroundColor='#c0392b'" 
+           onmouseout="this.style.backgroundColor='#e74a3b'">
+            <i class="fas fa-fw fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
 </ul>
 <!-- End of Sidebar -->
