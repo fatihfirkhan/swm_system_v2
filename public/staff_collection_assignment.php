@@ -374,7 +374,7 @@ $(document).ready(function() {
         $toggle.prop("disabled", true);
         
         $.ajax({
-            url: "../backend/handle_lane_status.php",
+            url: "backend/handle_lane_status.php",
             method: "POST",
             dataType: "json",
             data: {
@@ -419,7 +419,7 @@ $(document).ready(function() {
         $("#lanes-container").html("<div class=\"text-center p-4\"><i class=\"fas fa-spinner fa-spin fa-2x text-primary\"></i></div>");
         
         $.ajax({
-            url: "../backend/handle_lane_status.php",
+            url: "backend/handle_lane_status.php",
             method: "POST",
             dataType: "json",
             data: {

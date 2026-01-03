@@ -193,7 +193,7 @@ ob_start();
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../backend/area_actions.php?action=add" method="POST">
+                <form action="backend/area_actions.php?action=add" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="taman_name">Taman Name <span class="text-danger">*</span></label>
@@ -224,7 +224,7 @@ ob_start();
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../backend/area_actions.php?action=add_lanes" method="POST">
+                <form action="backend/area_actions.php?action=add_lanes" method="POST">
                     <input type="hidden" name="area_id" id="laneAreaId">
                     <div class="modal-body">
                         <div class="form-group">
@@ -298,7 +298,7 @@ ob_start();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <form id="deleteAreaForm" action="../backend/area_actions.php?action=delete" method="POST" style="display: inline;">
+                    <form id="deleteAreaForm" action="backend/area_actions.php?action=delete" method="POST" style="display: inline;">
                         <input type="hidden" name="area_id" id="deleteAreaId">
                         <button type="submit" class="btn btn-danger">Delete Area</button>
                     </form>
@@ -368,7 +368,7 @@ ob_start();
             $('#viewLanesModal').modal('show');
             
             // Load lanes via AJAX
-            $.get('../backend/area_actions.php?action=get_lanes&area_id=' + areaId, function(data) {
+            $.get('backend/area_actions.php?action=get_lanes&area_id=' + areaId, function(data) {
                 if (data.error) {
                     $('#lanesContent').html('<p class="text-center text-danger">Error: ' + data.error + '</p>');
                     return;
@@ -406,7 +406,7 @@ ob_start();
         $(document).on('click', '.delete-lane', function() {
             var laneId = $(this).data('lane-id');
             if (confirm('Are you sure you want to delete this lane?')) {
-                $.post('../backend/area_actions.php?action=delete_lane', { lane_id: laneId }, function(response) {
+                $.post('backend/area_actions.php?action=delete_lane', { lane_id: laneId }, function(response) {
                     if (response.success) {
                         // Reload the lanes view
                         $('.view-lanes').first().click();

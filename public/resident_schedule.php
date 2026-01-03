@@ -485,7 +485,7 @@ ob_start();
             $('#calendar').html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading schedule...</p></div>');
 
             $.ajax({
-                url: '../backend/fetch_resident_schedule.php',
+                url: 'backend/fetch_resident_schedule.php',
                 method: 'GET',
                 data: { 
                     month: month,
@@ -511,7 +511,7 @@ ob_start();
             $('#laneStatusModal').modal('show');
 
             $.ajax({
-                url: '../backend/ajax_get_lane_status.php',
+                url: 'backend/ajax_get_lane_status.php',
                 method: 'GET',
                 data: {
                     date: dateStr,

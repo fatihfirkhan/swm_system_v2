@@ -22,7 +22,7 @@ require __DIR__ . '/../includes/template_navbar.php';
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4"><?php echo ucfirst($displayRole); ?> Login</h1>
                         </div>
-                        <form class="user" method="post" action="../backend/handle_login.php?role=<?php echo $role; ?>" id="loginForm">
+                        <form class="user" method="post" action="backend/handle_login.php?role=<?php echo $role; ?>" id="loginForm">
                 <?php if ($role === 'resident'): ?>
                     <div class="form-group">
                         <input type="email" name="email" class="form-control form-control-user" placeholder="Enter Email Address" required>

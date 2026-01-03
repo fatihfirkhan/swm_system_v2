@@ -796,7 +796,7 @@ function viewDetails(scheduleId) {
     $('#detailsModal').modal('show');
     
     $.ajax({
-        url: '../backend/get_schedule_details.php',
+        url: 'backend/get_schedule_details.php',
         method: 'GET',
         data: { schedule_id: scheduleId },
         dataType: 'json',

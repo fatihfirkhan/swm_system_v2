@@ -61,7 +61,7 @@ $(document).ready(function() {
         $("#calendar").html("<div class=\"text-center p-4\"><i class=\"fas fa-spinner fa-spin fa-2x text-info\"></i><p class=\"mt-2 text-muted\">Loading schedule...</p></div>");
 
         $.ajax({
-            url: "../backend/fetch_calendar_schedule.php",
+            url: "backend/fetch_calendar_schedule.php",
             method: "GET",
             data: { area_id: areaId, month: month },
             success: function(response) {

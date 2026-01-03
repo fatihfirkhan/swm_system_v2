@@ -314,7 +314,7 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                         <h6 class="m-0 font-weight-bold text-primary">Add / Edit Schedule</h6>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="../backend/handle_adminschedule.php" id="scheduleForm">
+                        <form method="post" action="backend/handle_adminschedule.php" id="scheduleForm">
                             <div class="mb-3">
                                 <label for="area_id" class="form-label">Select Area</label>
                                 <select name="area_id" id="area_id" class="form-select select2" required>
@@ -624,7 +624,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('monitorCalendar').innerHTML = 
             '<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading schedule...</p></div>';
 
-        fetch('../backend/fetch_resident_schedule.php?month=' + month + '&area_id=' + monitorAreaId)
+        fetch('backend/fetch_resident_schedule.php?month=' + month + '&area_id=' + monitorAreaId)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
@@ -648,7 +648,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         $('#laneStatusModal').modal('show');
 
-        fetch('../backend/ajax_get_lane_status.php?date=' + dateStr + '&area_id=' + monitorAreaId)
+        fetch('backend/ajax_get_lane_status.php?date=' + dateStr + '&area_id=' + monitorAreaId)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {

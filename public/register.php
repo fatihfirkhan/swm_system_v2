@@ -53,7 +53,7 @@ $areas_result = $conn->query($areas_query);
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="../backend/handle_register.php" id="registerForm">
+            <form method="post" action="backend/handle_register.php" id="registerForm">
                 <!-- Personal Information -->
                 <div class="mb-3">
                     <label class="form-label required">Full Name</label>
@@ -155,7 +155,7 @@ $(document).ready(function() {
 
             // Fetch lanes via AJAX
             $.ajax({
-                url: '../backend/get_lanes.php',
+                url: 'backend/get_lanes.php',
                 method: 'POST',
                 dataType: 'json',
                 data: { area_id: areaId },
