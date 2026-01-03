@@ -116,7 +116,7 @@
                   transition: all 0.3s ease;
                   padding: 0.5rem 0.75rem;
                   font-size: 0.9rem;
-                  margin: 0 1rem;"
+                  margin: 0 1.5rem;"
            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(238, 90, 111, 0.4)'"
            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(238, 90, 111, 0.3)'">
             <i class="fas fa-fw fa-sign-out-alt"></i>
