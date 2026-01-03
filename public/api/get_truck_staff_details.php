@@ -81,25 +81,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     exit();
 }
 
-// Get swap options (staff from other trucks)
+// Get swap options (staff from other trucks AND unassigned)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'swap_options') {
     $exclude_truck_id = isset($_GET['exclude_truck_id']) ? intval($_GET['exclude_truck_id']) : 0;
     
-    $sql = "SELECT ts.user_id, ts.role, ts.truck_id, u.name, u.work_id, t.truck_number
+    // Get unassigned staff
+    $sql_unassigned = "SELECT u.user_id, u.name, u.work_id 
+            FROM user u
+            WHERE u.role = 'staff' 
+            AND u.user_id NOT IN (
+                SELECT DISTINCT user_id FROM truck_staff WHERE status = 'active'
+            )
+            ORDER BY u.name";
+    
+    $result_unassigned = $conn->query($sql_unassigned);
+    $unassigned = [];
+    while ($row = $result_unassigned->fetch_assoc()) {
+        $unassigned[] = [
+            'user_id' => $row['user_id'],
+            'name' => $row['name'],
+            'work_id' => $row['work_id']
+        ];
+    }
+    
+    // Get staff from other trucks
+    $sql_assigned = "SELECT ts.user_id, ts.role, ts.truck_id, u.name, u.work_id, t.truck_number
             FROM truck_staff ts
             INNER JOIN user u ON ts.user_id = u.user_id
             INNER JOIN truck t ON ts.truck_id = t.truck_id
             WHERE ts.status = 'active' AND ts.truck_id != ?
             ORDER BY t.truck_number, ts.role";
     
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql_assigned);
     $stmt->bind_param('i', $exclude_truck_id);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $result_assigned = $stmt->get_result();
     
-    $staff = [];
-    while ($row = $result->fetch_assoc()) {
-        $staff[] = [
+    $assigned = [];
+    while ($row = $result_assigned->fetch_assoc()) {
+        $assigned[] = [
             'user_id' => $row['user_id'],
             'name' => $row['name'],
             'work_id' => $row['work_id'],
@@ -109,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
         ];
     }
     
-    echo json_encode(['staff' => $staff]);
+    echo json_encode(['unassigned' => $unassigned, 'assigned' => $assigned]);
     exit();
 }
 
