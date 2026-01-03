@@ -58,7 +58,7 @@ require __DIR__ . '/../includes/template_navbar.php';
                     <a class="small" href="register.php">Create an Account!</a>
                     <div class="mb-2"></div>
                 <?php endif; ?>
-                <a class="small" href="#">Forgot Password?</a>
+                <a class="small" href="forgot_password.php?role=<?php echo $role; ?>">Forgot Password?</a>
             </div>
         </div>
     </div>

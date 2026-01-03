@@ -71,6 +71,7 @@ The **Smart Waste Management System** is a modern, role-based web application de
 - 📍 **Area-Based Information** - Location-specific collection details
 - 🔔 **Notifications** - Receive schedule updates and announcements
 - 📊 **Personal Dashboard** - Track complaint status and history
+- 🔐 **Password Reset** - Secure email-based password recovery
 
 ---
 
@@ -246,7 +247,52 @@ $password = "root123";     // Match docker-compose.yml
 
 ---
 
-## 📸 Screenshots
+## � Password Reset Feature
+
+The system includes a secure password reset feature for residents:
+
+### Setup Instructions
+
+1. **Run Database Migration**
+   ```bash
+   # Access the setup page
+   http://localhost/swm_system_v2/setup_password_reset.php
+   ```
+   Click "Run Setup" to create the required database table.
+
+2. **Configure Email Settings**
+   
+   See [EMAIL_SETUP.md](EMAIL_SETUP.md) for detailed configuration options:
+   - Gmail SMTP (Recommended)
+   - Local PHP mail()
+   - Alternative SMTP providers
+
+3. **Test the Feature**
+   - Visit login page and click "Forgot Password?"
+   - Enter resident email address
+   - Check email for reset link
+   - Set new password
+
+### Security Features
+- ✅ Secure token generation (64-character random hash)
+- ✅ Token expires after 1 hour
+- ✅ One-time use tokens
+- ✅ Password hashing with bcrypt
+- ✅ Email validation
+- ✅ Resident-only access
+
+### Files Added
+- `public/forgot_password.php` - Request reset link
+- `public/reset_password.php` - Set new password
+- `backend/handle_forgot_password.php` - Generate token & send email
+- `backend/handle_reset_password.php` - Verify token & update password
+- `add_password_reset_table.sql` - Database migration
+- `setup_password_reset.php` - Setup wizard
+- `EMAIL_SETUP.md` - Email configuration guide
+
+---
+
+## �📸 Screenshots
 
 <details>
 <summary>Click to expand screenshots</summary>
