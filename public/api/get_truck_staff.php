@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 session_start();
-require_once '../../includes/db.php';
+require_once '../includes/db.php';
 
 // Check if user is logged in as admin
 if (!isset($_SESSION['work_id']) || $_SESSION['role'] !== 'admin') {

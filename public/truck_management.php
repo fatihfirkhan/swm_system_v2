@@ -670,7 +670,7 @@ ob_start();
         
         // Function to load staff for view modal
         function loadStaffForView(truckId, truckNumber) {
-            $.get('../api/get_truck_staff_details.php?truck_id=' + truckId, function(data) {
+            $.get('api/get_truck_staff_details.php?truck_id=' + truckId, function(data) {
                 if (data.error) {
                     $('#viewStaffContent').html('<p class="text-center text-danger">Error: ' + data.error + '</p>');
                     return;
@@ -809,7 +809,7 @@ ob_start();
             $('#swapStaffModal').modal('show');
             
             // Load staff from other trucks AND unassigned staff
-            $.get('../api/get_truck_staff_details.php?action=swap_options&exclude_truck_id=' + truckId, function(data) {
+            $.get('api/get_truck_staff_details.php?action=swap_options&exclude_truck_id=' + truckId, function(data) {
                 var html = '<option value="">-- Select Staff to Swap With --</option>';
                 
                 // Add unassigned staff first
@@ -947,7 +947,7 @@ ob_start();
             $('#addStaffModal').modal('show');
             
             // Load unassigned staff
-            $.get('../api/get_truck_staff_details.php?action=unassigned', function(data) {
+            $.get('api/get_truck_staff_details.php?action=unassigned', function(data) {
                 var html = '<option value="">-- Select Staff --</option>';
                 if (data.staff && data.staff.length > 0) {
                     data.staff.forEach(function(staff) {
@@ -1013,7 +1013,7 @@ ob_start();
             $('#driverSelect, #collector1Select, #collector2Select').html('<option value="">Select...</option>');
             
             // Get assigned staff IDs (excluding current truck - these are staff assigned to OTHER trucks)
-            $.get('../api/get_truck_staff_details.php?action=assigned_ids&exclude_truck_id=' + truckId, function(assignedData) {
+            $.get('api/get_truck_staff_details.php?action=assigned_ids&exclude_truck_id=' + truckId, function(assignedData) {
                 if (assignedData.error) {
                     console.error('Error getting assigned staff:', assignedData.error);
                     // Fallback: show all staff if API fails
@@ -1043,7 +1043,7 @@ ob_start();
                 
                 // Load current staff assignments for this truck and set selected values
                 // This ensures current assignments are visible even if they're in the filtered list
-                $.get('../api/get_truck_staff.php?truck_id=' + truckId, function(data) {
+                $.get('api/get_truck_staff.php?truck_id=' + truckId, function(data) {
                     if (data.driver_id) {
                         // Add current driver to dropdown if not already there
                         var driverStaff = allStaff.find(function(s) { return parseInt(s.user_id) == parseInt(data.driver_id); });
