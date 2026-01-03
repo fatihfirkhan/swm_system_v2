@@ -59,7 +59,7 @@
     </li>
 
     <!-- Nav Item - Logout -->
-    <li class="nav-item" style="padding: 0 1rem;">
+    <li class="nav-item" style="padding: 0 1.5rem;">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal" 
            style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); 
                   color: white; 
