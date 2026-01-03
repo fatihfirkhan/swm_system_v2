@@ -107,7 +107,7 @@
     </li>
 
     <!-- Nav Item - Logout -->
-    <li class="nav-item" style="padding: 0 1.5rem;">
+    <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal" 
            style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); 
                   color: white; 
@@ -115,7 +115,8 @@
                   box-shadow: 0 2px 4px rgba(238, 90, 111, 0.3);
                   transition: all 0.3s ease;
                   padding: 0.5rem 0.75rem;
-                  font-size: 0.9rem;"
+                  font-size: 0.9rem;
+                  margin: 0 1rem;"
            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(238, 90, 111, 0.4)'"
            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(238, 90, 111, 0.3)'">
             <i class="fas fa-fw fa-sign-out-alt"></i>
