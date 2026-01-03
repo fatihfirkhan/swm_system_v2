@@ -64,8 +64,6 @@
            style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); 
                   color: white; 
                   border-radius: 10px; 
-                  margin: 0 0.5rem; 
-                  padding: 0.75rem 1rem;
                   box-shadow: 0 4px 6px rgba(238, 90, 111, 0.3);
                   transition: all 0.3s ease;"
            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(238, 90, 111, 0.4)'"
