@@ -29,7 +29,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     if (isset($_POST['action'])) {
         send_json_response('error', 'Unauthorized access');
     }
-    header('Location: ../public/login.php');
+    header('Location: /login.php');
     exit;
 }
 
@@ -152,7 +152,7 @@ if (isset($_POST['submit'])) {
 
     // Validate basic fields
     if ($area_id <= 0 || empty($collection_dates_raw) || empty($collection_type)) {
-        header("Location: ../public/adminschedule.php?error=missing_fields");
+        header("Location: /adminschedule.php?error=missing_fields");
         exit;
     }
 
@@ -161,7 +161,7 @@ if (isset($_POST['submit'])) {
     $dates = array_filter($dates); // Remove empty values
     
     if (empty($dates)) {
-        header("Location: ../public/adminschedule.php?error=missing_fields");
+        header("Location: /adminschedule.php?error=missing_fields");
         exit;
     }
 
@@ -215,23 +215,23 @@ if (isset($_POST['submit'])) {
     // Build result message
     $totalDates = count($dates);
     if ($successCount == $totalDates) {
-        header("Location: ../public/adminschedule.php?status=success&count=" . $successCount);
+        header("Location: /adminschedule.php?status=success&count=" . $successCount);
     } elseif ($successCount > 0) {
         // Partial success
         $msg = "added={$successCount}";
         if ($duplicateCount > 0) $msg .= "&skipped_dup={$duplicateCount}";
         if ($pastDateCount > 0) $msg .= "&skipped_past={$pastDateCount}";
-        header("Location: ../public/adminschedule.php?status=partial&{$msg}");
+        header("Location: /adminschedule.php?status=partial&{$msg}");
     } elseif ($duplicateCount > 0) {
-        header("Location: ../public/adminschedule.php?error=duplicate");
+        header("Location: /adminschedule.php?error=duplicate");
     } elseif ($pastDateCount > 0) {
-        header("Location: ../public/adminschedule.php?error=past_date");
+        header("Location: /adminschedule.php?error=past_date");
     } else {
-        header("Location: ../public/adminschedule.php?error=insert_failed");
+        header("Location: /adminschedule.php?error=insert_failed");
     }
     exit;
 }
 
 // No valid request - redirect back
-header("Location: ../public/adminschedule.php");
+header("Location: /adminschedule.php");
 exit;

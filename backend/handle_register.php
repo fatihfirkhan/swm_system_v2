@@ -16,19 +16,19 @@ if (isset($_POST['register'])) {
     // Validate required fields
     if (empty($name) || empty($phone) || empty($house_unit_number) || 
         empty($area_id) || empty($lane_id) || empty($email) || empty($password)) {
-        header("Location: ../public/register.php?error=incomplete");
+        header("Location: /register.php?error=incomplete");
         exit;
     }
 
     // Check if passwords match
     if ($password !== $confirm_password) {
-        header("Location: ../public/register.php?error=password_mismatch");
+        header("Location: /register.php?error=password_mismatch");
         exit;
     }
 
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../public/register.php?error=email");
+        header("Location: /register.php?error=email");
         exit;
     }
 
@@ -39,7 +39,7 @@ if (isset($_POST['register'])) {
     $result = $check_email->get_result();
 
     if ($result->num_rows > 0) {
-        header("Location: ../public/register.php?error=email");
+        header("Location: /register.php?error=email");
         exit;
     }
 
@@ -55,7 +55,7 @@ if (isset($_POST['register'])) {
     $address_result = $stmt->get_result();
 
     if ($address_result->num_rows === 0) {
-        header("Location: ../public/register.php?error=incomplete");
+        header("Location: /register.php?error=incomplete");
         exit;
     }
 
@@ -95,17 +95,17 @@ if (isset($_POST['register'])) {
 
     if ($insert_stmt->execute()) {
         // Registration successful
-        header("Location: ../public/login.php?role=resident&register=success");
+        header("Location: /login.php?role=resident&register=success");
         exit;
     } else {
         // Database error
         error_log("Registration error: " . $conn->error);
-        header("Location: ../public/register.php?error=db");
+        header("Location: /register.php?error=db");
         exit;
     }
 }
 
 // If accessed directly without POST
-header("Location: ../public/register.php");
+header("Location: /register.php");
 exit;
 ?>

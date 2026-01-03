@@ -27,14 +27,14 @@ if (isset($_POST['register'])) {
         !isset($raw_password) || trim($raw_password) === ''
     ) {
         $_SESSION['old'] = $_POST;
-        header("Location: ../public/staffregister.php?error=incomplete");
+        header("Location: /staffregister.php?error=incomplete");
         exit;
     }
 
     // Check if passwords match
     if ($raw_password !== $confirm_password) {
         $_SESSION['old'] = $_POST;
-        header("Location: ../public/staffregister.php?error=password_mismatch");
+        header("Location: /staffregister.php?error=password_mismatch");
         exit;
     }
 
@@ -63,7 +63,7 @@ if (isset($_POST['register'])) {
     $check->execute();
     if ($check->get_result()->num_rows > 0) {
         $_SESSION['old'] = $_POST;
-        header("Location: ../public/staffregister.php?error=duplicate");
+        header("Location: /staffregister.php?error=duplicate");
         exit;
     }
 
@@ -74,7 +74,7 @@ if (isset($_POST['register'])) {
     $stmt->bind_param("ssssssss", $name, $phone, $address1, $address2, $postcode, $work_id, $password, $role);
     $stmt->execute();
 
-    header("Location: ../public/staffregister.php?success=1&work_id=$work_id");
+    header("Location: /staffregister.php?success=1&work_id=$work_id");
     exit;
 }
 ?>

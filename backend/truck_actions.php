@@ -37,7 +37,7 @@ switch ($action) {
     default:
         header('HTTP/1.1 400 Bad Request');
         $_SESSION['error'] = 'Invalid action';
-        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '../public/truck_management.php'));
+        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/truck_management.php'));
         exit();
 }
 
@@ -76,7 +76,7 @@ function handleAddTruck() {
     
     if ($stmt->execute()) {
         $_SESSION['success'] = "Truck added successfully!";
-        header('Location: ../public/truck_management.php');
+        header('Location: /truck_management.php');
         exit();
     } else {
         sendError('Error adding truck: ' . $conn->error);
@@ -121,7 +121,7 @@ function handleEditTruck() {
     
     if ($stmt->execute()) {
         $_SESSION['success'] = "Truck updated successfully!";
-        header('Location: ../public/truck_management.php');
+        header('Location: /truck_management.php');
         exit();
     } else {
         sendError('Error updating truck: ' . $conn->error);
@@ -168,7 +168,7 @@ function handleDeleteTruck() {
         if ($stmt->execute()) {
             $conn->commit();
             $_SESSION['success'] = "Truck deleted successfully!";
-            header('Location: ../public/truck_management.php');
+            header('Location: /truck_management.php');
             exit();
         } else {
             throw new Exception("Error deleting truck: " . $conn->error);
@@ -263,7 +263,7 @@ function handleAssignStaff() {
         // Commit transaction
         $conn->commit();
         $_SESSION['success'] = "Staff assignments updated successfully!";
-        header('Location: ../public/truck_management.php');
+        header('Location: /truck_management.php');
         exit();
         
     } catch (Exception $e) {
@@ -475,7 +475,7 @@ function sanitizeInput($data) {
  */
 function sendError($message) {
     $_SESSION['error'] = $message;
-    header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '../public/truck_management.php'));
+    header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/truck_management.php'));
     exit();
 }
 ?>

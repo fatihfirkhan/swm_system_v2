@@ -30,7 +30,7 @@ switch ($action) {
         break;
     default:
         $_SESSION['error'] = 'Invalid action';
-        header('Location: ../public/area_management.php');
+        header('Location: /area_management.php');
         exit();
 }
 
@@ -74,7 +74,7 @@ function handleAddArea() {
     
     if ($stmt->execute()) {
         $_SESSION['success'] = "Area '$taman_name' added successfully!";
-        header('Location: ../public/area_management.php');
+        header('Location: /area_management.php');
         exit();
     } else {
         sendError('Error adding area: ' . $conn->error);
@@ -143,7 +143,7 @@ function handleAddLanes() {
         $conn->commit();
         
         $_SESSION['success'] = "Successfully created $created_count lanes for {$area['taman_name']}!";
-        header('Location: ../public/area_management.php');
+        header('Location: /area_management.php');
         exit();
         
     } catch (Exception $e) {
@@ -186,7 +186,7 @@ function handleDeleteArea() {
         if ($stmt->execute()) {
             $conn->commit();
             $_SESSION['success'] = "Area deleted successfully!";
-            header('Location: ../public/area_management.php');
+            header('Location: /area_management.php');
             exit();
         } else {
             throw new Exception("Error deleting area: " . $conn->error);
@@ -265,7 +265,7 @@ function handleDeleteLane() {
  */
 function sendError($message) {
     $_SESSION['error'] = $message;
-    header('Location: ../public/area_management.php');
+    header('Location: /area_management.php');
     exit();
 }
 ?>
