@@ -19,11 +19,11 @@ $currentPage = 'dashboard';
 $userId = $_SESSION['user_id'];
 $userName = $_SESSION['name'] ?? 'Staff';
 
-// 1. Get staff's assigned truck
+// 1. Get staff's assigned truck (ACTIVE only)
 $truckQuery = "SELECT t.truck_id, t.truck_number
                FROM truck t
                INNER JOIN truck_staff ts ON t.truck_id = ts.truck_id
-               WHERE ts.user_id = ?
+               WHERE ts.user_id = ? AND ts.status = 'active'
                LIMIT 1";
 $truckStmt = $conn->prepare($truckQuery);
 $truckStmt->bind_param('i', $userId);

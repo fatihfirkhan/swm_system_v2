@@ -16,8 +16,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
 $staff_user_id = $_SESSION['user_id'];
 $action = $_POST['action'] ?? '';
 
-// Find the truck assigned to this staff member
-$truck_query = $conn->prepare("SELECT truck_id FROM truck_staff WHERE user_id = ?");
+// Find the ACTIVE truck assigned to this staff member
+$truck_query = $conn->prepare("SELECT truck_id FROM truck_staff WHERE user_id = ? AND status = 'active'");
 $truck_query->bind_param("s", $staff_user_id);
 $truck_query->execute();
 $truck_result = $truck_query->get_result();
