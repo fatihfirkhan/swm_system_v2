@@ -163,12 +163,12 @@ ob_start();
                     <div class="mb-4">
                         <i class="fas fa-user-circle fa-5x text-swm-dark"></i>
                     </div>
-                    <h5 class="font-weight-bold"><?php echo htmlspecialchars($user['name']); ?></h5>
+                    <h5 class="font-weight-bold"><?php echo htmlspecialchars($user['name'] ?? ''); ?></h5>
                     <p class="text-muted mb-1">
-                        <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($user['email']); ?>
+                        <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($user['email'] ?? 'Not set'); ?>
                     </p>
                     <p class="text-muted mb-3">
-                        <i class="fas fa-id-badge"></i> Work ID: <?php echo htmlspecialchars($user['work_id']); ?>
+                        <i class="fas fa-id-badge"></i> Work ID: <?php echo htmlspecialchars($user['work_id'] ?? ''); ?>
                     </p>
                     <span class="badge badge-swm-dark badge-pill px-3 py-2">
                         <i class="fas fa-user-tie"></i> Staff Member

@@ -23,7 +23,11 @@ $conn->query("
 ");
 
 // Add title column if it doesn't exist (for existing tables)
-$conn->query("ALTER TABLE notifications ADD COLUMN IF NOT EXISTS title VARCHAR(255) NOT NULL DEFAULT 'System Notification' AFTER notification_id");
+// Check if column exists first since MySQL doesn't support IF NOT EXISTS for columns
+$result = $conn->query("SHOW COLUMNS FROM notifications LIKE 'title'");
+if ($result->num_rows == 0) {
+    $conn->query("ALTER TABLE notifications ADD COLUMN title VARCHAR(255) NOT NULL DEFAULT 'System Notification' AFTER notification_id");
+}
 
 // Handle form submission
 $successMessage = '';
