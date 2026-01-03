@@ -355,21 +355,27 @@ function handleSwapStaff() {
             $stmt2->bind_param('ii', $target_user_id, $target_truck_id);
             $stmt2->execute();
             
-            // Assign source staff to target truck with target's role
-            $sql3 = "INSERT INTO truck_staff (truck_id, user_id, role, status) VALUES (?, ?, ?, 'active')";
+            // Assign source staff to target truck with target's role (use INSERT ON DUPLICATE KEY UPDATE)
+            $sql3 = "INSERT INTO truck_staff (truck_id, user_id, role, status, created_at) 
+                     VALUES (?, ?, ?, 'active', NOW())
+                     ON DUPLICATE KEY UPDATE role = VALUES(role), status = 'active', created_at = NOW()";
             $stmt3 = $conn->prepare($sql3);
             $stmt3->bind_param('iis', $target_truck_id, $source_user_id, $target_role);
             $stmt3->execute();
             
-            // Assign target staff to source truck with source's role
-            $sql4 = "INSERT INTO truck_staff (truck_id, user_id, role, status) VALUES (?, ?, ?, 'active')";
+            // Assign target staff to source truck with source's role (use INSERT ON DUPLICATE KEY UPDATE)
+            $sql4 = "INSERT INTO truck_staff (truck_id, user_id, role, status, created_at) 
+                     VALUES (?, ?, ?, 'active', NOW())
+                     ON DUPLICATE KEY UPDATE role = VALUES(role), status = 'active', created_at = NOW()";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->bind_param('iis', $source_truck_id, $target_user_id, $source_role);
             $stmt4->execute();
         } else {
             // Target is unassigned - just replace source with target
-            // Assign target (unassigned) staff to source truck with source's role
-            $sql3 = "INSERT INTO truck_staff (truck_id, user_id, role, status) VALUES (?, ?, ?, 'active')";
+            // Assign target (unassigned) staff to source truck with source's role (use INSERT ON DUPLICATE KEY UPDATE)
+            $sql3 = "INSERT INTO truck_staff (truck_id, user_id, role, status, created_at) 
+                     VALUES (?, ?, ?, 'active', NOW())
+                     ON DUPLICATE KEY UPDATE role = VALUES(role), status = 'active', created_at = NOW()";
             $stmt3 = $conn->prepare($sql3);
             $stmt3->bind_param('iis', $source_truck_id, $target_user_id, $source_role);
             $stmt3->execute();
