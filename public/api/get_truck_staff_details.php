@@ -56,6 +56,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['truck_id'])) {
     }
 }
 
+// Get unassigned staff (not assigned to any truck)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'unassigned') {
+    $sql = "SELECT u.user_id, u.name, u.work_id 
+            FROM user u
+            WHERE u.role = 'staff' 
+            AND u.user_id NOT IN (
+                SELECT DISTINCT user_id FROM truck_staff WHERE status = 'active'
+            )
+            ORDER BY u.name";
+    
+    $result = $conn->query($sql);
+    
+    $staff = [];
+    while ($row = $result->fetch_assoc()) {
+        $staff[] = [
+            'user_id' => $row['user_id'],
+            'name' => $row['name'],
+            'work_id' => $row['work_id']
+        ];
+    }
+    
+    echo json_encode(['staff' => $staff]);
+    exit();
+}
+
+// Get swap options (staff from other trucks)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'swap_options') {
+    $exclude_truck_id = isset($_GET['exclude_truck_id']) ? intval($_GET['exclude_truck_id']) : 0;
+    
+    $sql = "SELECT ts.user_id, ts.role, ts.truck_id, u.name, u.work_id, t.truck_number
+            FROM truck_staff ts
+            INNER JOIN user u ON ts.user_id = u.user_id
+            INNER JOIN truck t ON ts.truck_id = t.truck_id
+            WHERE ts.status = 'active' AND ts.truck_id != ?
+            ORDER BY t.truck_number, ts.role";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $exclude_truck_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $staff = [];
+    while ($row = $result->fetch_assoc()) {
+        $staff[] = [
+            'user_id' => $row['user_id'],
+            'name' => $row['name'],
+            'work_id' => $row['work_id'],
+            'role' => $row['role'],
+            'truck_id' => $row['truck_id'],
+            'truck_number' => $row['truck_number']
+        ];
+    }
+    
+    echo json_encode(['staff' => $staff]);
+    exit();
+}
+
 // Get all assigned staff IDs (for filtering)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'assigned_ids') {
     $exclude_truck_id = isset($_GET['exclude_truck_id']) ? intval($_GET['exclude_truck_id']) : 0;
