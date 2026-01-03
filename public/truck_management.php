@@ -274,7 +274,7 @@ ob_start();
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="../backend/truck_actions.php?action=add" method="POST">
+                <form action="backend/truck_actions.php?action=add" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="truck_number">Truck Number *</label>
@@ -330,7 +330,7 @@ ob_start();
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="assignStaffForm" action="../backend/truck_actions.php?action=assign_staff" method="POST">
+                <form id="assignStaffForm" action="backend/truck_actions.php?action=assign_staff" method="POST">
                     <input type="hidden" name="truck_id" id="assignTruckId">
                     <div class="modal-body">
                         <div class="form-group">
@@ -371,7 +371,7 @@ ob_start();
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="editTruckForm" action="../backend/truck_actions.php?action=edit" method="POST">
+                <form id="editTruckForm" action="backend/truck_actions.php?action=edit" method="POST">
                     <input type="hidden" name="truck_id" id="editTruckId">
                     <input type="hidden" name="truck_number" id="edit_truck_number">
                     <div class="modal-body">
@@ -413,7 +413,7 @@ ob_start();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <form id="deleteTruckForm" action="../backend/truck_actions.php?action=delete" method="POST" style="display: inline;">
+                    <form id="deleteTruckForm" action="backend/truck_actions.php?action=delete" method="POST" style="display: inline;">
                         <input type="hidden" name="truck_id" id="deleteTruckId">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -769,7 +769,7 @@ ob_start();
             
             $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i>Removing...');
             
-            $.post('../backend/truck_actions.php?action=remove_staff', {
+            $.post('backend/truck_actions.php?action=remove_staff', {
                 user_id: userId,
                 truck_id: truckId
             }, function(response) {
@@ -897,7 +897,7 @@ ob_start();
             
             $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i>Swapping...');
             
-            $.post('../backend/truck_actions.php?action=swap_staff', {
+            $.post('backend/truck_actions.php?action=swap_staff', {
                 source_user_id: sourceUserId,
                 source_truck_id: sourceTruckId,
                 source_role: sourceRole,
@@ -980,7 +980,7 @@ ob_start();
             
             $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i>Adding...');
             
-            $.post('../backend/truck_actions.php?action=add_single_staff', {
+            $.post('backend/truck_actions.php?action=add_single_staff', {
                 user_id: userId,
                 truck_id: truckId,
                 role: role
