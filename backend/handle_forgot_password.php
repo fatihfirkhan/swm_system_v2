@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/email_config.php';
 
 // Use PHPMailer for sending emails
 use PHPMailer\PHPMailer\PHPMailer;
@@ -9,9 +10,24 @@ use PHPMailer\PHPMailer\Exception;
 
 // Check if PHPMailer is available, if not we'll use mail() function
 $usePhpMailer = false;
-if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+$phpmailerPath = __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+if (file_exists($phpmailerPath)) {
+    require_once $phpmailerPath;
+    require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
+    require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
+    $usePhpMailer = true;
+} elseif (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require __DIR__ . '/../vendor/autoload.php';
     $usePhpMailer = true;
+}
+
+// Log function for debugging
+function logDebug($message) {
+    if (defined('EMAIL_DEBUG') && EMAIL_DEBUG) {
+        $logFile = __DIR__ . '/../debug_log.txt';
+        $timestamp = date('Y-m-d H:i:s');
+        file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
@@ -51,44 +67,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
     }
     $stmt->close();
     
-    // Create reset link
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'];
-    $reset_link = $protocol . "://" . $host . "/reset_password.php?token=" . $token;
+    // Create reset link for wastetrack.me
+    $reset_link = SITE_URL . "/reset_password.php?token=" . $token;
     
     // Prepare email
-    $subject = "Password Reset Request - SWM Environment";
+    $subject = "Password Reset Request - WasteTrack";
     $message_body = "
     <html>
     <head>
         <style>
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background-color: #4e73df; color: white; padding: 20px; text-align: center; }
+            .header { background-color: #28a745; color: white; padding: 20px; text-align: center; }
             .content { background-color: #f8f9fc; padding: 30px; border: 1px solid #e3e6f0; }
-            .button { display: inline-block; padding: 12px 30px; background-color: #4e73df; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+            .button { display: inline-block; padding: 12px 30px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
             .footer { text-align: center; padding: 20px; color: #858796; font-size: 12px; }
         </style>
     </head>
     <body>
         <div class='container'>
             <div class='header'>
-                <h1>Password Reset Request</h1>
+                <h1>🔐 Password Reset Request</h1>
             </div>
             <div class='content'>
-                <p>Hello " . htmlspecialchars($user['name']) . ",</p>
-                <p>We received a request to reset your password for your SWM Environment account.</p>
-                <p>Click the button below to reset your password:</p>
+                <p>Hai " . htmlspecialchars($user['name']) . ",</p>
+                <p>Kami terima permintaan untuk reset password akaun WasteTrack anda.</p>
+                <p>Klik butang di bawah untuk reset password:</p>
                 <div style='text-align: center;'>
-                    <a href='" . $reset_link . "' class='button'>Reset Password</a>
+                    <a href='" . $reset_link . "' class='button' style='color: white;'>Reset Password</a>
                 </div>
-                <p>Or copy and paste this link into your browser:</p>
+                <p>Atau copy dan paste link ini dalam browser:</p>
                 <p style='word-break: break-all; background-color: #fff; padding: 10px; border: 1px solid #ddd;'>" . $reset_link . "</p>
-                <p><strong>This link will expire in 1 hour.</strong></p>
-                <p>If you did not request a password reset, please ignore this email or contact support if you have concerns.</p>
+                <p><strong>⏰ Link ini akan tamat dalam 1 jam.</strong></p>
+                <p>Jika anda tidak meminta reset password, sila abaikan email ini.</p>
             </div>
             <div class='footer'>
-                <p>This is an automated email from SWM Environment System. Please do not reply to this email.</p>
+                <p>Email automatik dari WasteTrack System. Jangan reply email ini.</p>
+                <p>© " . date('Y') . " WasteTrack - wastetrack.me</p>
             </div>
         </div>
     </body>
@@ -96,23 +111,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
     ";
     
     $sent = false;
+    logDebug("Attempting to send password reset email to: $email");
+    logDebug("Reset link: $reset_link");
     
     // Try to send email using PHPMailer if available
     if ($usePhpMailer) {
         try {
             $mail = new PHPMailer(true);
             
-            // Server settings
+            // Server settings from config
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; // Change this to your SMTP server
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'your-email@gmail.com'; // Change this to your email
-            $mail->Password   = 'your-app-password'; // Change this to your app password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+            $mail->Host       = SMTP_HOST;
+            $mail->SMTPAuth   = SMTP_AUTH;
+            $mail->Username   = SMTP_USERNAME;
+            $mail->Password   = SMTP_PASSWORD;
+            $mail->SMTPSecure = SMTP_SECURE === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = SMTP_PORT;
             
             // Recipients
-            $mail->setFrom('noreply@swmenvironment.com', 'SWM Environment');
+            $mail->setFrom(EMAIL_FROM_ADDRESS, EMAIL_FROM_NAME);
             $mail->addAddress($email, $user['name']);
             
             // Content
@@ -123,21 +140,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
             
             $mail->send();
             $sent = true;
+            logDebug("Email sent successfully using PHPMailer");
         } catch (Exception $e) {
             // Log error but don't expose details to user
+            logDebug("PHPMailer failed: " . $mail->ErrorInfo);
             error_log("Email sending failed: " . $mail->ErrorInfo);
         }
     }
     
     // Fallback to PHP mail() function if PHPMailer fails or not available
     if (!$sent) {
+        logDebug("Trying PHP mail() function as fallback");
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: SWM Environment <noreply@swmenvironment.com>" . "\r\n";
+        $headers .= "From: " . EMAIL_FROM_NAME . " <" . EMAIL_FROM_ADDRESS . ">" . "\r\n";
         
-        if (mail($email, $subject, $message_body, $headers)) {
+        if (@mail($email, $subject, $message_body, $headers)) {
             $sent = true;
+            logDebug("Email sent successfully using PHP mail()");
+        } else {
+            logDebug("PHP mail() function failed");
         }
+    }
+    
+    // Log the result
+    if ($sent) {
+        logDebug("Password reset email sent successfully to: $email");
+    } else {
+        logDebug("Failed to send password reset email to: $email");
+        // For testing - show the reset link in console/log
+        logDebug("TEST MODE - Reset Link: $reset_link");
     }
     
     // Always show success message to prevent email enumeration

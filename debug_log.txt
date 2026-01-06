@@ -9361,3 +9361,79 @@ Login successful. Session data: Array
     [work_id] => ADM001
 )
 
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
+Login attempt - Role: staff_auto
+POST data: Array
+(
+    [work_id] => STF005
+    [password] => ramimalek
+    [login] => 
+)
+
+Staff/Admin login attempt with work_id: STF005
+Query: SELECT * FROM user WHERE work_id = ?
+Input: STF005
+Query result rows: 1
+User data: Array
+(
+    [user_id] => 14
+    [name] => Rami bin Malek
+    [phone] => 0192100311
+    [house_unit_number] => 
+    [lane_id] => 
+    [area_id] => 
+    [address_line1] => 9 Jalan Kencana 2, Taman Pura Kencana
+    [address_line2] => Sri Gading, Batu Pahat, Johor
+    [postcode] => 83300
+    [email] => 
+    [work_id] => STF005
+    [password] => $2y$10$FgaAnk/hHbvGlJ5Exp5keewf77eWKIVblWLVew0ZRSZYjD7xHrqaq
+    [role] => staff
+    [created_at] => 2025-12-07 11:46:10
+)
+
+Login successful. Session data: Array
+(
+    [user_id] => 14
+    [role] => staff
+    [name] => Rami bin Malek
+    [work_id] => STF005
+)
+
