@@ -1,0 +1,58 @@
+services:
+  web:
+    build: .
+    container_name: swm_web
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./public/uploads:/var/www/html/public/uploads
+    depends_on:
+      - db
+    networks:
+      - swm_network
+    restart: unless-stopped
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+      - DB_HOST=db
+      - DB_NAME=swm_system
+      - DB_USER=root
+      - DB_PASSWORD=root123
+
+  db:
+    image: mysql:8.0
+    container_name: swm_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: swm_system
+      MYSQL_USER: swm_user
+      MYSQL_PASSWORD: swm_pass123
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - swm_network
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: swm_phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root123
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - swm_network
+    restart: unless-stopped
+
+networks:
+  swm_network:
+    driver: bridge
+
+volumes:
+  db_data:
