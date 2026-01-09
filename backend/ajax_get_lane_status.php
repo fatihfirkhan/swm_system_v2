@@ -88,10 +88,21 @@ $lanesResult = $lanesQuery->get_result();
 
 $lanes = [];
 while ($lane = $lanesResult->fetch_assoc()) {
+    // Determine if missed
+    $lane_status = $lane['status'] ?? 'Pending';
+    $is_missed = false;
+    if ($lane_status === 'Pending') {
+        $schedule_date = $date;
+        $now = date('Y-m-d');
+        if (strtotime($schedule_date) < strtotime($now)) {
+            $lane_status = 'Missed';
+            $is_missed = true;
+        }
+    }
     $lanes[] = [
         'lane_id' => $lane['lane_id'],
         'lane_name' => $lane['lane_name'],
-        'status' => $lane['status'] ?? 'Pending'  // Default to Pending if no status recorded
+        'status' => $lane_status
     ];
 }
 

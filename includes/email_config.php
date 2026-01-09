@@ -19,9 +19,8 @@ define('SMTP_AUTH', true);                       // Use SMTP authentication
 
 // IMPORTANT: Change these to your actual email credentials
 // ============================================================
-// AWAK PERLU TUKAR 2 BARIS NI:
-define('SMTP_USERNAME', 'your-email@gmail.com');   // <- Tukar ke Gmail awak
-define('SMTP_PASSWORD', 'your-app-password');      // <- Tukar ke App Password
+define('SMTP_USERNAME', 'mfatihfirkhan@gmail.com');
+define('SMTP_PASSWORD', 'ylljgccohsyaqnnu');
 // ============================================================
 
 // Sender Information

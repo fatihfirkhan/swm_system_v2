@@ -135,9 +135,11 @@ if ($action === 'update_status') {
     }
     
     if (!in_array($status, ['Pending', 'Collected'])) {
-        ob_clean();
-        echo json_encode(['status' => 'error', 'message' => 'Invalid status value']);
-        exit();
+        if (!in_array($status, ['Pending', 'Collected', 'Missed'])) {
+            ob_clean();
+            echo json_encode(['status' => 'error', 'message' => 'Invalid status value']);
+            exit();
+        }
     }
     
     // Verify this schedule belongs to the staff's truck

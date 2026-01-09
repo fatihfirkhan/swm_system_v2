@@ -523,16 +523,25 @@ $(document).ready(function() {
         // Display Lanes
         data.lanes.forEach(function(lane) {
             const isChecked = lane.status === "Collected";
-            const statusClass = lane.status === "Collected" ? "completed" : (lane.status === "Pending" ? "pending" : "");
-            const statusBadge = lane.status === "Collected" ? 
-                `<span class="status-badge badge-completed"><i class="fas fa-check-circle me-1"></i>Completed</span>` : 
-                (lane.status === "Pending" ? 
-                    `<span class="status-badge badge-pending"><i class="fas fa-clock me-1"></i>Pending</span>` : 
-                    `<span class="status-badge badge-pending"><i class="fas fa-clock me-1"></i>Pending</span>`);
-            const disabledAttr = isToday ? "" : "disabled";
+            let statusClass = "";
+            let statusBadge = "";
+            if (lane.status === "Collected") {
+                statusClass = "completed";
+                statusBadge = `<span class="status-badge badge-completed"><i class="fas fa-check-circle me-1"></i>Completed</span>`;
+            } else if (lane.status === "Pending") {
+                statusClass = "pending";
+                statusBadge = `<span class="status-badge badge-pending"><i class="fas fa-clock me-1"></i>Pending</span>`;
+            } else if (lane.status === "Missed") {
+                statusClass = "missed";
+                statusBadge = `<span class="status-badge badge-missed"><i class="fas fa-times-circle me-1"></i>Missed</span>`;
+            } else {
+                statusClass = "pending";
+                statusBadge = `<span class="status-badge badge-pending"><i class="fas fa-clock me-1"></i>Pending</span>`;
+            }
+            const disabledAttr = isToday && lane.status !== "Missed" ? "" : "disabled";
             const timestampInfo = (lane.status && lane.update_time) ? 
                 `<div class="timestamp"><i class="fas fa-history"></i>Updated ${lane.update_time}</div>` : "";
-            
+
             html += `
                 <div class="lane-card card ${statusClass}">
                     <div class="card-body">
