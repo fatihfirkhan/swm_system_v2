@@ -21,55 +21,78 @@ if (file_exists($phpmailerPath)) {
     $usePhpMailer = true;
 }
 
-// Log function for debugging
-function logDebug($message) {
+// Log function for debugging (errors suppressed for production)
+function logDebug($message)
+{
     if (defined('EMAIL_DEBUG') && EMAIL_DEBUG) {
         $logFile = __DIR__ . '/../debug_log.txt';
         $timestamp = date('Y-m-d H:i:s');
-        file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+        @file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+    }
+}
+
+// Check if this is an AJAX request
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+
+function sendResponse($success, $message, $type = 'info')
+{
+    global $isAjax;
+    if ($isAjax) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => $success, 'message' => $message, 'type' => $type]);
+        exit();
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
     $email = trim($_POST['email']);
-    
+
     // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($isAjax) {
+            sendResponse(false, 'Please enter a valid email address.', 'error');
+        }
         header("Location: ../public/forgot_password.php?error=invalid_email&email=" . urlencode($email));
         exit();
     }
-    
+
     // Check if email exists in database (only for residents)
     $stmt = $conn->prepare("SELECT user_id, name, email FROM user WHERE email = ? AND role = 'resident'");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows === 0) {
+        if ($isAjax) {
+            sendResponse(false, 'No account found with this email address.', 'error');
+        }
         header("Location: ../public/forgot_password.php?error=email_not_found&email=" . urlencode($email));
         exit();
     }
-    
+
     $user = $result->fetch_assoc();
     $stmt->close();
-    
+
     // Generate unique token
     $token = bin2hex(random_bytes(32));
     $expires_at = date('Y-m-d H:i:s', strtotime('+1 hour')); // Token expires in 1 hour
-    
+
     // Store token in database
     $stmt = $conn->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $email, $token, $expires_at);
-    
+
     if (!$stmt->execute()) {
+        if ($isAjax) {
+            sendResponse(false, 'Failed to process request. Please try again.', 'error');
+        }
         header("Location: ../public/forgot_password.php?error=send_failed&email=" . urlencode($email));
         exit();
     }
     $stmt->close();
-    
+
     // Create reset link for wastetrack.me
     $reset_link = SITE_URL . "/reset_password.php?token=" . $token;
-    
+
     // Prepare email
     $subject = "Password Reset Request - WasteTrack";
     $message_body = "
@@ -109,35 +132,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
     </body>
     </html>
     ";
-    
+
     $sent = false;
     logDebug("Attempting to send password reset email to: $email");
     logDebug("Reset link: $reset_link");
-    
+
     // Try to send email using PHPMailer if available
     if ($usePhpMailer) {
         try {
             $mail = new PHPMailer(true);
-            
+
             // Server settings from config
             $mail->isSMTP();
-            $mail->Host       = SMTP_HOST;
-            $mail->SMTPAuth   = SMTP_AUTH;
-            $mail->Username   = SMTP_USERNAME;
-            $mail->Password   = SMTP_PASSWORD;
+            $mail->Host = SMTP_HOST;
+            $mail->SMTPAuth = SMTP_AUTH;
+            $mail->Username = SMTP_USERNAME;
+            $mail->Password = SMTP_PASSWORD;
             $mail->SMTPSecure = SMTP_SECURE === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = SMTP_PORT;
-            
+            $mail->Port = SMTP_PORT;
+
             // Recipients
             $mail->setFrom(EMAIL_FROM_ADDRESS, EMAIL_FROM_NAME);
             $mail->addAddress($email, $user['name']);
-            
+
             // Content
             $mail->isHTML(true);
             $mail->Subject = $subject;
-            $mail->Body    = $message_body;
+            $mail->Body = $message_body;
             $mail->AltBody = strip_tags(str_replace('<br>', "\n", $message_body));
-            
+
             $mail->send();
             $sent = true;
             logDebug("Email sent successfully using PHPMailer");
@@ -147,14 +170,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
             error_log("Email sending failed: " . $mail->ErrorInfo);
         }
     }
-    
+
     // Fallback to PHP mail() function if PHPMailer fails or not available
     if (!$sent) {
         logDebug("Trying PHP mail() function as fallback");
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: " . EMAIL_FROM_NAME . " <" . EMAIL_FROM_ADDRESS . ">" . "\r\n";
-        
+
         if (@mail($email, $subject, $message_body, $headers)) {
             $sent = true;
             logDebug("Email sent successfully using PHP mail()");
@@ -162,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
             logDebug("PHP mail() function failed");
         }
     }
-    
+
     // Log the result
     if ($sent) {
         logDebug("Password reset email sent successfully to: $email");
@@ -171,12 +194,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
         // For testing - show the reset link in console/log
         logDebug("TEST MODE - Reset Link: $reset_link");
     }
-    
+
     // Always show success message to prevent email enumeration
     // Even if email send fails, we don't want to reveal if email exists
+    if ($isAjax) {
+        sendResponse(true, 'Password reset link has been sent to your email. Please check your inbox.', 'success');
+    }
     header("Location: ../public/forgot_password.php?message=email_sent");
     exit();
-    
+
 } else {
     header("Location: ../public/forgot_password.php");
     exit();

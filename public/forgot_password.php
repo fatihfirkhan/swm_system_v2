@@ -17,12 +17,14 @@ require __DIR__ . '/../includes/template_navbar.php';
                     <div class="p-5">
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                            <p class="mb-4">Enter your email address and we'll send you a link to reset your password.</p>
+                            <p class="mb-4">Enter your email address and we'll send you a link to reset your password.
+                            </p>
                         </div>
 
                         <?php if ($message === 'email_sent'): ?>
                             <div class="alert alert-success" role="alert">
-                                <i class="fas fa-check-circle"></i> Password reset link has been sent to your email. Please check your inbox.
+                                <i class="fas fa-check-circle"></i> Password reset link has been sent to your email. Please
+                                check your inbox.
                             </div>
                         <?php elseif ($error === 'email_not_found'): ?>
                             <div class="alert alert-danger" role="alert">
@@ -38,13 +40,18 @@ require __DIR__ . '/../includes/template_navbar.php';
                             </div>
                         <?php endif; ?>
 
-                        <form class="user" method="post" action="../backend/handle_forgot_password.php" id="forgotPasswordForm">
+                        <!-- Message container for AJAX responses -->
+                        <div id="messageContainer" style="display: none;"></div>
+
+                        <form class="user" method="post" action="../backend/handle_forgot_password.php"
+                            id="forgotPasswordForm">
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control form-control-user" 
-                                    placeholder="Enter Email Address" required 
+                                <input type="email" name="email" id="emailInput" class="form-control form-control-user"
+                                    placeholder="Enter Email Address" required
                                     value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>">
                             </div>
-                            <button type="submit" name="reset_password" class="btn btn-primary btn-user btn-block">
+                            <button type="submit" name="reset_password" class="btn btn-primary btn-user btn-block"
+                                id="submitBtn">
                                 Reset Password
                             </button>
                         </form>
@@ -71,5 +78,57 @@ require __DIR__ . '/../includes/template_navbar.php';
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('forgotPasswordForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const form = this;
+        const submitBtn = document.getElementById('submitBtn');
+        const messageContainer = document.getElementById('messageContainer');
+        const emailInput = document.getElementById('emailInput');
+
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        messageContainer.style.display = 'none';
+
+        // Create FormData
+        const formData = new FormData(form);
+        formData.append('reset_password', '1');
+
+        // Send AJAX request
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                messageContainer.style.display = 'block';
+
+                if (data.success) {
+                    messageContainer.className = 'alert alert-success';
+                    messageContainer.innerHTML = '<i class="fas fa-check-circle"></i> ' + data.message;
+                    emailInput.value = ''; // Clear email input on success
+                } else {
+                    messageContainer.className = 'alert alert-danger';
+                    messageContainer.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + data.message;
+                }
+            })
+            .catch(error => {
+                messageContainer.style.display = 'block';
+                messageContainer.className = 'alert alert-danger';
+                messageContainer.innerHTML = '<i class="fas fa-exclamation-triangle"></i> An error occurred. Please try again.';
+            })
+            .finally(() => {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Reset Password';
+            });
+    });
+</script>
 
 <?php require __DIR__ . '/../includes/template_footer.php'; ?>
