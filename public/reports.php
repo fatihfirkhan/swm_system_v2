@@ -1045,6 +1045,32 @@ function exportToExcel() {
         summaryData.push([trendLabels[i], trendData[i]]);
     }
     
+    // COMPLAINT ANALYTICS SECTION
+    if (complaintAreaLabels.length > 0) {
+        summaryData.push(['']);
+        summaryData.push(['════════════════════════════════════════']);
+        summaryData.push(['COMPLAINT ANALYTICS']);
+        summaryData.push(['════════════════════════════════════════']);
+        summaryData.push(['']);
+        summaryData.push(['Complaints by Area (Top 10)']);
+        summaryData.push(['Area', 'Complaints']);
+        for (let i = 0; i < complaintAreaLabels.length; i++) {
+            summaryData.push([complaintAreaLabels[i], complaintAreaData[i]]);
+        }
+    }
+    
+    if (hasRatingData) {
+        const totalRatings = ratingData.reduce((a, b) => a + b, 0);
+        summaryData.push(['']);
+        summaryData.push(['Rating Distribution']);
+        summaryData.push(['Rating', 'Count', 'Percentage']);
+        for (let i = 0; i < ratingLabels.length; i++) {
+            const pct = totalRatings > 0 ? ((ratingData[i] / totalRatings) * 100).toFixed(1) : 0;
+            summaryData.push([ratingLabels[i], ratingData[i], pct + '%']);
+        }
+        summaryData.push(['TOTAL', totalRatings, '100%']);
+    }
+    
     const wsSummary = XLSX.utils.aoa_to_sheet(summaryData);
     wsSummary['!cols'] = [{ wch: 30 }, { wch: 15 }, { wch: 15 }];
     XLSX.utils.book_append_sheet(wb, wsSummary, 'Summary & Charts');
@@ -1179,20 +1205,74 @@ async function exportToPDF() {
         }
     }
     
-    // Add chart data as text summary below
-    doc.setFontSize(9);
-    doc.setTextColor(80);
-    let summaryY = 195;
-    
-    doc.text('Data Summary:', 14, summaryY);
-    doc.text(`• Completed: ${summaryStats.completedCollections} | Pending: ${summaryStats.pendingCollections} | Missed: ${summaryStats.missedCollections}`, 20, summaryY + 6);
-    doc.text(`• Domestic: ${summaryStats.domesticCount} (${domesticPct}%) | Recycle: ${summaryStats.recycleCount} (${recyclePct}%)`, 20, summaryY + 12);
-    
-    // Footer
+    // Footer for page 2
     doc.setFontSize(8);
     doc.setTextColor(150);
     doc.text('SWM Environment - Waste Management System', 14, pageHeight - 10);
     doc.text(`Page ${doc.internal.getCurrentPageInfo().pageNumber}`, pageWidth - 25, pageHeight - 10);
+    
+    // ===== PAGE 3: COMPLAINT ANALYTICS (if data exists) =====
+    if (complaintAreaLabels.length > 0 || hasRatingData) {
+        doc.addPage();
+        
+        doc.setFontSize(14);
+        doc.setTextColor(78, 115, 223);
+        doc.text('COMPLAINT ANALYTICS', 14, 20);
+        
+        // Capture complaint charts
+        const complaintCharts = [];
+        
+        if (complaintAreaLabels.length > 0) {
+            complaintCharts.push({ id: 'complaintAreaChart', title: 'Complaints by Area', x: 14, y: 30, w: 130, h: 90 });
+        }
+        
+        if (hasRatingData) {
+            complaintCharts.push({ id: 'ratingChart', title: 'Rating Distribution', x: 150, y: 30, w: 120, h: 90 });
+        }
+        
+        for (const chart of complaintCharts) {
+            const canvas = document.getElementById(chart.id);
+            if (canvas) {
+                try {
+                    const canvasImg = await html2canvas(canvas, { backgroundColor: '#ffffff' });
+                    const imgData = canvasImg.toDataURL('image/png');
+                    
+                    doc.setFontSize(10);
+                    doc.setTextColor(60);
+                    doc.text(chart.title, chart.x, chart.y - 2);
+                    doc.addImage(imgData, 'PNG', chart.x, chart.y, chart.w, chart.h);
+                } catch (err) {
+                    console.error(`Error capturing ${chart.id}`, err);
+                }
+            }
+        }
+        
+        // Add complaint summary text
+        doc.setFontSize(9);
+        doc.setTextColor(80);
+        let summaryY = 135;
+        
+        if (complaintAreaLabels.length > 0) {
+            doc.text('Top Areas by Complaints:', 14, summaryY);
+            for (let i = 0; i < Math.min(5, complaintAreaLabels.length); i++) {
+                doc.text(`${i + 1}. ${complaintAreaLabels[i]}: ${complaintAreaData[i]} complaint(s)`, 20, summaryY + 7 + (i * 6));
+            }
+        }
+        
+        if (hasRatingData) {
+            const totalRatings = ratingData.reduce((a, b) => a + b, 0);
+            doc.text('Rating Summary:', 150, summaryY);
+            doc.text(`Total Ratings: ${totalRatings}`, 156, summaryY + 7);
+            const avgRating = totalRatings > 0 ? (ratingData.reduce((sum, count, idx) => sum + count * (idx + 1), 0) / totalRatings).toFixed(1) : 0;
+            doc.text(`Average Rating: ${avgRating} stars`, 156, summaryY + 13);
+        }
+        
+        // Footer for page 3
+        doc.setFontSize(8);
+        doc.setTextColor(150);
+        doc.text('SWM Environment - Waste Management System', 14, pageHeight - 10);
+        doc.text(`Page ${doc.internal.getCurrentPageInfo().pageNumber}`, pageWidth - 25, pageHeight - 10);
+    }
     
     doc.save(`report_<?php echo $startDate; ?>_to_<?php echo $endDate; ?>.pdf`);
 }
