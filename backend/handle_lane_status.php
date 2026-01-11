@@ -33,6 +33,7 @@ $assigned_truck_id = $truck_result->fetch_assoc()['truck_id'];
 // ========== GET LANES FOR SELECTED DATE ==========
 if ($action === 'get_lanes') {
     $collection_date = $_POST['collection_date'] ?? '';
+    $selected_schedule_id = $_POST['schedule_id'] ?? null;
 
     if (empty($collection_date)) {
         ob_clean();
@@ -40,7 +41,7 @@ if ($action === 'get_lanes') {
         exit();
     }
 
-    // Find schedule for this truck and date
+    // Find ALL schedules for this truck and date
     $schedule_query = $conn->prepare("
         SELECT 
             s.schedule_id, 
@@ -53,6 +54,7 @@ if ($action === 'get_lanes') {
         LEFT JOIN collection_area ca ON s.area_id = ca.area_id
         LEFT JOIN truck t ON s.truck_id = t.truck_id
         WHERE s.truck_id = ? AND s.collection_date = ?
+        ORDER BY s.schedule_id ASC
     ");
     $schedule_query->bind_param("ss", $assigned_truck_id, $collection_date);
     $schedule_query->execute();
@@ -67,7 +69,23 @@ if ($action === 'get_lanes') {
         exit();
     }
 
-    $schedule = $schedule_result->fetch_assoc();
+    // Collect all schedules
+    $all_schedules = [];
+    while ($row = $schedule_result->fetch_assoc()) {
+        $all_schedules[] = $row;
+    }
+
+    // If schedule_id provided, use that; otherwise default to first schedule
+    $schedule = $all_schedules[0];
+    if ($selected_schedule_id) {
+        foreach ($all_schedules as $s) {
+            if ($s['schedule_id'] == $selected_schedule_id) {
+                $schedule = $s;
+                break;
+            }
+        }
+    }
+
     $schedule_id = $schedule['schedule_id'];
     $area_id = $schedule['area_id'];
     $area_name = $schedule['taman_name'];
@@ -105,6 +123,16 @@ if ($action === 'get_lanes') {
         ];
     }
 
+    // Prepare available schedules for dropdown
+    $available_schedules = [];
+    foreach ($all_schedules as $s) {
+        $available_schedules[] = [
+            'schedule_id' => $s['schedule_id'],
+            'area_name' => $s['taman_name'],
+            'collection_type' => $s['collection_type']
+        ];
+    }
+
     ob_clean();
     echo json_encode([
         'status' => 'success',
@@ -115,7 +143,8 @@ if ($action === 'get_lanes') {
             'truck_number' => $truck_number,
             'collection_type' => $collection_type,
             'is_today' => $is_today,
-            'lanes' => $lanes
+            'lanes' => $lanes,
+            'available_schedules' => $available_schedules
         ]
     ]);
     exit();

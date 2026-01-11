@@ -360,6 +360,7 @@ $(document).ready(function() {
     $("#collection_date").val(selectedDate);
     
     // Load lanes on page load
+    let currentScheduleId = null;
     loadLanes();
     
     // Handle toggle switch changes
@@ -424,7 +425,8 @@ $(document).ready(function() {
             dataType: "json",
             data: {
                 action: "get_lanes",
-                collection_date: selectedDate
+                collection_date: selectedDate,
+                schedule_id: currentScheduleId
             },
             success: function(response) {
                 if (response.status === "success") {
@@ -508,6 +510,21 @@ $(document).ready(function() {
             </div>
         `;
         $("#job-summary").html(summaryHtml).show();
+        
+        // Show Area Selector dropdown if multiple schedules
+        if (data.available_schedules && data.available_schedules.length > 1) {
+            let areaSelectHtml = `
+                <div id="area-selector" class="mt-3 pt-3" style="border-top: 1px solid rgba(255,255,255,0.2);">
+                    <label class="small mb-1" style="opacity: 0.9;"><i class="fas fa-exchange-alt mr-1"></i>Switch Area:</label>
+                    <select id="area_dropdown" class="form-control form-control-sm" style="max-width: 300px;">
+            `;
+            data.available_schedules.forEach(function(s) {
+                const selected = s.schedule_id == scheduleId ? 'selected' : '';
+                areaSelectHtml += `<option value="${s.schedule_id}" ${selected}>${s.area_name} (${s.collection_type})</option>`;
+            });
+            areaSelectHtml += `</select></div>`;
+            $("#job-summary").append(areaSelectHtml);
+        }
         
         // Display Read-Only Notice if not today
         let html = "";
@@ -599,6 +616,12 @@ $(document).ready(function() {
             $(this).remove();
         });
     }
+    
+    // Handle Area Selector Change
+    $(document).on("change", "#area_dropdown", function() {
+        currentScheduleId = $(this).val();
+        loadLanes();
+    });
 });
 </script>
 ';
