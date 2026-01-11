@@ -33,13 +33,13 @@ $assigned_truck_id = $truck_result->fetch_assoc()['truck_id'];
 // ========== GET LANES FOR SELECTED DATE ==========
 if ($action === 'get_lanes') {
     $collection_date = $_POST['collection_date'] ?? '';
-    
+
     if (empty($collection_date)) {
         ob_clean();
         echo json_encode(['status' => 'error', 'message' => 'Collection date is required']);
         exit();
     }
-    
+
     // Find schedule for this truck and date
     $schedule_query = $conn->prepare("
         SELECT 
@@ -57,26 +57,26 @@ if ($action === 'get_lanes') {
     $schedule_query->bind_param("ss", $assigned_truck_id, $collection_date);
     $schedule_query->execute();
     $schedule_result = $schedule_query->get_result();
-    
+
     if ($schedule_result->num_rows === 0) {
         ob_clean();
         echo json_encode([
-            'status' => 'error', 
+            'status' => 'error',
             'message' => 'No schedule found for your truck on this date'
         ]);
         exit();
     }
-    
+
     $schedule = $schedule_result->fetch_assoc();
     $schedule_id = $schedule['schedule_id'];
     $area_id = $schedule['area_id'];
     $area_name = $schedule['taman_name'];
     $truck_number = $schedule['truck_number'];
     $collection_type = $schedule['collection_type'];
-    
+
     // Check if selected date is today
     $is_today = ($collection_date === date('Y-m-d'));
-    
+
     // Get all lanes for this area with their status
     $lanes_query = $conn->prepare("
         SELECT 
@@ -93,7 +93,7 @@ if ($action === 'get_lanes') {
     $lanes_query->bind_param("ss", $schedule_id, $area_id);
     $lanes_query->execute();
     $lanes_result = $lanes_query->get_result();
-    
+
     $lanes = [];
     while ($lane = $lanes_result->fetch_assoc()) {
         $lanes[] = [
@@ -104,7 +104,7 @@ if ($action === 'get_lanes') {
             'update_time' => $lane['update_time'] ?? null
         ];
     }
-    
+
     ob_clean();
     echo json_encode([
         'status' => 'success',
@@ -126,14 +126,14 @@ if ($action === 'update_status') {
     $schedule_id = $_POST['schedule_id'] ?? '';
     $lane_name = $_POST['lane_name'] ?? '';
     $status = $_POST['status'] ?? '';
-    
+
     // Validation
     if (empty($schedule_id) || empty($lane_name) || empty($status)) {
         ob_clean();
         echo json_encode(['status' => 'error', 'message' => 'Missing required parameters']);
         exit();
     }
-    
+
     if (!in_array($status, ['Pending', 'Collected'])) {
         if (!in_array($status, ['Pending', 'Collected', 'Missed'])) {
             ob_clean();
@@ -141,39 +141,39 @@ if ($action === 'update_status') {
             exit();
         }
     }
-    
+
     // Verify this schedule belongs to the staff's truck
     $verify_query = $conn->prepare("SELECT schedule_id FROM schedule WHERE schedule_id = ? AND truck_id = ?");
     $verify_query->bind_param("ss", $schedule_id, $assigned_truck_id);
     $verify_query->execute();
-    
+
     if ($verify_query->get_result()->num_rows === 0) {
         ob_clean();
         echo json_encode(['status' => 'error', 'message' => 'Unauthorized: This schedule does not belong to your truck']);
         exit();
     }
-    
+
     // Check if this schedule is for today (24-hour rule)
     $date_check = $conn->prepare("SELECT collection_date FROM schedule WHERE schedule_id = ?");
     $date_check->bind_param("s", $schedule_id);
     $date_check->execute();
     $date_result = $date_check->get_result();
     $schedule_date = $date_result->fetch_assoc()['collection_date'];
-    
+
     if ($schedule_date !== date('Y-m-d')) {
         ob_clean();
         echo json_encode(['status' => 'error', 'message' => 'Cannot update: Only today\'s schedules can be modified']);
         exit();
     }
-    
+
     // Check if lane_status row exists
     $check_query = $conn->prepare("SELECT status FROM lane_status WHERE schedule_id = ? AND lane_name = ?");
     $check_query->bind_param("ss", $schedule_id, $lane_name);
     $check_query->execute();
     $check_result = $check_query->get_result();
-    
+
     $update_time = date('Y-m-d H:i:s');
-    
+
     if ($check_result->num_rows > 0) {
         // UPDATE existing row
         $update_query = $conn->prepare("
@@ -182,17 +182,17 @@ if ($action === 'update_status') {
             WHERE schedule_id = ? AND lane_name = ?
         ");
         $update_query->bind_param("sssss", $status, $staff_user_id, $update_time, $schedule_id, $lane_name);
-        
+
         if ($update_query->execute()) {
             ob_clean();
             echo json_encode([
-                'status' => 'success', 
+                'status' => 'success',
                 'message' => 'Lane status updated to ' . $status
             ]);
         } else {
             ob_clean();
             echo json_encode([
-                'status' => 'error', 
+                'status' => 'error',
                 'message' => 'Failed to update lane status: ' . $conn->error
             ]);
         }
@@ -203,21 +203,49 @@ if ($action === 'update_status') {
             VALUES (?, ?, ?, ?, ?)
         ");
         $insert_query->bind_param("sssss", $schedule_id, $lane_name, $status, $staff_user_id, $update_time);
-        
+
         if ($insert_query->execute()) {
             ob_clean();
             echo json_encode([
-                'status' => 'success', 
+                'status' => 'success',
                 'message' => 'Lane status set to ' . $status
             ]);
         } else {
             ob_clean();
             echo json_encode([
-                'status' => 'error', 
+                'status' => 'error',
                 'message' => 'Failed to insert lane status: ' . $conn->error
             ]);
         }
     }
+
+    // ========== AUTO-COMPLETE SCHEDULE IF ALL LANES COLLECTED ==========
+    // Get total lanes for this schedule's area
+    $area_query = $conn->prepare("SELECT area_id FROM schedule WHERE schedule_id = ?");
+    $area_query->bind_param("s", $schedule_id);
+    $area_query->execute();
+    $area_result = $area_query->get_result()->fetch_assoc();
+    $check_area_id = $area_result['area_id'];
+
+    // Count total lanes in this area
+    $total_lanes_query = $conn->prepare("SELECT COUNT(*) as total FROM collection_lane WHERE area_id = ?");
+    $total_lanes_query->bind_param("i", $check_area_id);
+    $total_lanes_query->execute();
+    $total_lanes = $total_lanes_query->get_result()->fetch_assoc()['total'];
+
+    // Count collected lanes for this schedule
+    $collected_lanes_query = $conn->prepare("SELECT COUNT(*) as collected FROM lane_status WHERE schedule_id = ? AND status = 'Collected'");
+    $collected_lanes_query->bind_param("s", $schedule_id);
+    $collected_lanes_query->execute();
+    $collected_lanes = $collected_lanes_query->get_result()->fetch_assoc()['collected'];
+
+    // If all lanes are collected, mark schedule as Completed
+    if ($collected_lanes >= $total_lanes && $total_lanes > 0) {
+        $complete_schedule = $conn->prepare("UPDATE schedule SET status = 'Completed', update_time = NOW() WHERE schedule_id = ?");
+        $complete_schedule->bind_param("s", $schedule_id);
+        $complete_schedule->execute();
+    }
+
     exit();
 }
 
