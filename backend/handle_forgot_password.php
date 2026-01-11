@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
         if ($isAjax) {
             sendResponse(false, 'Please enter a valid email address.', 'error');
         }
-        header("Location: ../public/forgot_password.php?error=invalid_email&email=" . urlencode($email));
+        header("Location: /forgot_password.php?role=resident&error=invalid_email&email=" . urlencode($email));
         exit();
     }
 
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
         if ($isAjax) {
             sendResponse(false, 'No account found with this email address.', 'error');
         }
-        header("Location: ../public/forgot_password.php?error=email_not_found&email=" . urlencode($email));
+        header("Location: /forgot_password.php?role=resident&error=email_not_found&email=" . urlencode($email));
         exit();
     }
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
         if ($isAjax) {
             sendResponse(false, 'Failed to process request. Please try again.', 'error');
         }
-        header("Location: ../public/forgot_password.php?error=send_failed&email=" . urlencode($email));
+        header("Location: /forgot_password.php?role=resident&error=send_failed&email=" . urlencode($email));
         exit();
     }
     $stmt->close();
@@ -200,11 +200,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
     if ($isAjax) {
         sendResponse(true, 'Password reset link has been sent to your email. Please check your inbox.', 'success');
     }
-    header("Location: ../public/forgot_password.php?message=email_sent");
+    header("Location: /forgot_password.php?role=resident&message=email_sent");
     exit();
 
 } else {
-    header("Location: ../public/forgot_password.php");
+    header("Location: /forgot_password.php?role=resident");
     exit();
 }
 ?>
