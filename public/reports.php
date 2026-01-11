@@ -926,7 +926,7 @@ $(document).ready(function() {
                 labels: ratingLabels,
                 datasets: [{
                     data: ratingData,
-                    backgroundColor: ['#e74a3b', '#fd7e14', '#f6c23e', '#20c997', '#1cc88a'],
+                    backgroundColor: ['#e74a3b', '#fd7e14', '#f6c23e', '#36b9cc', '#4e73df'],
                     borderWidth: 2,
                     borderColor: '#fff'
                 }]
