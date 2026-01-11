@@ -162,6 +162,54 @@ foreach ($trendResult as $row) {
 }
 
 // ============================================================
+// COMPLAINT ANALYTICS QUERIES
+// ============================================================
+
+// Complaints by Area (Top 10)
+$complaintsByAreaQuery = "SELECT ca.taman_name, COUNT(c.complaint_id) as complaint_count
+                          FROM complaints c
+                          LEFT JOIN collection_area ca ON c.area_id = ca.area_id
+                          WHERE c.submission_time BETWEEN ? AND ?
+                          GROUP BY c.area_id, ca.taman_name
+                          ORDER BY complaint_count DESC
+                          LIMIT 10";
+$stmt = $conn->prepare($complaintsByAreaQuery);
+$endDatePlusOne = date('Y-m-d', strtotime($endDate . ' +1 day'));
+$stmt->bind_param("ss", $startDate, $endDatePlusOne);
+$stmt->execute();
+$complaintsByAreaResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+$complaintAreaLabels = [];
+$complaintAreaData = [];
+foreach ($complaintsByAreaResult as $row) {
+    $complaintAreaLabels[] = $row['taman_name'] ?? 'Unknown';
+    $complaintAreaData[] = (int)$row['complaint_count'];
+}
+
+// Rating Distribution (only if ratings exist)
+$ratingDistQuery = "SELECT rating, COUNT(*) as count
+                    FROM complaints
+                    WHERE rating IS NOT NULL AND rating > 0
+                    AND submission_time BETWEEN ? AND ?
+                    GROUP BY rating
+                    ORDER BY rating ASC";
+$stmt = $conn->prepare($ratingDistQuery);
+$stmt->bind_param("ss", $startDate, $endDatePlusOne);
+$stmt->execute();
+$ratingDistResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+$ratingLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
+$ratingData = [0, 0, 0, 0, 0];
+$hasRatingData = false;
+foreach ($ratingDistResult as $row) {
+    $rating = (int)$row['rating'];
+    if ($rating >= 1 && $rating <= 5) {
+        $ratingData[$rating - 1] = (int)$row['count'];
+        $hasRatingData = true;
+    }
+}
+
+// ============================================================
 // TABLE DATA QUERY
 // ============================================================
 
@@ -592,6 +640,51 @@ ob_start();
                     </div>
                 </div>
 
+                <!-- Complaint Analytics Section -->
+                <?php if (!empty($complaintAreaLabels) || $hasRatingData): ?>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h5 class="font-weight-bold text-gray-700 mb-3">
+                            <i class="fas fa-exclamation-circle mr-2 text-warning"></i>Complaint Analytics
+                        </h5>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <?php if (!empty($complaintAreaLabels)): ?>
+                    <div class="col-xl-<?php echo $hasRatingData ? '7' : '12'; ?> col-lg-<?php echo $hasRatingData ? '7' : '12'; ?> mb-4">
+                        <div class="card chart-card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-warning">
+                                    <i class="fas fa-chart-bar mr-2"></i>Complaints by Area
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="complaintAreaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if ($hasRatingData): ?>
+                    <div class="col-xl-5 col-lg-5 mb-4">
+                        <div class="card chart-card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-info">
+                                    <i class="fas fa-star mr-2"></i>Rating Distribution
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="ratingChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
             </div>
             </div>
         <?php include '../includes/template_footer.php'; ?>
@@ -652,6 +745,13 @@ const statusData = <?php echo json_encode($statusChartData); ?>;
 const collectionTypeData = <?php echo json_encode($collectionTypeData); ?>;
 const trendLabels = <?php echo json_encode($trendLabels); ?>;
 const trendData = <?php echo json_encode($trendData); ?>;
+
+// Complaint Analytics Data
+const complaintAreaLabels = <?php echo json_encode($complaintAreaLabels); ?>;
+const complaintAreaData = <?php echo json_encode($complaintAreaData); ?>;
+const ratingLabels = <?php echo json_encode($ratingLabels); ?>;
+const ratingData = <?php echo json_encode($ratingData); ?>;
+const hasRatingData = <?php echo $hasRatingData ? 'true' : 'false'; ?>;
 
 // Summary Stats for Export
 const summaryStats = {
@@ -788,6 +888,58 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Complaints by Area - Bar Chart
+    if (complaintAreaLabels.length > 0 && document.getElementById('complaintAreaChart')) {
+        new Chart(document.getElementById('complaintAreaChart'), {
+            type: 'bar',
+            data: {
+                labels: complaintAreaLabels,
+                datasets: [{
+                    label: 'Complaints',
+                    data: complaintAreaData,
+                    backgroundColor: '#f6c23e',
+                    borderColor: '#dda20a',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { beginAtZero: true, ticks: { stepSize: 1 } }
+                }
+            }
+        });
+    }
+
+    // Rating Distribution - Doughnut Chart
+    if (hasRatingData && document.getElementById('ratingChart')) {
+        new Chart(document.getElementById('ratingChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ratingLabels,
+                datasets: [{
+                    data: ratingData,
+                    backgroundColor: ['#e74a3b', '#fd7e14', '#f6c23e', '#20c997', '#1cc88a'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
 });
 
 // View Details Function
