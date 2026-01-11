@@ -75,7 +75,8 @@ $lanesQuery = $conn->prepare("
     SELECT 
         cl.lane_id,
         cl.lane_name,
-        ls.status
+        ls.status,
+        DATE_FORMAT(ls.update_time, '%d %b %Y, %h:%i %p') as update_time
     FROM collection_lane cl
     LEFT JOIN lane_status ls ON ls.lane_name = cl.lane_name AND ls.schedule_id = ?
     WHERE cl.area_id = ?
@@ -102,7 +103,8 @@ while ($lane = $lanesResult->fetch_assoc()) {
     $lanes[] = [
         'lane_id' => $lane['lane_id'],
         'lane_name' => $lane['lane_name'],
-        'status' => $lane_status
+        'status' => $lane_status,
+        'update_time' => $lane['update_time'] ?? null
     ];
 }
 

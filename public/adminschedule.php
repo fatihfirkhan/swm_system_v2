@@ -281,14 +281,14 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
 <!-- Nav Tabs -->
 <ul class="nav nav-tabs mb-0" id="scheduleTabs" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="manage-tab" data-toggle="tab" href="#manageSchedules" 
-           role="tab" aria-controls="manageSchedules" aria-selected="true">
+        <a class="nav-link active" id="manage-tab" data-toggle="tab" href="#manageSchedules" role="tab"
+            aria-controls="manageSchedules" aria-selected="true">
             <i class="fas fa-calendar-plus mr-2"></i>Manage Schedules
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="monitor-tab" data-toggle="tab" href="#calendarMonitor" 
-           role="tab" aria-controls="calendarMonitor" aria-selected="false">
+        <a class="nav-link" id="monitor-tab" data-toggle="tab" href="#calendarMonitor" role="tab"
+            aria-controls="calendarMonitor" aria-selected="false">
             <i class="fas fa-eye mr-2"></i>Calendar Monitor
         </a>
     </li>
@@ -299,7 +299,7 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
 
     <!-- ======================= TAB 1: MANAGE SCHEDULES ======================= -->
     <div class="tab-pane fade show active" id="manageSchedules" role="tabpanel" aria-labelledby="manage-tab">
-        
+
         <div class="d-flex justify-content-end mb-3">
             <a href="adminschedule.php?new=1" class="btn btn-sm btn-secondary shadow-sm">
                 <i class="fas fa-undo fa-sm"></i> Reset
@@ -320,28 +320,35 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                                 <select name="area_id" id="area_id" class="form-select select2" required>
                                     <option value="">-- Select Area --</option>
                                     <?php while ($row = $area_query->fetch_assoc()): ?>
-                                        <option value="<?= $row['area_id'] ?>"><?= htmlspecialchars($row['taman_name']) ?></option>
+                                        <option value="<?= $row['area_id'] ?>"><?= htmlspecialchars($row['taman_name']) ?>
+                                        </option>
                                     <?php endwhile; ?>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="collection_dates" class="form-label">Collection Date(s)</label>
-                                <input type="text" name="collection_dates" id="collection_dates" class="form-control" placeholder="Click to select dates..." required>
+                                <input type="text" name="collection_dates" id="collection_dates" class="form-control"
+                                    placeholder="Click to select dates..." required>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted"><i class="fas fa-info-circle mr-1"></i>You can select multiple dates for bulk scheduling</small>
-                                    <small id="clearDatesBtn" class="text-danger" style="cursor: pointer; display: none;"><i class="fas fa-times-circle mr-1"></i>Clear Dates</small>
+                                    <small class="text-muted"><i class="fas fa-info-circle mr-1"></i>You can select
+                                        multiple dates for bulk scheduling</small>
+                                    <small id="clearDatesBtn" class="text-danger"
+                                        style="cursor: pointer; display: none;"><i
+                                            class="fas fa-times-circle mr-1"></i>Clear Dates</small>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label d-block">Collection Type</label>
                                 <div class="btn-group w-100" role="group">
-                                    <input type="radio" class="btn-check" name="collection_type" id="type_domestic" value="Domestic" checked required>
+                                    <input type="radio" class="btn-check" name="collection_type" id="type_domestic"
+                                        value="Domestic" checked required>
                                     <label class="btn btn-outline-primary" for="type_domestic" style="width: 50%;">
                                         <i class="fas fa-trash-alt mr-2"></i>Domestic
                                     </label>
-                                    
-                                    <input type="radio" class="btn-check" name="collection_type" id="type_recycle" value="Recycle" required>
+
+                                    <input type="radio" class="btn-check" name="collection_type" id="type_recycle"
+                                        value="Recycle" required>
                                     <label class="btn btn-outline-success" for="type_recycle" style="width: 50%;">
                                         <i class="fas fa-recycle mr-2"></i>Recycle
                                     </label>
@@ -352,8 +359,10 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                                 <label class="form-label">Assign Truck</label>
                                 <select name="truck_id" id="truck_id" class="form-select select2" required>
                                     <option value="">-- Select Truck --</option>
-                                    <?php $truck_query->data_seek(0); while ($truck = $truck_query->fetch_assoc()): ?>
-                                        <option value="<?= $truck['truck_id'] ?>"><?= htmlspecialchars($truck['truck_number']) ?></option>
+                                    <?php $truck_query->data_seek(0);
+                                    while ($truck = $truck_query->fetch_assoc()): ?>
+                                        <option value="<?= $truck['truck_id'] ?>">
+                                            <?= htmlspecialchars($truck['truck_number']) ?></option>
                                     <?php endwhile; ?>
                                 </select>
                             </div>
@@ -379,8 +388,9 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                                     <?php
                                     $area_result = $conn->query("SELECT area_id, taman_name FROM collection_area ORDER BY taman_name");
                                     while ($area = $area_result->fetch_assoc()):
-                                    ?>
-                                        <option value="<?= $area['area_id'] ?>"><?= htmlspecialchars($area['taman_name']) ?></option>
+                                        ?>
+                                        <option value="<?= $area['area_id'] ?>"><?= htmlspecialchars($area['taman_name']) ?>
+                                        </option>
                                     <?php endwhile; ?>
                                 </select>
                             </div>
@@ -394,15 +404,18 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="d-flex align-items-center">
                                 <div class="d-flex align-items-center mr-4">
-                                    <span style="display:inline-block; width:14px; height:14px; background:#d4edda; border:2px solid #28a745; border-radius:50%; margin-right:6px;"></span>
+                                    <span
+                                        style="display:inline-block; width:14px; height:14px; background:#d4edda; border:2px solid #28a745; border-radius:50%; margin-right:6px;"></span>
                                     <span style="color:#155724; font-weight:500;">Recycle</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span style="display:inline-block; width:14px; height:14px; background:#cfe2ff; border:2px solid #0d6efd; border-radius:50%; margin-right:6px;"></span>
+                                    <span
+                                        style="display:inline-block; width:14px; height:14px; background:#cfe2ff; border:2px solid #0d6efd; border-radius:50%; margin-right:6px;"></span>
                                     <span style="color:#084298; font-weight:500;">Domestic</span>
                                 </div>
                             </div>
-                            <small style="color:#6c757d; font-style:italic;"><i class="fas fa-info-circle mr-1"></i>Click on scheduled dates to edit</small>
+                            <small style="color:#6c757d; font-style:italic;"><i
+                                    class="fas fa-info-circle mr-1"></i>Click on scheduled dates to edit</small>
                         </div>
 
                         <div id="calendar" class="table-responsive mt-2">
@@ -418,7 +431,7 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
 
     <!-- ======================= TAB 2: CALENDAR MONITOR ======================= -->
     <div class="tab-pane fade" id="calendarMonitor" role="tabpanel" aria-labelledby="monitor-tab">
-        
+
         <!-- Area Switcher Card -->
         <div class="row mb-4">
             <div class="col-12">
@@ -428,7 +441,9 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                     Live Collection Monitor - Select Area</div>
-                                <select id="monitor_area_selector" class="form-control form-control-lg font-weight-bold text-gray-800" style="max-width: 400px;">
+                                <select id="monitor_area_selector"
+                                    class="form-control form-control-lg font-weight-bold text-gray-800"
+                                    style="max-width: 400px;">
                                     <option value="">-- Select Area --</option>
                                     <?php foreach ($allAreas as $area): ?>
                                         <option value="<?= $area['area_id'] ?>">
@@ -453,8 +468,8 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                     <i class="fas fa-calendar-alt mr-2"></i>Collection Calendar
                 </h6>
                 <div>
-                    <input type="month" id="monitor_calendar_month" class="form-control form-control-sm" 
-                           value="<?= date('Y-m') ?>" style="width: 160px;">
+                    <input type="month" id="monitor_calendar_month" class="form-control form-control-sm"
+                        value="<?= date('Y-m') ?>" style="width: 160px;">
                 </div>
             </div>
             <div class="card-body">
@@ -469,11 +484,13 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                         <span class="text-muted">Recyclables</span>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <span style="display:inline-block; width:16px; height:16px; background:#fff; border:2px solid #4e73df; border-radius:3px; margin-right: 5px;"></span>
+                        <span
+                            style="display:inline-block; width:16px; height:16px; background:#fff; border:2px solid #4e73df; border-radius:3px; margin-right: 5px;"></span>
                         <span class="text-muted">Today</span>
                     </div>
                     <div class="ml-auto">
-                        <small class="text-info"><i class="fas fa-hand-pointer mr-1"></i>Click on any date to view lane status</small>
+                        <small class="text-info"><i class="fas fa-hand-pointer mr-1"></i>Click on any date to view lane
+                            status</small>
                     </div>
                 </div>
 
@@ -538,7 +555,8 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                         ?>
                         <select name="truck_id" id="modal_truck_id" class="form-select truck-dropdown select2" required>
                             <option value="">-- Select Truck --</option>
-                            <?php $trucks->data_seek(0); while ($t = $trucks->fetch_assoc()): ?>
+                            <?php $trucks->data_seek(0);
+                            while ($t = $trucks->fetch_assoc()): ?>
                                 <option value="<?= $t['truck_id'] ?>"><?= htmlspecialchars($t['truck_number']) ?></option>
                             <?php endwhile; ?>
                         </select>
@@ -584,214 +602,223 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
 
 <!-- Calendar Monitor JavaScript -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Calendar Monitor variables
-    let monitorAreaId = null;
+    document.addEventListener('DOMContentLoaded', function () {
+        // Calendar Monitor variables
+        let monitorAreaId = null;
 
-    // Area selector change
-    document.getElementById('monitor_area_selector').addEventListener('change', function() {
-        monitorAreaId = this.value;
-        if (monitorAreaId) {
-            fetchMonitorCalendarData();
-        } else {
-            document.getElementById('monitorCalendar').innerHTML = 
-                '<div class="text-center py-5"><i class="fas fa-map-marker-alt fa-3x text-muted mb-3"></i><p class="text-muted">Please select an area to view the collection calendar.</p></div>';
-        }
-    });
-
-    // Month change
-    document.getElementById('monitor_calendar_month').addEventListener('change', function() {
-        if (monitorAreaId) {
-            fetchMonitorCalendarData();
-        }
-    });
-
-    // Delegate click event for monitor calendar days
-    document.getElementById('monitorCalendar').addEventListener('click', function(e) {
-        const calendarDay = e.target.closest('.monitor-calendar-day');
-        if (calendarDay) {
-            const dateStr = calendarDay.dataset.date;
-            if (dateStr) {
-                showLaneStatus(dateStr);
+        // Area selector change
+        document.getElementById('monitor_area_selector').addEventListener('change', function () {
+            monitorAreaId = this.value;
+            if (monitorAreaId) {
+                fetchMonitorCalendarData();
+            } else {
+                document.getElementById('monitorCalendar').innerHTML =
+                    '<div class="text-center py-5"><i class="fas fa-map-marker-alt fa-3x text-muted mb-3"></i><p class="text-muted">Please select an area to view the collection calendar.</p></div>';
             }
-        }
-    });
-
-    function fetchMonitorCalendarData() {
-        const month = document.getElementById('monitor_calendar_month').value;
-        if (!month || !monitorAreaId) return;
-
-        document.getElementById('monitorCalendar').innerHTML = 
-            '<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading schedule...</p></div>';
-
-        fetch('backend/fetch_resident_schedule.php?month=' + month + '&area_id=' + monitorAreaId)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    document.getElementById('monitorCalendar').innerHTML = 
-                        '<p class="text-danger text-center py-4">' + data.error + '</p>';
-                    return;
-                }
-                renderMonitorCalendar(data, month);
-            })
-            .catch(() => {
-                document.getElementById('monitorCalendar').innerHTML = 
-                    '<p class="text-danger text-center py-4">Failed to load schedule. Please try again.</p>';
-            });
-    }
-
-    function showLaneStatus(dateStr) {
-        document.getElementById('laneStatusModalLabel').innerHTML = 
-            '<i class="fas fa-road mr-2"></i>Lane Status - ' + dateStr;
-        document.getElementById('laneStatusContent').innerHTML = 
-            '<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading lane status...</p></div>';
-        
-        $('#laneStatusModal').modal('show');
-
-        fetch('backend/ajax_get_lane_status.php?date=' + dateStr + '&area_id=' + monitorAreaId)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    document.getElementById('laneStatusContent').innerHTML = 
-                        '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle mr-2"></i>' + data.error + '</div>';
-                    return;
-                }
-                // Handle no_schedule status
-                if (data.status === 'no_schedule') {
-                    document.getElementById('laneStatusContent').innerHTML = 
-                        '<div class="text-center py-5">' +
-                        '<i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>' +
-                        '<h5 class="text-muted">No Collection Scheduled</h5>' +
-                        '<p class="text-muted mb-0">There is no waste collection scheduled for this date in <strong>' + (data.area_name || 'this area') + '</strong>.</p>' +
-                        '</div>';
-                    return;
-                }
-                renderLaneStatus(data);
-            })
-            .catch(() => {
-                document.getElementById('laneStatusContent').innerHTML = 
-                    '<div class="alert alert-danger"><i class="fas fa-times-circle mr-2"></i>Failed to load lane status.</div>';
-            });
-    }
-
-    function renderLaneStatus(data) {
-        if (!data.lanes || data.lanes.length === 0) {
-            document.getElementById('laneStatusContent').innerHTML = 
-                '<div class="text-center py-4"><i class="fas fa-info-circle fa-3x text-muted mb-3"></i><p class="text-muted">No lanes found for this area.</p></div>';
-            return;
-        }
-
-        let html = '<div class="mb-3">';
-        html += '<p class="text-muted small mb-2"><i class="fas fa-map-marker-alt mr-1"></i>' + (data.area_name || 'Selected Area') + '</p>';
-        if (data.collection_type) {
-            const badgeClass = data.collection_type === 'Recycle' ? 'success' : 'primary';
-            html += '<p class="mb-0"><strong>Collection Type:</strong> <span class="badge badge-' + badgeClass + '">' + data.collection_type + '</span></p>';
-        }
-        html += '</div>';
-
-        html += '<div class="lane-list">';
-        data.lanes.forEach(function(lane) {
-            const statusClass = lane.status === 'Collected' ? 'collected' : 'pending';
-            const statusBadge = lane.status === 'Collected' 
-                ? '<span class="badge badge-success"><i class="fas fa-check mr-1"></i>Collected</span>'
-                : '<span class="badge badge-warning"><i class="fas fa-clock mr-1"></i>Pending</span>';
-
-            html += '<div class="lane-status-item ' + statusClass + ' d-flex justify-content-between align-items-center">';
-            html += '<div><i class="fas fa-road mr-2 text-muted"></i><strong>' + lane.lane_name + '</strong></div>';
-            html += statusBadge;
-            html += '</div>';
         });
-        html += '</div>';
 
-        // Summary
-        const collected = data.lanes.filter(l => l.status === 'Collected').length;
-        const pending = data.lanes.filter(l => l.status !== 'Collected').length;
-        html += '<div class="mt-3 pt-3 border-top">';
-        html += '<div class="row text-center">';
-        html += '<div class="col-6"><span class="h4 text-success">' + collected + '</span><br><small class="text-muted">Collected</small></div>';
-        html += '<div class="col-6"><span class="h4 text-warning">' + pending + '</span><br><small class="text-muted">Pending</small></div>';
-        html += '</div></div>';
+        // Month change
+        document.getElementById('monitor_calendar_month').addEventListener('change', function () {
+            if (monitorAreaId) {
+                fetchMonitorCalendarData();
+            }
+        });
 
-        document.getElementById('laneStatusContent').innerHTML = html;
-    }
+        // Delegate click event for monitor calendar days
+        document.getElementById('monitorCalendar').addEventListener('click', function (e) {
+            const calendarDay = e.target.closest('.monitor-calendar-day');
+            if (calendarDay) {
+                const dateStr = calendarDay.dataset.date;
+                if (dateStr) {
+                    showLaneStatus(dateStr);
+                }
+            }
+        });
 
-    function renderMonitorCalendar(schedules, month) {
-        const parts = month.split('-');
-        const year = parseInt(parts[0]);
-        const monthNum = parseInt(parts[1]);
-        const daysInMonth = new Date(year, monthNum, 0).getDate();
-        
-        let html = '<table class="table table-bordered mb-0"><thead><tr>';
-        
-        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        weekdays.forEach(day => html += '<th class="text-center">' + day + '</th>');
-        html += '</tr></thead><tbody><tr>';
+        function fetchMonitorCalendarData() {
+            const month = document.getElementById('monitor_calendar_month').value;
+            if (!month || !monitorAreaId) return;
 
-        const firstDay = new Date(year, monthNum - 1, 1).getDay();
-        for (let i = 0; i < firstDay; i++) {
-            html += '<td class="bg-light"></td>';
+            document.getElementById('monitorCalendar').innerHTML =
+                '<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading schedule...</p></div>';
+
+            fetch('backend/fetch_resident_schedule.php?month=' + month + '&area_id=' + monitorAreaId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('monitorCalendar').innerHTML =
+                            '<p class="text-danger text-center py-4">' + data.error + '</p>';
+                        return;
+                    }
+                    renderMonitorCalendar(data, month);
+                })
+                .catch(() => {
+                    document.getElementById('monitorCalendar').innerHTML =
+                        '<p class="text-danger text-center py-4">Failed to load schedule. Please try again.</p>';
+                });
         }
 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        function showLaneStatus(dateStr) {
+            document.getElementById('laneStatusModalLabel').innerHTML =
+                '<i class="fas fa-road mr-2"></i>Lane Status - ' + dateStr;
+            document.getElementById('laneStatusContent').innerHTML =
+                '<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading lane status...</p></div>';
 
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dateStr = month + '-' + String(day).padStart(2, '0');
-            const currentDate = new Date(year, monthNum - 1, day);
-            const isPast = currentDate < today;
-            const isToday = currentDate.getTime() === today.getTime();
-            
-            // Find schedule for this date
-            const schedule = schedules.find(s => s.date === dateStr);
+            $('#laneStatusModal').modal('show');
 
-            let bgColor = '#ffffff';
-            let borderStyle = '';
-            
-            if (schedule) {
-                if (schedule.type === 'Recycle') {
-                    bgColor = '#d4edda';
-                    borderStyle = 'border-left: 4px solid #28a745;';
+            fetch('backend/ajax_get_lane_status.php?date=' + dateStr + '&area_id=' + monitorAreaId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('laneStatusContent').innerHTML =
+                            '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle mr-2"></i>' + data.error + '</div>';
+                        return;
+                    }
+                    // Handle no_schedule status
+                    if (data.status === 'no_schedule') {
+                        document.getElementById('laneStatusContent').innerHTML =
+                            '<div class="text-center py-5">' +
+                            '<i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>' +
+                            '<h5 class="text-muted">No Collection Scheduled</h5>' +
+                            '<p class="text-muted mb-0">There is no waste collection scheduled for this date in <strong>' + (data.area_name || 'this area') + '</strong>.</p>' +
+                            '</div>';
+                        return;
+                    }
+                    renderLaneStatus(data);
+                })
+                .catch(() => {
+                    document.getElementById('laneStatusContent').innerHTML =
+                        '<div class="alert alert-danger"><i class="fas fa-times-circle mr-2"></i>Failed to load lane status.</div>';
+                });
+        }
+
+        function renderLaneStatus(data) {
+            if (!data.lanes || data.lanes.length === 0) {
+                document.getElementById('laneStatusContent').innerHTML =
+                    '<div class="text-center py-4"><i class="fas fa-info-circle fa-3x text-muted mb-3"></i><p class="text-muted">No lanes found for this area.</p></div>';
+                return;
+            }
+
+            let html = '<div class="mb-3">';
+            html += '<p class="text-muted small mb-2"><i class="fas fa-map-marker-alt mr-1"></i>' + (data.area_name || 'Selected Area') + '</p>';
+            if (data.collection_type) {
+                const badgeClass = data.collection_type === 'Recycle' ? 'success' : 'primary';
+                html += '<p class="mb-0"><strong>Collection Type:</strong> <span class="badge badge-' + badgeClass + '">' + data.collection_type + '</span></p>';
+            }
+            html += '</div>';
+
+            html += '<div class="lane-list">';
+            data.lanes.forEach(function (lane) {
+                const statusClass = lane.status === 'Collected' ? 'collected' : (lane.status === 'Missed' ? 'missed' : 'pending');
+                let statusBadge = '';
+                if (lane.status === 'Collected') {
+                    statusBadge = '<span class="badge badge-success"><i class="fas fa-check mr-1"></i>Collected</span>';
+                } else if (lane.status === 'Missed') {
+                    statusBadge = '<span class="badge badge-danger"><i class="fas fa-times mr-1"></i>Missed</span>';
                 } else {
-                    bgColor = '#cfe2ff';
-                    borderStyle = 'border-left: 4px solid #0d6efd;';
+                    statusBadge = '<span class="badge badge-warning"><i class="fas fa-clock mr-1"></i>Pending</span>';
+                }
+
+                html += '<div class="lane-status-item ' + statusClass + ' d-flex justify-content-between align-items-center">';
+                html += '<div><i class="fas fa-road mr-2 text-muted"></i><strong>' + lane.lane_name + '</strong></div>';
+                html += '<div class="text-right">' + statusBadge;
+                if (lane.update_time && lane.status === 'Collected') {
+                    html += '<br><small class="text-muted"><i class="fas fa-clock mr-1"></i>' + lane.update_time + '</small>';
+                }
+                html += '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+
+            // Summary
+            const collected = data.lanes.filter(l => l.status === 'Collected').length;
+            const pending = data.lanes.filter(l => l.status !== 'Collected').length;
+            html += '<div class="mt-3 pt-3 border-top">';
+            html += '<div class="row text-center">';
+            html += '<div class="col-6"><span class="h4 text-success">' + collected + '</span><br><small class="text-muted">Collected</small></div>';
+            html += '<div class="col-6"><span class="h4 text-warning">' + pending + '</span><br><small class="text-muted">Pending</small></div>';
+            html += '</div></div>';
+
+            document.getElementById('laneStatusContent').innerHTML = html;
+        }
+
+        function renderMonitorCalendar(schedules, month) {
+            const parts = month.split('-');
+            const year = parseInt(parts[0]);
+            const monthNum = parseInt(parts[1]);
+            const daysInMonth = new Date(year, monthNum, 0).getDate();
+
+            let html = '<table class="table table-bordered mb-0"><thead><tr>';
+
+            const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            weekdays.forEach(day => html += '<th class="text-center">' + day + '</th>');
+            html += '</tr></thead><tbody><tr>';
+
+            const firstDay = new Date(year, monthNum - 1, 1).getDay();
+            for (let i = 0; i < firstDay; i++) {
+                html += '<td class="bg-light"></td>';
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = month + '-' + String(day).padStart(2, '0');
+                const currentDate = new Date(year, monthNum - 1, day);
+                const isPast = currentDate < today;
+                const isToday = currentDate.getTime() === today.getTime();
+
+                // Find schedule for this date
+                const schedule = schedules.find(s => s.date === dateStr);
+
+                let bgColor = '#ffffff';
+                let borderStyle = '';
+
+                if (schedule) {
+                    if (schedule.type === 'Recycle') {
+                        bgColor = '#d4edda';
+                        borderStyle = 'border-left: 4px solid #28a745;';
+                    } else {
+                        bgColor = '#cfe2ff';
+                        borderStyle = 'border-left: 4px solid #0d6efd;';
+                    }
+                }
+
+                let classes = 'monitor-calendar-day';
+                if (isPast) classes += ' past-date';
+                if (isToday) classes += ' today';
+
+                // Add data-date attribute for click handling
+                html += '<td class="' + classes + '" data-date="' + dateStr + '" style="background-color: ' + bgColor + '; ' + borderStyle + '">';
+                html += '<div class="date-number">' + day;
+                if (isToday) {
+                    html += '<span class="today-badge">Today</span>';
+                }
+                html += '</div>';
+
+                if (schedule) {
+                    const badgeClass = schedule.type === 'Recycle' ? 'collection-recycle' : 'collection-domestic';
+                    html += '<span class="collection-badge ' + badgeClass + '">' + schedule.type + '</span>';
+                }
+
+                html += '</td>';
+
+                if ((day + firstDay) % 7 === 0 && day !== daysInMonth) {
+                    html += '</tr><tr>';
                 }
             }
 
-            let classes = 'monitor-calendar-day';
-            if (isPast) classes += ' past-date';
-            if (isToday) classes += ' today';
+            // Fill remaining cells
+            const totalCells = firstDay + daysInMonth;
+            const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+            for (let i = 0; i < remainingCells; i++) {
+                html += '<td class="bg-light"></td>';
+            }
 
-            // Add data-date attribute for click handling
-            html += '<td class="' + classes + '" data-date="' + dateStr + '" style="background-color: ' + bgColor + '; ' + borderStyle + '">';
-            html += '<div class="date-number">' + day;
-            if (isToday) {
-                html += '<span class="today-badge">Today</span>';
-            }
-            html += '</div>';
-            
-            if (schedule) {
-                const badgeClass = schedule.type === 'Recycle' ? 'collection-recycle' : 'collection-domestic';
-                html += '<span class="collection-badge ' + badgeClass + '">' + schedule.type + '</span>';
-            }
-            
-            html += '</td>';
-
-            if ((day + firstDay) % 7 === 0 && day !== daysInMonth) {
-                html += '</tr><tr>';
-            }
+            html += '</tr></tbody></table>';
+            document.getElementById('monitorCalendar').innerHTML = html;
         }
-
-        // Fill remaining cells
-        const totalCells = firstDay + daysInMonth;
-        const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-        for (let i = 0; i < remainingCells; i++) {
-            html += '<td class="bg-light"></td>';
-        }
-
-        html += '</tr></tbody></table>';
-        document.getElementById('monitorCalendar').innerHTML = html;
-    }
-});
+    });
 </script>
 
 <?php

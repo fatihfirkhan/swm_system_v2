@@ -55,6 +55,7 @@ ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -63,39 +64,46 @@ ob_start();
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/swm-custom.css" rel="stylesheet">
-    
+
     <style>
         /* Calendar Styles */
-        #calendar table { 
-            width: 100%; 
-            border-collapse: collapse; 
+        #calendar table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        #calendar th, 
-        #calendar td { 
-            padding: 10px; 
-            border: 1px solid #eef2f7; 
-            min-height: 80px; 
-            vertical-align: top; 
+
+        #calendar th,
+        #calendar td {
+            padding: 10px;
+            border: 1px solid #eef2f7;
+            min-height: 80px;
+            vertical-align: top;
         }
+
         #calendar th {
             background-color: #f8f9fc;
             font-weight: 600;
             text-align: center;
         }
+
         .calendar-day {
             cursor: pointer;
             min-height: 80px;
             transition: all 0.2s ease;
         }
+
         .calendar-day:hover {
             box-shadow: 0 0 10px rgba(78, 115, 223, 0.3);
             transform: scale(1.02);
         }
+
         .lane-status-item {
             padding: 12px 15px;
             border-radius: 8px;
@@ -103,21 +111,26 @@ ob_start();
             background: #f8f9fc;
             border-left: 4px solid #e3e6f0;
         }
+
         .lane-status-item.collected {
             border-left-color: #1cc88a;
             background: #d4edda;
         }
+
         .lane-status-item.pending {
             border-left-color: #f6c23e;
             background: #fff3cd;
         }
+
         .calendar-day.past-date {
             opacity: 0.6;
             background-color: #f8f9fa !important;
         }
+
         .calendar-day.today {
             border: 2px solid #4e73df !important;
         }
+
         .collection-badge {
             display: inline-block;
             padding: 3px 8px;
@@ -126,18 +139,22 @@ ob_start();
             font-weight: 600;
             margin-top: 5px;
         }
+
         .collection-domestic {
             background-color: #cfe2ff;
             color: #0d6efd;
         }
+
         .collection-recycle {
             background-color: #d4edda;
             color: #28a745;
         }
+
         .date-number {
             font-size: 1.1em;
             font-weight: bold;
         }
+
         .today-badge {
             font-size: 0.65em;
             background-color: #4e73df;
@@ -183,10 +200,10 @@ ob_start();
                         // Count UNREAD notifications for Resident
                         $notifCount = 0;
                         $roleForQuery = 'Resident';
-                        
+
                         // Create unique user ID: RES_userid (e.g., RES_5)
                         $uniqueUserId = 'RES_' . ($_SESSION['user_id'] ?? 0);
-                        
+
                         // Get last_check time from notification_tracking using unique user ID
                         $lastCheckTime = '2000-01-01 00:00:00';
                         $trackStmt = $conn->prepare("SELECT last_check FROM notification_tracking WHERE user_id = ?");
@@ -199,7 +216,7 @@ ob_start();
                             }
                             $trackStmt->close();
                         }
-                        
+
                         // Count notifications newer than last_check for Resident
                         $notifStmt = $conn->prepare("SELECT COUNT(*) as count FROM notifications WHERE (target_role = ? OR target_role = 'All') AND time_created > ?");
                         if ($notifStmt) {
@@ -214,7 +231,8 @@ ob_start();
                             <a class="nav-link" href="notification_view.php" title="Notifications">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <?php if ($notifCount > 0): ?>
-                                    <span class="badge badge-danger badge-counter"><?php echo $notifCount > 3 ? '3+' : $notifCount; ?></span>
+                                    <span
+                                        class="badge badge-danger badge-counter"><?php echo $notifCount > 3 ? '3+' : $notifCount; ?></span>
                                 <?php endif; ?>
                             </a>
                         </li>
@@ -267,9 +285,12 @@ ob_start();
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 View Collection Area</div>
-                                            <select id="area_selector" class="form-control form-control-lg font-weight-bold text-gray-800" style="max-width: 400px;">
+                                            <select id="area_selector"
+                                                class="form-control form-control-lg font-weight-bold text-gray-800"
+                                                style="max-width: 400px;">
                                                 <?php foreach ($allAreas as $area): ?>
-                                                    <option value="<?= $area['area_id'] ?>" <?= ($area['area_id'] == $selectedAreaId) ? 'selected' : '' ?>>
+                                                    <option value="<?= $area['area_id'] ?>"
+                                                        <?= ($area['area_id'] == $selectedAreaId) ? 'selected' : '' ?>>
                                                         <?= htmlspecialchars($area['taman_name']) ?>
                                                         <?= ($area['area_id'] == $residentAreaId) ? ' (Your Area)' : '' ?>
                                                     </option>
@@ -295,8 +316,8 @@ ob_start();
                                 <i class="fas fa-calendar-alt mr-2"></i>Schedule Calendar
                             </h6>
                             <div>
-                                <input type="month" id="calendar_month" class="form-control form-control-sm" 
-                                       value="<?= date('Y-m') ?>" style="width: 160px;">
+                                <input type="month" id="calendar_month" class="form-control form-control-sm"
+                                    value="<?= date('Y-m') ?>" style="width: 160px;">
                             </div>
                         </div>
                         <div class="card-body">
@@ -311,7 +332,8 @@ ob_start();
                                     <span class="text-muted">Recyclables</span>
                                 </div>
                                 <div class="d-flex align-items-center mb-2">
-                                    <span style="display:inline-block; width:16px; height:16px; background:#fff; border:2px solid #4e73df; border-radius:3px; margin-right: 5px;"></span>
+                                    <span
+                                        style="display:inline-block; width:16px; height:16px; background:#fff; border:2px solid #4e73df; border-radius:3px; margin-right: 5px;"></span>
                                     <span class="text-muted">Today</span>
                                 </div>
                             </div>
@@ -322,7 +344,8 @@ ob_start();
                                     <div class="text-center py-5">
                                         <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
                                         <p class="text-muted">You are not assigned to any collection area yet.</p>
-                                        <p class="small text-muted">Please contact the administrator to update your profile.</p>
+                                        <p class="small text-muted">Please contact the administrator to update your profile.
+                                        </p>
                                     </div>
                                 <?php else: ?>
                                     <div class="text-center py-4">
@@ -444,223 +467,233 @@ ob_start();
     <script src="js/sb-admin-2.min.js"></script>
 
     <script>
-    $(document).ready(function() {
-        // Ensure dropdown works
-        $('.dropdown-toggle').dropdown();
+        $(document).ready(function () {
+            // Ensure dropdown works
+            $('.dropdown-toggle').dropdown();
 
-        // Selected area ID from PHP (from URL or resident's area)
-        const selectedAreaId = <?= json_encode($selectedAreaId) ?>;
+            // Selected area ID from PHP (from URL or resident's area)
+            const selectedAreaId = <?= json_encode($selectedAreaId) ?>;
 
-        // Area selector change - reload page with new area_id
-        $('#area_selector').on('change', function() {
-            const newAreaId = $(this).val();
-            if (newAreaId) {
-                window.location.href = 'resident_schedule.php?area_id=' + newAreaId;
-            }
-        });
-
-        // Only load calendar if an area is selected
-        if (selectedAreaId) {
-            // Load calendar on page load
-            fetchCalendarData();
-
-            // Calendar month change
-            $('#calendar_month').on('change', fetchCalendarData);
-        }
-
-        // Delegate click event for calendar days
-        $(document).on('click', '.calendar-day', function() {
-            const dateStr = $(this).data('date');
-            if (dateStr) {
-                showLaneStatus(dateStr);
-            }
-        });
-
-        function fetchCalendarData() {
-            const month = $('#calendar_month').val();
-
-            if (!month) return;
-
-            // Show loading
-            $('#calendar').html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading schedule...</p></div>');
-
-            $.ajax({
-                url: 'backend/fetch_resident_schedule.php',
-                method: 'GET',
-                data: { 
-                    month: month,
-                    area_id: selectedAreaId
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.error) {
-                        $('#calendar').html('<p class="text-danger text-center py-4">' + response.error + '</p>');
-                        return;
-                    }
-                    renderCalendar(response, month);
-                },
-                error: function() {
-                    $('#calendar').html('<p class="text-danger text-center py-4">Failed to load schedule. Please try again.</p>');
+            // Area selector change - reload page with new area_id
+            $('#area_selector').on('change', function () {
+                const newAreaId = $(this).val();
+                if (newAreaId) {
+                    window.location.href = 'resident_schedule.php?area_id=' + newAreaId;
                 }
             });
-        }
 
-        function showLaneStatus(dateStr) {
-            $('#laneStatusModalLabel').html('<i class="fas fa-road mr-2"></i>Lane Status - ' + dateStr);
-            $('#laneStatusContent').html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading lane status...</p></div>');
-            $('#laneStatusModal').modal('show');
+            // Only load calendar if an area is selected
+            if (selectedAreaId) {
+                // Load calendar on page load
+                fetchCalendarData();
 
-            $.ajax({
-                url: 'backend/ajax_get_lane_status.php',
-                method: 'GET',
-                data: {
-                    date: dateStr,
-                    area_id: selectedAreaId
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.error) {
-                        $('#laneStatusContent').html('<div class="alert alert-warning"><i class="fas fa-exclamation-triangle mr-2"></i>' + response.error + '</div>');
-                        return;
-                    }
-                    // Handle no_schedule status
-                    if (response.status === 'no_schedule') {
-                        $('#laneStatusContent').html(
-                            '<div class="text-center py-5">' +
-                            '<i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>' +
-                            '<h5 class="text-muted">No Collection Scheduled</h5>' +
-                            '<p class="text-muted mb-0">There is no waste collection scheduled for this date in <strong>' + (response.area_name || 'this area') + '</strong>.</p>' +
-                            '</div>'
-                        );
-                        return;
-                    }
-                    renderLaneStatus(response);
-                },
-                error: function() {
-                    $('#laneStatusContent').html('<div class="alert alert-danger"><i class="fas fa-times-circle mr-2"></i>Failed to load lane status.</div>');
+                // Calendar month change
+                $('#calendar_month').on('change', fetchCalendarData);
+            }
+
+            // Delegate click event for calendar days
+            $(document).on('click', '.calendar-day', function () {
+                const dateStr = $(this).data('date');
+                if (dateStr) {
+                    showLaneStatus(dateStr);
                 }
             });
-        }
 
-        function renderLaneStatus(data) {
-            if (!data.lanes || data.lanes.length === 0) {
-                $('#laneStatusContent').html('<div class="text-center py-4"><i class="fas fa-info-circle fa-3x text-muted mb-3"></i><p class="text-muted">No lanes found for this area.</p></div>');
-                return;
+            function fetchCalendarData() {
+                const month = $('#calendar_month').val();
+
+                if (!month) return;
+
+                // Show loading
+                $('#calendar').html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading schedule...</p></div>');
+
+                $.ajax({
+                    url: 'backend/fetch_resident_schedule.php',
+                    method: 'GET',
+                    data: {
+                        month: month,
+                        area_id: selectedAreaId
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.error) {
+                            $('#calendar').html('<p class="text-danger text-center py-4">' + response.error + '</p>');
+                            return;
+                        }
+                        renderCalendar(response, month);
+                    },
+                    error: function () {
+                        $('#calendar').html('<p class="text-danger text-center py-4">Failed to load schedule. Please try again.</p>');
+                    }
+                });
             }
 
-            let html = '<div class="mb-3">';
-            html += '<p class="text-muted small mb-2"><i class="fas fa-map-marker-alt mr-1"></i>' + (data.area_name || 'Selected Area') + '</p>';
-            if (data.collection_type) {
-                html += '<p class="mb-0"><strong>Collection Type:</strong> <span class="badge badge-' + (data.collection_type === 'Recycle' ? 'success' : 'primary') + '">' + data.collection_type + '</span></p>';
+            function showLaneStatus(dateStr) {
+                $('#laneStatusModalLabel').html('<i class="fas fa-road mr-2"></i>Lane Status - ' + dateStr);
+                $('#laneStatusContent').html('<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading lane status...</p></div>');
+                $('#laneStatusModal').modal('show');
+
+                $.ajax({
+                    url: 'backend/ajax_get_lane_status.php',
+                    method: 'GET',
+                    data: {
+                        date: dateStr,
+                        area_id: selectedAreaId
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.error) {
+                            $('#laneStatusContent').html('<div class="alert alert-warning"><i class="fas fa-exclamation-triangle mr-2"></i>' + response.error + '</div>');
+                            return;
+                        }
+                        // Handle no_schedule status
+                        if (response.status === 'no_schedule') {
+                            $('#laneStatusContent').html(
+                                '<div class="text-center py-5">' +
+                                '<i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>' +
+                                '<h5 class="text-muted">No Collection Scheduled</h5>' +
+                                '<p class="text-muted mb-0">There is no waste collection scheduled for this date in <strong>' + (response.area_name || 'this area') + '</strong>.</p>' +
+                                '</div>'
+                            );
+                            return;
+                        }
+                        renderLaneStatus(response);
+                    },
+                    error: function () {
+                        $('#laneStatusContent').html('<div class="alert alert-danger"><i class="fas fa-times-circle mr-2"></i>Failed to load lane status.</div>');
+                    }
+                });
             }
-            html += '</div>';
 
-            html += '<div class="lane-list">';
-            data.lanes.forEach(function(lane) {
-                const statusClass = lane.status === 'Collected' ? 'collected' : 'pending';
-                const statusBadge = lane.status === 'Collected' 
-                    ? '<span class="badge badge-success"><i class="fas fa-check mr-1"></i>Collected</span>'
-                    : '<span class="badge badge-warning"><i class="fas fa-clock mr-1"></i>Pending</span>';
+            function renderLaneStatus(data) {
+                if (!data.lanes || data.lanes.length === 0) {
+                    $('#laneStatusContent').html('<div class="text-center py-4"><i class="fas fa-info-circle fa-3x text-muted mb-3"></i><p class="text-muted">No lanes found for this area.</p></div>');
+                    return;
+                }
 
-                html += '<div class="lane-status-item ' + statusClass + ' d-flex justify-content-between align-items-center">';
-                html += '<div><i class="fas fa-road mr-2 text-muted"></i><strong>' + lane.lane_name + '</strong></div>';
-                html += statusBadge;
+                let html = '<div class="mb-3">';
+                html += '<p class="text-muted small mb-2"><i class="fas fa-map-marker-alt mr-1"></i>' + (data.area_name || 'Selected Area') + '</p>';
+                if (data.collection_type) {
+                    html += '<p class="mb-0"><strong>Collection Type:</strong> <span class="badge badge-' + (data.collection_type === 'Recycle' ? 'success' : 'primary') + '">' + data.collection_type + '</span></p>';
+                }
                 html += '</div>';
-            });
-            html += '</div>';
 
-            // Summary
-            const collected = data.lanes.filter(l => l.status === 'Collected').length;
-            const pending = data.lanes.filter(l => l.status !== 'Collected').length;
-            html += '<div class="mt-3 pt-3 border-top">';
-            html += '<div class="row text-center">';
-            html += '<div class="col-6"><span class="h4 text-success">' + collected + '</span><br><small class="text-muted">Collected</small></div>';
-            html += '<div class="col-6"><span class="h4 text-warning">' + pending + '</span><br><small class="text-muted">Pending</small></div>';
-            html += '</div></div>';
-
-            $('#laneStatusContent').html(html);
-        }
-
-        function renderCalendar(schedules, month) {
-            const parts = month.split('-');
-            const year = parseInt(parts[0]);
-            const monthNum = parseInt(parts[1]);
-            const daysInMonth = new Date(year, monthNum, 0).getDate();
-            
-            let html = '<table class="table table-bordered mb-0"><thead><tr>';
-            
-            const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            weekdays.forEach(day => html += '<th class="text-center">' + day + '</th>');
-            html += '</tr></thead><tbody><tr>';
-
-            const firstDay = new Date(year, monthNum - 1, 1).getDay();
-            for (let i = 0; i < firstDay; i++) {
-                html += '<td class="bg-light"></td>';
-            }
-
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = month + '-' + String(day).padStart(2, '0');
-                const currentDate = new Date(year, monthNum - 1, day);
-                const isPast = currentDate < today;
-                const isToday = currentDate.getTime() === today.getTime();
-                
-                // Find schedule for this date
-                const schedule = schedules.find(s => s.date === dateStr);
-
-                let bgColor = '#ffffff';
-                let borderStyle = '';
-                
-                if (schedule) {
-                    if (schedule.type === 'Recycle') {
-                        bgColor = '#d4edda';
-                        borderStyle = 'border-left: 4px solid #28a745;';
+                html += '<div class="lane-list">';
+                data.lanes.forEach(function (lane) {
+                    const statusClass = lane.status === 'Collected' ? 'collected' : (lane.status === 'Missed' ? 'missed' : 'pending');
+                    let statusBadge = '';
+                    if (lane.status === 'Collected') {
+                        statusBadge = '<span class="badge badge-success"><i class="fas fa-check mr-1"></i>Collected</span>';
+                    } else if (lane.status === 'Missed') {
+                        statusBadge = '<span class="badge badge-danger"><i class="fas fa-times mr-1"></i>Missed</span>';
                     } else {
-                        bgColor = '#cfe2ff';
-                        borderStyle = 'border-left: 4px solid #0d6efd;';
+                        statusBadge = '<span class="badge badge-warning"><i class="fas fa-clock mr-1"></i>Pending</span>';
+                    }
+
+                    html += '<div class="lane-status-item ' + statusClass + ' d-flex justify-content-between align-items-center">';
+                    html += '<div><i class="fas fa-road mr-2 text-muted"></i><strong>' + lane.lane_name + '</strong></div>';
+                    html += '<div class="text-right">' + statusBadge;
+                    if (lane.update_time && lane.status === 'Collected') {
+                        html += '<br><small class="text-muted"><i class="fas fa-clock mr-1"></i>' + lane.update_time + '</small>';
+                    }
+                    html += '</div>';
+                    html += '</div>';
+                });
+                html += '</div>';
+
+                // Summary
+                const collected = data.lanes.filter(l => l.status === 'Collected').length;
+                const pending = data.lanes.filter(l => l.status !== 'Collected').length;
+                html += '<div class="mt-3 pt-3 border-top">';
+                html += '<div class="row text-center">';
+                html += '<div class="col-6"><span class="h4 text-success">' + collected + '</span><br><small class="text-muted">Collected</small></div>';
+                html += '<div class="col-6"><span class="h4 text-warning">' + pending + '</span><br><small class="text-muted">Pending</small></div>';
+                html += '</div></div>';
+
+                $('#laneStatusContent').html(html);
+            }
+
+            function renderCalendar(schedules, month) {
+                const parts = month.split('-');
+                const year = parseInt(parts[0]);
+                const monthNum = parseInt(parts[1]);
+                const daysInMonth = new Date(year, monthNum, 0).getDate();
+
+                let html = '<table class="table table-bordered mb-0"><thead><tr>';
+
+                const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                weekdays.forEach(day => html += '<th class="text-center">' + day + '</th>');
+                html += '</tr></thead><tbody><tr>';
+
+                const firstDay = new Date(year, monthNum - 1, 1).getDay();
+                for (let i = 0; i < firstDay; i++) {
+                    html += '<td class="bg-light"></td>';
+                }
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = month + '-' + String(day).padStart(2, '0');
+                    const currentDate = new Date(year, monthNum - 1, day);
+                    const isPast = currentDate < today;
+                    const isToday = currentDate.getTime() === today.getTime();
+
+                    // Find schedule for this date
+                    const schedule = schedules.find(s => s.date === dateStr);
+
+                    let bgColor = '#ffffff';
+                    let borderStyle = '';
+
+                    if (schedule) {
+                        if (schedule.type === 'Recycle') {
+                            bgColor = '#d4edda';
+                            borderStyle = 'border-left: 4px solid #28a745;';
+                        } else {
+                            bgColor = '#cfe2ff';
+                            borderStyle = 'border-left: 4px solid #0d6efd;';
+                        }
+                    }
+
+                    let classes = 'calendar-day';
+                    if (isPast) classes += ' past-date';
+                    if (isToday) classes += ' today';
+
+                    // Add data-date attribute for click handling
+                    html += '<td class="' + classes + '" data-date="' + dateStr + '" style="background-color: ' + bgColor + '; ' + borderStyle + '">';
+                    html += '<div class="date-number">' + day;
+                    if (isToday) {
+                        html += '<span class="today-badge">Today</span>';
+                    }
+                    html += '</div>';
+
+                    if (schedule) {
+                        const badgeClass = schedule.type === 'Recycle' ? 'collection-recycle' : 'collection-domestic';
+                        html += '<span class="collection-badge ' + badgeClass + '">' + schedule.type + '</span>';
+                    }
+
+                    html += '</td>';
+
+                    if ((day + firstDay) % 7 === 0 && day !== daysInMonth) {
+                        html += '</tr><tr>';
                     }
                 }
 
-                let classes = 'calendar-day';
-                if (isPast) classes += ' past-date';
-                if (isToday) classes += ' today';
+                // Fill remaining cells
+                const totalCells = firstDay + daysInMonth;
+                const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+                for (let i = 0; i < remainingCells; i++) {
+                    html += '<td class="bg-light"></td>';
+                }
 
-                // Add data-date attribute for click handling
-                html += '<td class="' + classes + '" data-date="' + dateStr + '" style="background-color: ' + bgColor + '; ' + borderStyle + '">';
-                html += '<div class="date-number">' + day;
-                if (isToday) {
-                    html += '<span class="today-badge">Today</span>';
-                }
-                html += '</div>';
-                
-                if (schedule) {
-                    const badgeClass = schedule.type === 'Recycle' ? 'collection-recycle' : 'collection-domestic';
-                    html += '<span class="collection-badge ' + badgeClass + '">' + schedule.type + '</span>';
-                }
-                
-                html += '</td>';
-
-                if ((day + firstDay) % 7 === 0 && day !== daysInMonth) {
-                    html += '</tr><tr>';
-                }
+                html += '</tr></tbody></table>';
+                $('#calendar').html(html);
             }
-
-            // Fill remaining cells
-            const totalCells = firstDay + daysInMonth;
-            const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-            for (let i = 0; i < remainingCells; i++) {
-                html += '<td class="bg-light"></td>';
-            }
-
-            html += '</tr></tbody></table>';
-            $('#calendar').html(html);
-        }
-    });
+        });
     </script>
 
 </body>
+
 </html>
 
 <?php
