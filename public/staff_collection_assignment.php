@@ -519,8 +519,8 @@ $(document).ready(function() {
                     <select id="area_dropdown" class="form-control form-control-sm" style="max-width: 300px;">
             `;
             data.available_schedules.forEach(function(s) {
-                const selected = s.schedule_id == scheduleId ? 'selected' : '';
-                areaSelectHtml += `<option value="${s.schedule_id}" ${selected}>${s.area_name} (${s.collection_type})</option>`;
+                const isSelected = s.schedule_id == scheduleId ? \"selected\" : \"\";
+                areaSelectHtml += \"<option value=\\\"\" + s.schedule_id + \"\\\" \" + isSelected + \">\" + s.area_name + \" (\" + s.collection_type + \")</option>\";
             });
             areaSelectHtml += `</select></div>`;
             $("#job-summary").append(areaSelectHtml);
@@ -637,14 +637,14 @@ $selected_year = null;
 // Check if specific date is provided
 if (isset($_GET['date'])) {
     $selected_date = $_GET['date'];
-} 
+}
 // Check if month and year are provided (from month/year selector)
 elseif (isset($_GET['month']) && isset($_GET['year'])) {
     $selected_month = intval($_GET['month']);
     $selected_year = intval($_GET['year']);
     // Default to 1st of the selected month
     $selected_date = sprintf('%04d-%02d-01', $selected_year, $selected_month);
-} 
+}
 // Default to today
 else {
     $selected_date = date('Y-m-d');
@@ -674,66 +674,74 @@ for ($i = -3; $i <= 3; $i++) {
 }
 ?>
 
-<!-- Page Content -->
-<div class="d-sm-flex align-items-center justify-content-between mb-3">
-    <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-tasks me-2"></i>Lane Assignments</h1>
-</div>
-
-<!-- Weekly Date Navigation Strip (Always visible) -->
-<div class="weekly-nav">
-    <div class="d-flex align-items-center">
-        <div class="date-strip flex-grow-1">
-            <?php foreach ($date_strip as $day): ?>
-                <a href="staff_collection_assignment.php?date=<?= $day['date'] ?>" 
-                   class="date-box <?= $day['is_selected'] ? 'active' : '' ?> <?= $day['is_today'] ? 'today' : '' ?>">
-                    <div class="date-day"><?= $day['day'] ?></div>
-                    <div class="date-num"><?= $day['num'] ?></div>
-                </a>
-            <?php endforeach; ?>
-        </div>
-        
-        <!-- Current Month/Year Display -->
-        <h5 class="m-0 font-weight-bold text-primary mx-3"><?= $selected_month_year ?></h5>
-        
-        <!-- Today Button -->
-        <a href="staff_collection_assignment.php" class="btn btn-primary btn-sm mr-2" title="Jump to today">
-            <i class="fas fa-calendar-day"></i> Today
-        </a>
-        
-        <!-- Calendar Jump Button -->
-        <button type="button" class="btn btn-outline-primary btn-sm" id="calendar_jump_btn" title="Pick specific date">
-            <i class="fas fa-calendar-alt"></i>
-        </button>
+    <!-- Page Content -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-3">
+        <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-tasks me-2"></i>Lane Assignments</h1>
     </div>
-</div>
 
-<!-- Hidden Date Picker for Flatpickr -->
-<input type="text" id="hidden_date_picker" style="position: absolute; opacity: 0; pointer-events: none;" value="<?= htmlspecialchars($selected_date) ?>">
+    <!-- Weekly Date Navigation Strip (Always visible) -->
+    <div class="weekly-nav">
+        <div class="d-flex align-items-center">
+            <div class="date-strip flex-grow-1">
+                <?php foreach ($date_strip as $day): ?>
+                    <a href="staff_collection_assignment.php?date=<?= $day['date'] ?>"
+                        class="date-box <?= $day['is_selected'] ? 'active' : '' ?> <?= $day['is_today'] ? 'today' : '' ?>">
+                        <div class="date-day">
+                            <?= $day['day'] ?>
+                        </div>
+                        <div class="date-num">
+                            <?= $day['num'] ?>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
 
-<!-- Hidden field to store selected date for AJAX -->
-<input type="hidden" id="collection_date" value="<?= htmlspecialchars($selected_date) ?>">
+            <!-- Current Month/Year Display -->
+            <h5 class="m-0 font-weight-bold text-primary mx-3">
+                <?= $selected_month_year ?>
+            </h5>
 
-<!-- Job Summary Card (Hidden by default, shown by JS when data loads) -->
-<div id="job-summary" class="job-summary" style="display: none;">
-    <!-- Content populated by JavaScript -->
-</div>
+            <!-- Today Button -->
+            <a href="staff_collection_assignment.php" class="btn btn-primary btn-sm mr-2" title="Jump to today">
+                <i class="fas fa-calendar-day"></i> Today
+            </a>
 
-<!-- Lanes Container -->
-<div class="card shadow">
-    <div class="card-body">
-        <div id="lanes-container">
-            <p class="text-muted text-center p-4"><i class="fas fa-spinner fa-spin me-2"></i>Loading...</p>
+            <!-- Calendar Jump Button -->
+            <button type="button" class="btn btn-outline-primary btn-sm" id="calendar_jump_btn"
+                title="Pick specific date">
+                <i class="fas fa-calendar-alt"></i>
+            </button>
         </div>
     </div>
-</div>
 
-<!-- Toast Container -->
-<div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
+    <!-- Hidden Date Picker for Flatpickr -->
+    <input type="text" id="hidden_date_picker" style="position: absolute; opacity: 0; pointer-events: none;"
+        value="<?= htmlspecialchars($selected_date) ?>">
 
-<?php
-// Get the buffered content
-$pageContent = ob_get_clean();
+    <!-- Hidden field to store selected date for AJAX -->
+    <input type="hidden" id="collection_date" value="<?= htmlspecialchars($selected_date) ?>">
 
-// Render the staff template
-require_once '../includes/staff/staff_template.php';
-?>
+    <!-- Job Summary Card (Hidden by default, shown by JS when data loads) -->
+    <div id="job-summary" class="job-summary" style="display: none;">
+        <!-- Content populated by JavaScript -->
+    </div>
+
+    <!-- Lanes Container -->
+    <div class="card shadow">
+        <div class="card-body">
+            <div id="lanes-container">
+                <p class="text-muted text-center p-4"><i class="fas fa-spinner fa-spin me-2"></i>Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
+
+    <?php
+    // Get the buffered content
+    $pageContent = ob_get_clean();
+
+    // Render the staff template
+    require_once '../includes/staff/staff_template.php';
+    ?>
