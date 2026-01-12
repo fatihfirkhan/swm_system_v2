@@ -595,7 +595,7 @@ ob_start();
                         <div class="card chart-card shadow">
                             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                                 <h6 class="m-0 font-weight-bold text-primary">
-                                    <i class="fas fa-chart-bar mr-2"></i>Collections by Status
+                                    <i class="fas fa-chart-pie mr-2"></i>Collections by Status
                                 </h6>
                             </div>
                             <div class="card-body">
@@ -610,7 +610,7 @@ ob_start();
                         <div class="card chart-card shadow">
                             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                                 <h6 class="m-0 font-weight-bold text-primary">
-                                    <i class="fas fa-chart-pie mr-2"></i>Domestic vs Recycle
+                                    <i class="fas fa-chart-bar mr-2"></i>Domestic vs Recycle
                                 </h6>
                             </div>
                             <div class="card-body">
@@ -621,23 +621,6 @@ ob_start();
                         </div>
                     </div>
 
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="card chart-card shadow">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">
-                                    <i class="fas fa-chart-line mr-2"></i>Collection Trend Over Time
-                                </h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container" style="height: 250px;">
-                                    <canvas id="trendChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Complaint Analytics Section -->
@@ -779,58 +762,19 @@ $(document).ready(function() {
     });
     <?php endif; ?>
 
-    // Bar Chart - Collections by Status (with percentage)
+    // Pie Chart - Collections by Status (with value and percentage)
     const totalStatus = statusData.Completed + statusData.Pending + statusData.Missed;
     new Chart(document.getElementById('statusChart'), {
-        type: 'bar',
-        data: {
-            labels: ['Completed', 'Pending', 'Missed'],
-            datasets: [{
-                label: 'Collections',
-                data: [statusData.Completed, statusData.Pending, statusData.Missed],
-                backgroundColor: ['#1cc88a', '#f6c23e', '#e74a3b'],
-                borderColor: ['#17a673', '#dda20a', '#c0392b'],
-                borderWidth: 1,
-                borderRadius: 5,
-                barThickness: 50
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw;
-                            const percentage = totalStatus > 0 ? ((value / totalStatus) * 100).toFixed(1) : 0;
-                            return `${value} (${percentage}%)`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 1 }
-                }
-            }
-        }
-    });
-
-    // Pie Chart - Domestic vs Recycle (with percentage)
-    const totalType = (collectionTypeData.Domestic || 0) + (collectionTypeData.Recycle || 0);
-    new Chart(document.getElementById('typeChart'), {
-        type: 'pie',
+        type: 'doughnut',
         data: {
             labels: [
-                `Domestic: ${collectionTypeData.Domestic || 0} (${totalType > 0 ? ((collectionTypeData.Domestic / totalType) * 100).toFixed(1) : 0}%)`,
-                `Recycle: ${collectionTypeData.Recycle || 0} (${totalType > 0 ? ((collectionTypeData.Recycle / totalType) * 100).toFixed(1) : 0}%)`
+                `Completed: ${statusData.Completed} (${totalStatus > 0 ? ((statusData.Completed / totalStatus) * 100).toFixed(1) : 0}%)`,
+                `Pending: ${statusData.Pending} (${totalStatus > 0 ? ((statusData.Pending / totalStatus) * 100).toFixed(1) : 0}%)`,
+                `Missed: ${statusData.Missed} (${totalStatus > 0 ? ((statusData.Missed / totalStatus) * 100).toFixed(1) : 0}%)`
             ],
             datasets: [{
-                data: [collectionTypeData.Domestic || 0, collectionTypeData.Recycle || 0],
-                backgroundColor: ['#36b9cc', '#1cc88a'],
+                data: [statusData.Completed, statusData.Pending, statusData.Missed],
+                backgroundColor: ['#1cc88a', '#f6c23e', '#e74a3b'],
                 borderWidth: 2,
                 borderColor: '#fff'
             }]
@@ -847,7 +791,7 @@ $(document).ready(function() {
                     callbacks: {
                         label: function(context) {
                             const value = context.raw;
-                            const percentage = totalType > 0 ? ((value / totalType) * 100).toFixed(1) : 0;
+                            const percentage = totalStatus > 0 ? ((value / totalStatus) * 100).toFixed(1) : 0;
                             return `${value} collections (${percentage}%)`;
                         }
                     }
@@ -856,35 +800,40 @@ $(document).ready(function() {
         }
     });
 
-    // Line Chart - Collection Trend
-    new Chart(document.getElementById('trendChart'), {
-        type: 'line',
+    // Horizontal Bar Chart - Domestic vs Recycle
+    const totalType = (collectionTypeData.Domestic || 0) + (collectionTypeData.Recycle || 0);
+    new Chart(document.getElementById('typeChart'), {
+        type: 'bar',
         data: {
-            labels: trendLabels,
+            labels: ['Domestic', 'Recycle'],
             datasets: [{
                 label: 'Collections',
-                data: trendData,
-                borderColor: '#4e73df',
-                backgroundColor: 'rgba(78, 115, 223, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: '#4e73df',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-                pointRadius: 4
+                data: [collectionTypeData.Domestic || 0, collectionTypeData.Recycle || 0],
+                backgroundColor: ['#36b9cc', '#1cc88a'],
+                borderColor: ['#2ca8b8', '#17a673'],
+                borderWidth: 1,
+                borderRadius: 5,
+                barThickness: 40
             }]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false }
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = totalType > 0 ? ((value / totalType) * 100).toFixed(1) : 0;
+                            return `${value} collections (${percentage}%)`;
+                        }
+                    }
+                }
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 1 }
-                }
+                x: { beginAtZero: true, ticks: { stepSize: 1 } }
             }
         }
     });
@@ -1181,11 +1130,10 @@ async function exportToPDF() {
     doc.setTextColor(78, 115, 223);
     doc.text('CHARTS & VISUALIZATIONS', 14, 20);
     
-    // Capture and add all 3 charts
+    // Capture and add charts (no trend chart)
     const charts = [
-        { id: 'statusChart', title: 'Collections by Status', x: 14, y: 30, w: 130, h: 75 },
-        { id: 'typeChart', title: 'Domestic vs Recycle', x: 150, y: 30, w: 130, h: 75 },
-        { id: 'trendChart', title: 'Collection Trend Over Time', x: 14, y: 115, w: 266, h: 70 }
+        { id: 'statusChart', title: 'Collections by Status', x: 14, y: 30, w: 130, h: 100 },
+        { id: 'typeChart', title: 'Domestic vs Recycle', x: 150, y: 30, w: 130, h: 100 }
     ];
     
     for (const chart of charts) {
