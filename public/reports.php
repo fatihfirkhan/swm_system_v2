@@ -534,7 +534,6 @@ ob_start();
                                             <th width="12%">Truck</th>
                                             <th width="23%">Collector(s)</th>
                                             <th width="10%">Status</th>
-                                            <th width="10%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -573,11 +572,6 @@ ob_start();
                                                 <span class="badge badge-<?php echo $statusClass; ?> status-badge">
                                                     <?php echo htmlspecialchars($schedule['status']); ?>
                                                 </span>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-primary" onclick="viewDetails(<?php echo $schedule['schedule_id']; ?>)">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
