@@ -172,8 +172,28 @@ $additionalScripts = '
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="js/adminschedule.js?v=20251209092813"></script>
+<style>
+.flatpickr-day.has-schedule::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: #1cc88a;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.flatpickr-day {
+    position: relative;
+}
+</style>
 <script>
 $(document).ready(function() {
+    // Store scheduled dates for the selected area
+    let scheduledDates = [];
+    
     // Initialize Flatpickr for bulk date selection
     const fp = flatpickr("#collection_dates", {
         mode: "multiple",
@@ -184,6 +204,14 @@ $(document).ready(function() {
         clickOpens: true,
         animate: true,
         monthSelectorType: "static",
+        onDayCreate: function(dObj, dStr, fp, dayElem) {
+            // Add dot indicator for dates that have schedules
+            const dateStr = dayElem.dateObj.toISOString().split("T")[0];
+            if (scheduledDates.includes(dateStr)) {
+                dayElem.classList.add("has-schedule");
+                dayElem.title = "Schedule already exists for this date";
+            }
+        },
         onChange: function(selectedDates, dateStr, instance) {
             // Show/hide clear button based on selection
             const clearBtn = document.getElementById("clearDatesBtn");
@@ -193,6 +221,27 @@ $(document).ready(function() {
                 clearBtn.style.display = "none";
             }
         }
+    });
+    
+    // Fetch scheduled dates when area changes
+    $("#area_id").on("change", function() {
+        const areaId = $(this).val();
+        if (!areaId) {
+            scheduledDates = [];
+            fp.redraw();
+            return;
+        }
+        
+        fetch("backend/fetch_scheduled_dates.php?area_id=" + areaId)
+            .then(response => response.json())
+            .then(data => {
+                scheduledDates = data.dates || [];
+                fp.redraw();
+            })
+            .catch(err => {
+                console.error("Failed to fetch scheduled dates:", err);
+                scheduledDates = [];
+            });
     });
     
     // Clear dates button handler
@@ -362,7 +411,8 @@ $skippedPast = isset($_GET['skipped_past']) ? intval($_GET['skipped_past']) : 0;
                                     <?php $truck_query->data_seek(0);
                                     while ($truck = $truck_query->fetch_assoc()): ?>
                                         <option value="<?= $truck['truck_id'] ?>">
-                                            <?= htmlspecialchars($truck['truck_number']) ?></option>
+                                            <?= htmlspecialchars($truck['truck_number']) ?>
+                                        </option>
                                     <?php endwhile; ?>
                                 </select>
                             </div>
