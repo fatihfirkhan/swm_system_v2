@@ -206,7 +206,11 @@ $(document).ready(function() {
         monthSelectorType: "static",
         onDayCreate: function(dObj, dStr, fp, dayElem) {
             // Add dot indicator for dates that have schedules
-            const dateStr = dayElem.dateObj.toISOString().split("T")[0];
+            // Use local date formatting to avoid timezone shift
+            const d = dayElem.dateObj;
+            const dateStr = d.getFullYear() + "-" + 
+                String(d.getMonth() + 1).padStart(2, "0") + "-" + 
+                String(d.getDate()).padStart(2, "0");
             if (scheduledDates.includes(dateStr)) {
                 dayElem.classList.add("has-schedule");
                 dayElem.title = "Schedule already exists for this date";
