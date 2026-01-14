@@ -173,12 +173,24 @@ $additionalScripts = '
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="js/adminschedule.js?v=20251209092813"></script>
 <style>
-.flatpickr-day.has-schedule::after {
+.flatpickr-day.has-schedule-recycle::after {
     content: "";
     display: block;
     width: 6px;
     height: 6px;
     background-color: #1cc88a;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.flatpickr-day.has-schedule-domestic::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: #4e73df;
     border-radius: 50%;
     position: absolute;
     bottom: 3px;
@@ -191,8 +203,8 @@ $additionalScripts = '
 </style>
 <script>
 $(document).ready(function() {
-    // Store scheduled dates for the selected area
-    let scheduledDates = [];
+    // Store scheduled dates with their collection types {date: type}
+    let scheduledDates = {};
     
     // Initialize Flatpickr for bulk date selection
     const fp = flatpickr("#collection_dates", {
@@ -211,9 +223,10 @@ $(document).ready(function() {
             const dateStr = d.getFullYear() + "-" + 
                 String(d.getMonth() + 1).padStart(2, "0") + "-" + 
                 String(d.getDate()).padStart(2, "0");
-            if (scheduledDates.includes(dateStr)) {
-                dayElem.classList.add("has-schedule");
-                dayElem.title = "Schedule already exists for this date";
+            if (scheduledDates[dateStr]) {
+                const type = scheduledDates[dateStr].toLowerCase();
+                dayElem.classList.add("has-schedule-" + type);
+                dayElem.title = scheduledDates[dateStr] + " schedule exists for this date";
             }
         },
         onChange: function(selectedDates, dateStr, instance) {
@@ -231,7 +244,7 @@ $(document).ready(function() {
     $("#area_id").on("change", function() {
         const areaId = $(this).val();
         if (!areaId) {
-            scheduledDates = [];
+            scheduledDates = {};
             fp.redraw();
             return;
         }
@@ -239,12 +252,12 @@ $(document).ready(function() {
         fetch("backend/fetch_scheduled_dates.php?area_id=" + areaId)
             .then(response => response.json())
             .then(data => {
-                scheduledDates = data.dates || [];
+                scheduledDates = data.schedules || {};
                 fp.redraw();
             })
             .catch(err => {
                 console.error("Failed to fetch scheduled dates:", err);
-                scheduledDates = [];
+                scheduledDates = {};
             });
     });
     
