@@ -382,7 +382,7 @@ $(document).ready(function() {
     });
     
     // Fetch staff schedule dates on page load
-    fetch("backend/fetch_staff_schedule_dates.php")
+    fetch("../backend/fetch_staff_schedule_dates.php")
         .then(response => response.json())
         .then(data => {
             scheduledDates = data.schedules || {};
@@ -757,20 +757,24 @@ for ($i = -3; $i <= 3; $i++) {
             <?php endforeach; ?>
         </div>
 
-        <!-- Current Month/Year Display -->
-        <h5 class="m-0 font-weight-bold text-primary mx-3">
-            <?= $selected_month_year ?>
-        </h5>
+        <!-- Current Month/Year Display and Calendar Controls -->
+        <div class="d-flex align-items-center justify-content-end" style="min-width: 280px;">
+            <h4 class="m-0 font-weight-bold text-primary me-3" style="font-size: 1.25rem;">
+                <?= $selected_month_year ?>
+            </h4>
 
-        <!-- Today Button -->
-        <a href="staff_collection_assignment.php" class="btn btn-primary btn-sm mr-2" title="Jump to today">
-            <i class="fas fa-calendar-day"></i> Today
-        </a>
+            <!-- Today Button -->
+            <a href="staff_collection_assignment.php" class="btn btn-primary btn-sm me-2" title="Jump to today"
+                style="padding: 0.5rem 0.75rem;">
+                <i class="fas fa-calendar-day me-1"></i>Today
+            </a>
 
-        <!-- Calendar Jump Button -->
-        <button type="button" class="btn btn-outline-primary btn-sm" id="calendar_jump_btn" title="Pick specific date">
-            <i class="fas fa-calendar-alt"></i>
-        </button>
+            <!-- Calendar Jump Button -->
+            <button type="button" class="btn btn-outline-primary btn-sm" id="calendar_jump_btn"
+                title="Pick specific date" style="padding: 0.5rem 0.75rem;">
+                <i class="fas fa-calendar-alt"></i>
+            </button>
+        </div>
     </div>
 </div>
 
