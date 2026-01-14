@@ -310,6 +310,39 @@ $additionalStyles = '
     .flatpickr-day:hover {
         background: #e3e6f0;
     }
+    /* Schedule indicator dots */
+    .flatpickr-day {
+        position: relative;
+    }
+    .flatpickr-day.has-schedule-recycle::after {
+        content: "";
+        display: block;
+        width: 5px;
+        height: 5px;
+        background-color: #1cc88a;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .flatpickr-day.has-schedule-domestic::after {
+        content: "";
+        display: block;
+        width: 5px;
+        height: 5px;
+        background-color: #4e73df;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    /* Calendar popup positioning - align to right */
+    .flatpickr-calendar.open {
+        right: 0 !important;
+        left: auto !important;
+    }
 </style>
 ';
 
@@ -318,6 +351,9 @@ $additionalScripts = '
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 $(document).ready(function() {
+    // Store scheduled dates for this staff member
+    let scheduledDates = {};
+    
     // Initialize Flatpickr with beautiful calendar
     const datePicker = flatpickr("#hidden_date_picker", {
         dateFormat: "Y-m-d",
@@ -327,9 +363,34 @@ $(document).ready(function() {
                 window.location.href = "staff_collection_assignment.php?date=" + dateStr;
             }
         },
+        onDayCreate: function(dObj, dStr, fp, dayElem) {
+            // Add dot indicator for dates that have schedules
+            const d = dayElem.dateObj;
+            const dateStr = d.getFullYear() + "-" + 
+                String(d.getMonth() + 1).padStart(2, "0") + "-" + 
+                String(d.getDate()).padStart(2, "0");
+            if (scheduledDates[dateStr]) {
+                const type = scheduledDates[dateStr].toLowerCase();
+                dayElem.classList.add("has-schedule-" + type);
+                dayElem.title = scheduledDates[dateStr] + " collection assigned";
+            }
+        },
         monthSelectorType: "static",
-        animate: true
+        animate: true,
+        positionElement: document.getElementById("calendar_jump_btn"),
+        position: "below"
     });
+    
+    // Fetch staff schedule dates on page load
+    fetch("backend/fetch_staff_schedule_dates.php")
+        .then(response => response.json())
+        .then(data => {
+            scheduledDates = data.schedules || {};
+            datePicker.redraw();
+        })
+        .catch(err => {
+            console.error("Failed to fetch schedule dates:", err);
+        });
     
     // Handle calendar jump button - open Flatpickr
     $("#calendar_jump_btn").on("click", function() {
